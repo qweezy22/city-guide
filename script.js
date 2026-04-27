@@ -1475,6 +1475,7 @@ function openPlaceDetails(place) {
         console.warn("Rating load error:", err);
 
     });
+}
 
 function showPhotos(place) {
 
