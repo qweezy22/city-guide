@@ -714,11 +714,11 @@ button {
 
 @media (max-width: 768px) {
     #menu {
-        width: 85%;
-        max-width: 300px;
-        height: 75vh;
+        width: 90%;
+        max-width: 320px;
+        height: 95vh;
         left: 50%;
-        top: auto;
+        top: 8px;
         bottom: 8px;
         transform: translateX(-50%);
         border-radius: 24px;
