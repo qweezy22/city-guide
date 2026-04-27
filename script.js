@@ -152,8 +152,12 @@ function renderPlaceRatingControls(place) {
         submit.style.borderRadius = '10px';
         submit.style.cursor = 'pointer';
         submit.addEventListener('click', function(){
+            if (selected <= 0) {
+            alert("Поставьте звёзды перед отправкой.");
+            return;
+        }
 
-            fetch("http://localhost:3001/rating/place", {
+            fetch("/rating/place", {
 
                 method: "POST",
 
@@ -284,9 +288,7 @@ function showPlanFinishDialog(planId) {
                 return;
             }
 
-            fetch(
-                "http://localhost:3001/rating/plan",
-                {
+            fetch("/rating/plan", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -347,7 +349,6 @@ function showPlanFinishDialog(planId) {
 
 var map;
 var currentCategory = null;
-var currentScreen = "welcome";
 var prevScreen = null;
 var prevCategory = null;
 // состояние видимости списка мест
@@ -370,7 +371,6 @@ var activePlan = null; // { ids: [placeObjs], index: 0 }
 var carouselTimer = null;
 var searchOriginScreen = null;
 var currentScreen = "welcome";
-var screenStack = [];
 
 // Plans metadata: names and place lists and ratings
 var plansData = {
@@ -850,7 +850,12 @@ function showAll(button) {
 
 // Открыть детали плана маршрута
 function openRoutePlan(planId) {
+
     var container = document.getElementById('routePlanDetails');
+
+    container.innerHTML = '';
+    container.style.display = 'block';
+
     var ratingBlock =
         document.createElement("p");
 
@@ -876,39 +881,6 @@ function openRoutePlan(planId) {
     }
 
     container.appendChild(ratingBlock);
-    container.style.display = 'block';
-    container.innerHTML = '';
-    var title = '';
-    switch(planId) {
-        case 'hour': title = 'Маршрут на час'; break;
-        case 'kids': title = 'Маршрут с детьми'; break;
-        case 'walking': title = 'Пешеходный маршрут'; break;
-        case 'culture': title = 'Культурный маршрут'; break;
-        case 'photo': title = 'Фото-маршрут'; break;
-        default: title = 'Маршрут';
-    }
-    var h = document.createElement('h3'); h.innerText = title; container.appendChild(h);
-    // показать рейтинг маршрута
-    var ratingInfo = document.createElement('div');
-
-    var pd = plansData[planId].rating;
-
-    if (pd && pd.votes > 0) {
-        ratingInfo.innerText =
-            "Рейтинг: " +
-            pd.avg.toFixed(1) +
-            " (" +
-            pd.votes +
-            " голосов)";
-    } else {
-        ratingInfo.innerText = "Рейтинг: пока нет отзывов";
-    }
-
-    ratingInfo.style.marginBottom = "10px";
-    ratingInfo.style.color = "gold";
-
-    container.appendChild(ratingInfo);
-
     // build list of place objects for each plan
     var plans = {
         'hour': [
@@ -1111,7 +1083,7 @@ function showCategory(category, button) {
 
 function getRatingStars(rating) {
 
-    if (!rating) {
+    if (rating === 0 || rating === undefined || rating === null) {
         return "Нет отзывов";
     }
 
@@ -1125,7 +1097,7 @@ function getRatingStars(rating) {
     }
 
     if (half) {
-        stars += "☆"; 
+        stars += "☆";
     }
 
     return stars + " (" + rating.toFixed(1) + ")";
@@ -1475,25 +1447,20 @@ function openPlaceDetails(place) {
 
     currentScreen = "placeDetails";
 
-    fetch(
-        "http://localhost:3001/rating/place/"
-        + encodeURIComponent(place.name)
-    )
-    .then(res => {
-        if (!res.ok) return null;
+    fetch("/rating/place/" + encodeURIComponent(place.name))
+    .then(function(res) {
+
+        if (!res.ok) {
+            console.warn("Rating load failed:", res.status);
+            return null;
+        }
+
         return res.json();
+
     })
-    .then(data => {
+    .then(function(data) {
+
         if (!data) return;
-
-        place._rating = data;
-        renderPlaceRatingControls(place);
-    })
-    .catch(err => console.warn(err));
-
-fetch("http://localhost:3001/rating/place/" + encodeURIComponent(place.name))
-    .then(res => res.json())
-    .then(data => {
 
         place._rating = {
             avg: data.avg,
@@ -1503,10 +1470,11 @@ fetch("http://localhost:3001/rating/place/" + encodeURIComponent(place.name))
         renderPlaceRatingControls(place);
 
     })
-    .catch(err => console.warn(err));
-  
+    .catch(function(err) {
 
-}
+        console.warn("Rating load error:", err);
+
+    });
 
 function showPhotos(place) {
 
@@ -2040,10 +2008,7 @@ function startCategoriesCarousel() {
 
 function loadRatingForPlace(place) {
 
-    fetch(
-        "http://localhost:3001/rating/place/" +
-        encodeURIComponent(place.name)
-    )
+    fetch("/rating/place/" + encodeURIComponent(place.name))
     .then(res => res.json())
     .then(data => {
 
@@ -2057,102 +2022,6 @@ function loadRatingForPlace(place) {
 
 }
 
-function updateRoutePlanRating(planId) {
-
-    var ratingBlock =
-        document.getElementById("planRating");
-
-    if (!ratingBlock) return;
-
-    var pd = plansData[planId].rating;
-
-    if (!pd.votes) {
-
-        ratingBlock.innerText =
-            "Рейтинг: пока нет отзывов";
-
-        return;
-    }
-
-    ratingBlock.innerText =
-        "Рейтинг: " +
-        pd.avg.toFixed(1) +
-        " (" +
-        pd.votes +
-        " отзывов)";
-
-}
-
-
-function refreshVisiblePlacesRatings() {
-
-    var cards =
-        document.querySelectorAll(".place-card");
-
-    for (var i = 0; i < cards.length; i++) {
-
-        var title =
-            cards[i].querySelector("h3");
-
-        var ratingSpan =
-            cards[i].querySelector(".rating");
-
-        if (!title || !ratingSpan) continue;
-
-        var name =
-            title.innerText;
-
-        for (var j = 0; j < places.length; j++) {
-
-            var p = places[j];
-
-            if (p.name === name) {
-
-                ratingSpan.innerHTML =
-                    getRatingStars(
-                        p._rating
-                            ? p._rating.avg
-                            : p.rating
-                    );
-
-                break;
-
-            }
-
-        }
-
-    }
-
-}
-
-function updateRoutePlanRating(planId) {
-
-    var el =
-        document.getElementById("planRating");
-
-    if (!el) return;
-
-    var pd =
-        plansData[planId].rating;
-
-    if (!pd.votes) {
-
-        el.innerText =
-            "Рейтинг: пока нет отзывов";
-
-        return;
-
-    }
-
-    el.innerText =
-        "Рейтинг: " +
-        pd.avg.toFixed(1) +
-        " (" +
-        pd.votes +
-        " отзывов)";
-
-}
-
 function loadAllRatings() {
 
     var promises = [];
@@ -2161,10 +2030,7 @@ function loadAllRatings() {
 
         (function(place){
 
-            var request = fetch(
-                "http://localhost:3001/rating/place/" +
-                encodeURIComponent(place.name)
-            )
+            var request = fetch("/rating/place/" + encodeURIComponent(place.name))
 
             .then(function(res){
 
@@ -2224,7 +2090,7 @@ function loadPlanRatings() {
 
         (function(id){
 
-            fetch("http://localhost:3001/rating/plan/" + id)
+            fetch("/rating/plan/" + id)
 
                 .then(function(res){
                     if (!res.ok) {
@@ -2259,64 +2125,71 @@ function loadPlanRatings() {
 
 function updateRoutePlanRating(planId) {
 
-    var ratingBlock = document.getElementById("planRating");
+    var ratingBlock =
+        document.getElementById("planRating");
 
     if (!ratingBlock) return;
 
-    var pd = plansData[planId].rating;
+    var pd =
+        plansData[planId].rating;
 
     if (!pd.votes) {
 
         ratingBlock.innerText =
             "Рейтинг: пока нет отзывов";
 
-    } else {
-
-        ratingBlock.innerText =
-            "Рейтинг: " +
-            pd.avg.toFixed(1) +
-            " (" +
-            pd.votes +
-            " голос.)";
+        return;
 
     }
+
+    ratingBlock.innerText =
+        "Рейтинг: " +
+        pd.avg.toFixed(1) +
+        " (" +
+        pd.votes +
+        " голос.)";
 
 }
 
 function refreshVisiblePlacesRatings() {
 
-    var cards =
-        document.querySelectorAll(".place-card");
+    var list = document.getElementById("placesList");
+
+    if (!list) return;
+
+    var cards = list.querySelectorAll(".place-card");
 
     for (var i = 0; i < cards.length; i++) {
 
-        var title =
-            cards[i].querySelector("h3");
+        var title = cards[i].querySelector("h3");
 
         if (!title) continue;
 
-        var name =
-            title.innerText;
+        var name = title.innerText;
 
-        var place =
-            places.find(function(p){
-                return p.name === name;
-            });
+        for (var j = 0; j < places.length; j++) {
 
-        if (!place) continue;
+            if (places[j].name === name) {
 
-        var rating =
-            cards[i].querySelector(".rating");
+                var ratingSpan =
+                    cards[i].querySelector(".rating");
 
-        if (!rating) continue;
+                if (ratingSpan) {
 
-        var r =
-            place._rating
-            ? place._rating.avg
-            : place.rating;
+                    ratingSpan.innerText =
+                        getRatingStars(
+                            places[j]._rating
+                                ? places[j]._rating.avg
+                                : places[j].rating
+                        );
 
-        rating.innerHTML =
-            getRatingStars(r);
+                }
+
+                break;
+
+            }
+
+        }
 
     }
 
