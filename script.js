@@ -13,19 +13,45 @@ window.addEventListener("load", function () {
     // свайп панели
     if (panel) {
 
+        var isDragging = false;
+
         panel.addEventListener("touchstart", function (e) {
+
             startY = e.touches[0].clientY;
+            isDragging = true;
+
         });
 
         panel.addEventListener("touchmove", function (e) {
-            e.preventDefault(); // отменяем скролл страницы
+
+            if (!isDragging) return;
+
             endY = e.touches[0].clientY;
+
         });
 
-        panel.addEventListener("touchend", function (e) {
+        panel.addEventListener("touchend", function () {
+
+            if (!isDragging) return;
+
             var diff = endY - startY;
-            if (diff > 50) collapseMenu(); // свайп вниз
-            if (diff < -50) expandMenu();  // свайп вверх
+
+            if (Math.abs(diff) > 80) {
+
+                if (diff > 0) {
+
+                    collapseMenu();
+
+                } else {
+
+                    expandMenu();
+
+                }
+
+            }
+
+            isDragging = false;
+
         });
 
     }
@@ -2245,11 +2271,31 @@ function refreshVisiblePlacesRatings() {
 }
 
 function collapseMenu() {
+
     var menu = document.getElementById("menu");
-    if (menu) menu.style.transform = "translateX(-50%) translateY(100%)";
+
+    if (!menu) return;
+
+    if (window.innerWidth <= 768) {
+
+        menu.style.transform =
+            "translateX(-50%) translateY(90%)";
+
+    }
+
 }
 
 function expandMenu() {
+
     var menu = document.getElementById("menu");
-    if (menu) menu.style.transform = "translateX(-50%) translateY(0)";
+
+    if (!menu) return;
+
+    if (window.innerWidth <= 768) {
+
+        menu.style.transform =
+            "translateX(-50%) translateY(0)";
+
+    }
+
 }
