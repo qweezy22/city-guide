@@ -1,64 +1,63 @@
 console.log("script.js loaded");
 
 var panel;
-var handle;
+var startY = 0;
+var endY = 0;
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
 
     panel = document.getElementById("menuPanel");
-    handle = document.getElementById("dragHandle");
 
-    if (!panel || !handle) return;
+    if (!panel) return;
 
-    handle.addEventListener("click", function() {
+    panel.addEventListener("touchstart", function (e) {
 
-        panel.classList.toggle("collapsed");
+        startY = e.touches[0].clientY;
+
+    });
+
+    panel.addEventListener("touchend", function (e) {
+
+        endY = e.changedTouches[0].clientY;
+
+        var diff = endY - startY;
+
+        if (diff > 80) {
+
+            collapseMenu();
+
+        }
+
+        if (diff < -80) {
+
+            expandMenu();
+
+        }
 
     });
 
 });
 
-var startY = 0;
-var endY = 0;
-
-document.addEventListener("touchstart", function(e) {
-
-    startY = e.touches[0].clientY;
-
-});
-
-document.addEventListener("touchend", function(e) {
-
-    endY = e.changedTouches[0].clientY;
-
-    var diff = endY - startY;
-
-    if (diff > 80) {
-
-        collapseMenu();
-
-    }
-
-    if (diff < -80) {
-
-        expandMenu();
-
-    }
-
-});
-
 function collapseMenu() {
 
+    var panel = document.getElementById("menuPanel");
+
     if (panel) {
+
         panel.classList.add("collapsed");
+
     }
 
 }
 
 function expandMenu() {
 
+    var panel = document.getElementById("menuPanel");
+
     if (panel) {
+
         panel.classList.remove("collapsed");
+
     }
 
 }

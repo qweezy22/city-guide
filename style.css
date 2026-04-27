@@ -686,16 +686,30 @@ button {
     position: fixed;
 
     left: 0;
+    right: 0;          /* ВАЖНО */
+
     bottom: 0;
 
-    width: 100%;
-    height: 100%;
+    width: 100%;       /* можно оставить */
 
-    background: #1e1e1e;
+    max-width: 100vw;  /* защита от вылезания */
+
+    height: 92vh;
+
+    margin: 0;         /* ВАЖНО */
+
+    padding: 0;        /* ВАЖНО */
+
+    box-sizing: border-box;  /* КЛЮЧ */
+
+    background: rgba(30, 30, 30, 0.95);
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 
     transform: translateY(0);
 
-    transition: transform 0.35s ease;
+    transition: transform 0.3s ease;
 
     z-index: 1000;
 
