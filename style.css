@@ -678,3 +678,55 @@ button {
 .categories-btn {
     background-image: url("images/Cat-nature.jpg");
 }
+
+/ меню для мобилок /
+
+#menuPanel {
+
+    position: fixed;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #1e1e1e;
+
+    transform: translateY(0);
+
+    transition: transform 0.35s ease;
+
+    z-index: 1000;
+
+}
+
+/* свернутое состояние */
+
+#menuPanel.collapsed {
+
+    transform: translateY(85%);
+
+}
+
+/* ручка свайпа */
+
+#dragHandle {
+
+    position: absolute;
+
+    top: 10px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 60px;
+    height: 6px;
+
+    background: #aaa;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+}

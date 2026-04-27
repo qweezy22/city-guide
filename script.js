@@ -1,5 +1,68 @@
 console.log("script.js loaded");
 
+var panel;
+var handle;
+
+window.addEventListener("load", function() {
+
+    panel = document.getElementById("menuPanel");
+    handle = document.getElementById("dragHandle");
+
+    if (!panel || !handle) return;
+
+    handle.addEventListener("click", function() {
+
+        panel.classList.toggle("collapsed");
+
+    });
+
+});
+
+var startY = 0;
+var endY = 0;
+
+document.addEventListener("touchstart", function(e) {
+
+    startY = e.touches[0].clientY;
+
+});
+
+document.addEventListener("touchend", function(e) {
+
+    endY = e.changedTouches[0].clientY;
+
+    var diff = endY - startY;
+
+    if (diff > 80) {
+
+        collapseMenu();
+
+    }
+
+    if (diff < -80) {
+
+        expandMenu();
+
+    }
+
+});
+
+function collapseMenu() {
+
+    if (panel) {
+        panel.classList.add("collapsed");
+    }
+
+}
+
+function expandMenu() {
+
+    if (panel) {
+        panel.classList.remove("collapsed");
+    }
+
+}
+
 window.onload = function() {
     startCategoriesCarousel();
     loadAllRatings();
@@ -1588,6 +1651,7 @@ function setupRouteButton(place) {
     if (!button) return;
 
     button.onclick = function () {
+        collapseMenu();
 
         // Try to get user's current position
         if (!navigator.geolocation) {
