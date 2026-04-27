@@ -2250,3 +2250,25 @@ function refreshVisiblePlacesRatings() {
     }
 
 }
+
+function collapseMenu() {
+
+    var menu = document.getElementById("menu");
+
+    if (!menu) return;
+
+    menu.style.transform =
+        "translate(-50%, 100%)";
+
+}
+
+function expandMenu() {
+
+    var menu = document.getElementById("menu");
+
+    if (!menu) return;
+
+    menu.style.transform =
+        "translate(-50%, 0)";
+
+}

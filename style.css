@@ -71,31 +71,34 @@ body {
 /* МЕНЮ */
 
 #menu {
-    width: 460px;
-    height: 93vh;
     position: fixed;
-    left: 7px;
-    top: 7px;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    top: 8px;
+
+    width: calc(100% - 16px);
+    max-width: 460px;
+
+    height: calc(100vh - 16px);
+
     padding: 24px;
+
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
+
     border-radius: 28px;
+
     background: rgba(15, 23, 42, 0.35);
     backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-    color: white;
-    overflow-y: auto;
-    overflow-x: hidden;
-    z-index: 10;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255,255,255,0.3) transparent;
-    scrollbar-gutter: stable;
-}
 
+    border: 1px solid rgba(255,255,255,0.2);
+
+    overflow-y: auto;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
 /* КАРТА */
 
 #map {
