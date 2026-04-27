@@ -1,0 +1,680 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    /* ВАЖНО */
+
+    background: transparent;
+}
+
+/* route plan specific card layout */
+.route-plan-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.route-plan-card h4 {
+    color: white;
+    font-size: 15px;
+    margin: 0;
+}
+
+.route-plan-card .description {
+    color: rgba(255,255,255,0.75);
+    margin: 0;
+    font-size: 13px;
+}
+
+.route-plan-image {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.06);
+}
+
+    .route-plan-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+/* timeline visuals for route plan */
+.route-line { display:flex; flex-direction:column; align-items:center; width:32px; }
+.route-dot { width:8px; height:8px; background:white; border-radius:50%; margin:6px 0; }
+.route-vline { width:2px; background: rgba(255,255,255,0.12); flex:1; margin-top:4px; }
+.route-content { flex:1; min-width: 0; }
+.route-meta { width:72px; display:flex; flex-direction:column; align-items:flex-end; gap:4px; margin-left:12px; }
+.route-dist { font-weight:600; }
+.route-time { font-size:13px; color: rgba(255,255,255,0.8); }
+
+/* СТИЛИ ДЛЯ ПОЛЯ ПОИСКА */
+#searchInput {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.04);
+    color: white;
+}
+
+/* РЕЙТИНГ В КАРТОЧКЕ */
+.place-card .rating {
+    display: block;
+    margin-top: 8px;
+    color: gold;
+    font-size: 16px;
+}
+
+/* МЕНЮ */
+
+#menu {
+    width: 460px;
+    height: 93vh;
+    position: fixed;
+    left: 7px;
+    top: 7px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-radius: 28px;
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 10;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
+    scrollbar-gutter: stable;
+}
+
+/* КАРТА */
+
+#map {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+/* КНОПКИ */
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    overflow: hidden;
+}
+
+    button:hover {
+        transform: translateX(6px);
+    }
+
+    /* но НЕ для меню */
+
+    button:not(.menu-btn):hover {
+        transform: translateX(6px);
+        background: linear-gradient( 90deg, #38bdf8, #6366f1 );
+    }
+
+    button:active {
+        transform: scale(0.96);
+    }
+
+/* СПИСОК */
+
+/* placesList now animates via max-height + opacity/transform to avoid layout jump */
+#placesList {
+    width: 100%;
+    /* collapsed by default to reserve flow space when inserted */
+    max-height: 0;
+    overflow: hidden;
+    overflow-x: hidden;
+    margin-top: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
+    display: block;
+}
+
+/* inline list inserted under a specific button */
+.inline-places-list {
+    width: 100%;
+    /* collapsed by default like #placesList */
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.inline-places-list .place-card {
+    margin-left: 0;
+}
+
+.inline-places-list.active {
+    opacity: 1;
+    transform: translateY(0);
+    /* match canonical list max-height so inline lists are full-sized */
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+    #placesList.active {
+        opacity: 1;
+        transform: translateY(0);
+        /* allow the list to grow up to this size */
+        max-height: 80vh;
+        /* allow internal scrolling when expanded */
+        overflow-y: auto;
+    }
+
+/* КАРТОЧКА */
+
+.place-card {
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    transition: all 0.25s ease;
+}
+
+    .place-card:hover {
+        transform: scale(1.04);
+        background: rgba(255,255,255,0.2);
+    }
+
+    /* ФОТО */
+
+    .place-card img {
+        width: 100%;
+        height: 160px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+
+    /* НАЗВАНИЕ */
+
+    .place-card h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+    }
+
+    .place-card p {
+        margin-top: 6px;
+        font-size: 14px;
+        color: rgba(255,255,255,0.75);
+    }
+
+    .place-card:hover {
+        background: rgba(255,255,255,0.2);
+        transform: translateY(-3px);
+        cursor: pointer;
+    }
+
+/* РЕЙТИНГ */
+
+.rating {
+    color: gold;
+    font-size: 18px;
+}
+
+/* ПРИВЕТСТВИЕ */
+
+#welcome {
+    width: 100%;
+    max-width: 360px;
+    padding: 28px;
+    border-radius: 18px;
+    background: linear-gradient( -90deg, #38bdf8, #6366f1 );
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    text-align: left;
+    margin-top: auto;
+    margin-bottom: 280px;
+    /* ВАЖНО — вертикальная колонка */
+
+    display: block;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+    #welcome.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    #welcome h2 {
+        font-size: 30px;
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+
+    #welcome p {
+        margin-top: 12px;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #e2e8f0;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+/* КНОПКА ПЕРЕХОДА */
+
+#welcomeButton {
+    margin-top: 24px;
+    padding: 16px 26px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 16px;
+    border: none;
+    color: white;
+    background: linear-gradient( 90deg, #38bdf8, #6366f1 );
+    box-shadow: 0 4px 14px rgba(99,102,241,0.5);
+    transition: all 0.25s ease;
+    animation: fadeUp 1s ease;
+    align-self: flex-start;
+}
+
+    #welcomeButton:hover {
+        transform: translateX(6px);
+    }
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== ТОНКИЙ СКРОЛЛ ===== */
+
+/* Chrome / Edge */
+
+#menu::-webkit-scrollbar,
+#placesList::-webkit-scrollbar,
+#placeDetails::-webkit-scrollbar {
+    width: 4px;
+}
+
+#menu::-webkit-scrollbar-track,
+#placesList::-webkit-scrollbar-track,
+#placeDetails::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#menu::-webkit-scrollbar-thumb,
+#placesList::-webkit-scrollbar-thumb,
+#placeDetails::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.35);
+    border-radius: 999px;
+    transition: background 0.3s;
+}
+
+    #menu *::-webkit-scrollbar-thumb:hover,
+    #placesList::-webkit-scrollbar-thumb:hover {
+        background: rgba(255,255,255,0.55);
+    }
+
+/* Firefox */
+
+#menu,
+#placesList {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.4) transparent;
+    padding-bottom: 40px;
+}
+
+.description {
+    margin-top: 6px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+}
+
+/* КНОПКА НАЗАД */
+
+#backButton {
+    font-family: inherit;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    /* ВАЖНО — центрирование */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 45px;
+    text-align: center;
+    flex-shrink: 0;
+    scrollbar-gutter: stable;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+    #backButton:hover {
+        transform: translateX(-3px);
+        background: rgba(255,255,255,0.2);
+    }
+
+#placeDetails {
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    animation: fadeUp 0.3s ease;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden; /* УБИРАЕТ СКРОЛЛ */
+    border-radius: 12px;
+}
+
+/* контейнер для всех фото */
+.carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s ease; /* ПЛАВНАЯ АНИМАЦИЯ */
+}
+
+    /* каждое фото */
+    .carousel-track img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    z-index: 5;
+}
+
+    .carousel-arrow:hover {
+        background: rgba(255,255,255,0.25);
+    }
+
+    .carousel-arrow::before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        background: white;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M15 18l-6-6 6-6'/%3E%3C/svg%3E") no-repeat center;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M15 18l-6-6 6-6'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    .carousel-arrow.right::before {
+        transform: rotate(180deg);
+    }
+
+    .carousel-arrow.left {
+        left: 10px;
+    }
+
+    .carousel-arrow.right {
+        right: 10px;
+    }
+
+.screen {
+    display: none;
+    width: 100%;
+    animation: screenFade 0.35s ease;
+}
+
+@keyframes screenFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.back-icon {
+    width: 35px;
+    height: 18px;
+    display: block;
+    background: white;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M15 18l-6-6 6-6'/%3E%3C/svg%3E") no-repeat center;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M15 18l-6-6 6-6'/%3E%3C/svg%3E") no-repeat center;
+}
+
+/* ФУЛЛСКРИН ФОТО */
+
+.photo-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+}
+
+.photo-modal-content {
+    position: relative;
+    width: 80vw;
+    height: 80vh;
+    max-width: 1100px;
+    max-height: 800px;
+    padding: 0; /* важно */
+
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255,255,255,0.2);
+    overflow: hidden;
+}
+
+    .photo-modal-content img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 14px;
+    }
+
+.photo-close {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+    .photo-close:hover {
+        background: #ef4444;
+        border-color: rgba(255,255,255,0.4);
+        transform: scale(1.1);
+    }
+
+    .photo-close::before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        background: white;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M6 6l12 12M6 18L18 6'/%3E%3C/svg%3E") no-repeat center;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M6 6l12 12M6 18L18 6'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+.photo-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+    .photo-arrow:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+    .photo-arrow::before {
+        content: "";
+        width: 22px;
+        height: 22px;
+        background: white;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M15 18l-6-6 6-6'/%3E%3C/svg%3E") no-repeat center;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M15 18l-6-6 6-6'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    .photo-arrow.right::before {
+        transform: rotate(180deg);
+    }
+
+    .photo-arrow.left {
+        left: 12px;
+    }
+
+    .photo-arrow.right {
+        right: 12px;
+    }
+
+.photo-modal-slider {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    gap: 40px; /* расстояние между фото */
+    align-items: center;
+    will-change: transform;
+    transition: transform 0.5s ease;
+}
+    .photo-modal-slider img {
+        width: calc(100% - 80px); /* отступы по краям */
+        height: calc(100% - 80px);
+        margin: 40px;
+        object-fit: contain; /* важно — показывает полностью */
+
+        border-radius: 16px;
+        flex: 0 0 auto;
+    }
+
+/* КНОПКИ С ФОТО В МЕНЮ */
+
+.menu-btn {
+    position: relative;
+    height: 250px;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+}
+
+.menu-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.55;
+    z-index: 1;
+}
+
+.menu-carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.8s ease;
+}
+
+    .menu-carousel-track img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        flex-shrink: 0;
+        opacity: 0.6;
+    }
+
+.menu-btn span {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.9), 0 0 18px rgba(0,0,0,0.8);
+}
+
+.interesting-btn {
+    background-image: url("images/int-places.jpg");
+}
+
+.route-btn {
+    background-image: url("images/Route-plan.jpg");
+}
+
+.categories-btn {
+    background-image: url("images/Cat-nature.jpg");
+}

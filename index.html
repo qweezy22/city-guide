@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Мини-гид по городу Киров</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="menu">
+
+        <button id="backButton" onclick="goBack()" style="display:none;">
+            <span class="back-icon"></span>
+        </button>
+
+        <!-- Поиск (показывается на всех экранах кроме welcome и mainMenu) -->
+        <div id="searchWrapper" style="display:none; margin-bottom:12px;">
+            <input id="searchInput" type="text" placeholder="Поиск мест..." oninput="searchPlaces(this.value)" />
+        </div>
+
+        <!-- ИНТЕРЕСНЫЕ МЕСТА (отдельный экран) -->
+        <div id="interesting" class="screen">
+            <h2>Интересные места</h2>
+        </div>
+
+        <!-- ПРИВЕТСТВИЕ -->
+
+        <div id="welcome" class="screen active">
+
+            <h2>Мини-гид по Кирову</h2>
+
+            <p>
+                Выберите категорию
+                и откройте интересные места города.
+            </p>
+
+            <button id="welcomeButton" onclick="openMainMenu()">
+                В путешествие →
+            </button>
+
+        </div>
+
+        <!-- ГЛАВНОЕ МЕНЮ -->
+
+        <div id="mainMenu" class="screen">
+
+            <button class="menu-btn" onclick="openInterestingPlaces()">
+
+                <div class="menu-bg interesting-btn"></div>
+
+                <span>Интересные места</span>
+
+            </button>
+
+            <button class="menu-btn" onclick="openRoutePlanner()">
+
+                <div class="menu-bg route-btn"></div>
+
+                <span>Планы маршрутов</span>
+
+            </button>
+
+            <button class="menu-btn" onclick="openCategories()">
+
+                <div class="menu-bg">
+
+                    <div class="menu-carousel-track" id="categoriesCarousel">
+
+                        <img src="images/Cat-nature.jpg">
+                        <img src="images/Cat-cult.jpg">
+                        <img src="images/Cat-fun.jpg">
+
+                    </div>
+
+                </div>
+
+                <span>Категории</span>
+
+            </button>
+
+        </div>
+
+        <!-- КАТЕГОРИИ -->
+
+        <div id="categories" class="screen">
+
+            <h2>Категории</h2>
+
+            <button onclick="showAll(this)">
+                Показать все
+            </button>
+
+            <button onclick="showCategory('tradecenters', this)">
+                Торговый центр
+            </button>
+
+            <button onclick="showCategory('food', this)">
+                Еда
+            </button>
+
+            <button onclick="showCategory('nature', this)">
+                Природа
+            </button>
+
+            <button onclick="showCategory('water', this)">
+                Реки и озёра
+            </button>
+
+            <button onclick="showCategory('cave', this)">
+                Пещеры и скалы
+            </button>
+
+            <button onclick="showCategory('spring', this)">
+                Родники
+            </button>
+
+            <button onclick="showCategory('history', this)">
+                История
+            </button>
+
+            <button onclick="showCategory('museums', this)">
+                Музеи и театры
+            </button>
+
+            <button onclick="showCategory('park', this)">
+                Природные комплексы
+            </button>
+
+            <button onclick="showCategory('kids', this)">
+                Для детей
+            </button>
+
+        </div>
+
+        <!-- СПИСОК МЕСТ -->
+
+        <div id="placesList"></div>
+        <div id="placeDetails" class="screen">
+
+            <div class="place-details-container">
+
+                <div id="photoCarousel" class="carousel"></div>
+
+                <h2 id="placeTitle"></h2>
+
+                <p id="placeDescription"></p>
+
+                <button id="routeButton">
+                    Построить маршрут
+                </button>
+
+                <h3>Отзывы</h3>
+
+                <div id="reviews">
+                    Пока отзывов нет
+                </div>
+                <div id="placeRating" style="margin-top:10px;"></div>
+
+            </div>
+
+        </div>
+
+    <!-- Планировщик маршрутов -->
+    <div id="routePlanner" class="screen" style="display:none;">
+        <h2>Планы маршрутов</h2>
+        <p>Выберите готовый план маршрута для туристов:</p>
+        <button onclick="openRoutePlan('hour')">Маршрут на час</button>
+        <button onclick="openRoutePlan('kids')">Маршрут с детьми</button>
+        <button onclick="openRoutePlan('walking')">Пешеходный маршрут</button>
+        <button onclick="openRoutePlan('culture')">Культурный маршрут</button>
+        <button onclick="openRoutePlan('photo')">Фото-маршрут</button>
+        <div id="routePlanDetails" style="margin-top:12px; display:none;"></div>
+    </div>
+
+    </div>
+
+        <div id="map"></div>
+
+        <script src="https://api-maps.yandex.ru/2.1/?apikey=65ec81d2-94f4-4f40-adc4-f205e32ee9bb&lang=ru_RU"></script>
+        <script src="places.js"></script>
+        <script src="script.js"></script>
+
+</body>
+</html>
