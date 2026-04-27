@@ -14,25 +14,18 @@ window.addEventListener("load", function () {
     if (panel) {
 
         panel.addEventListener("touchstart", function (e) {
-
             startY = e.touches[0].clientY;
+        });
 
+        panel.addEventListener("touchmove", function (e) {
+            e.preventDefault(); // отменяем скролл страницы
+            endY = e.touches[0].clientY;
         });
 
         panel.addEventListener("touchend", function (e) {
-
-            endY = e.changedTouches[0].clientY;
-
             var diff = endY - startY;
-
-            if (diff > 80) {
-                collapseMenu();
-            }
-
-            if (diff < -80) {
-                expandMenu();
-            }
-
+            if (diff > 50) collapseMenu(); // свайп вниз
+            if (diff < -50) expandMenu();  // свайп вверх
         });
 
     }
@@ -2252,23 +2245,11 @@ function refreshVisiblePlacesRatings() {
 }
 
 function collapseMenu() {
-
     var menu = document.getElementById("menu");
-
-    if (!menu) return;
-
-    menu.style.transform =
-        "translate(-50%, 100%)";
-
+    if (menu) menu.style.transform = "translateX(-50%) translateY(100%)";
 }
 
 function expandMenu() {
-
     var menu = document.getElementById("menu");
-
-    if (!menu) return;
-
-    menu.style.transform =
-        "translate(-50%, 0)";
-
+    if (menu) menu.style.transform = "translateX(-50%) translateY(0)";
 }
