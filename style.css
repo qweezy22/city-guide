@@ -71,17 +71,13 @@ body {
 /* МЕНЮ */
 
 #menu {
+    width: 460px;
+    height: calc(100vh - 16px);
+
     position: fixed;
 
-    left: 50%;
-    transform: translateX(-50%);
-
+    left: 8px;      /* слева на десктопе */
     top: 8px;
-
-    width: calc(100% - 16px);
-    max-width: 460px;
-
-    height: calc(100vh - 16px);
 
     padding: 24px;
 
@@ -96,9 +92,12 @@ body {
     border: 1px solid rgba(255,255,255,0.2);
 
     overflow-y: auto;
+
     z-index: 10;
+
     transition: transform 0.3s ease;
 }
+
 /* КАРТА */
 
 #map {
@@ -685,37 +684,22 @@ button {
 / меню для мобилок /
 
 #menuPanel {
-
     position: fixed;
 
     left: 0;
-    right: 0;          /* ВАЖНО */
-
+    right: 0;
+    top: 0;
     bottom: 0;
 
-    width: 100%;       /* можно оставить */
+    display: flex;
 
-    max-width: 100vw;  /* защита от вылезания */
+    justify-content: center;
 
-    height: 92vh;
+    pointer-events: none;
+}
 
-    margin: 0;         /* ВАЖНО */
-
-    padding: 0;        /* ВАЖНО */
-
-    box-sizing: border-box;  /* КЛЮЧ */
-
-    background: rgba(30, 30, 30, 0.95);
-
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-
-    transform: translateY(0);
-
-    transition: transform 0.3s ease;
-
-    z-index: 1000;
-
+#menuPanel > * {
+    pointer-events: auto;
 }
 
 /* свернутое состояние */
@@ -745,5 +729,26 @@ button {
     border-radius: 10px;
 
     cursor: pointer;
+
+}
+
+@media (max-width: 768px) {
+
+    #menu {
+        width: calc(100% - 16px);
+
+        max-width: 460px;
+
+        left: 50%;
+        transform: translateX(-50%);
+
+        top: 8px;
+
+        height: calc(100vh - 16px);
+
+        padding: 18px;
+
+        border-radius: 22px;
+    }
 
 }
