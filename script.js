@@ -6,92 +6,84 @@ var endY = 0;
 
 window.addEventListener("load", function () {
 
+    console.log("page loaded");
+
     panel = document.getElementById("menuPanel");
 
-    if (!panel) return;
-
-    panel.addEventListener("touchstart", function (e) {
-
-        startY = e.touches[0].clientY;
-
-    });
-
-    panel.addEventListener("touchend", function (e) {
-
-        endY = e.changedTouches[0].clientY;
-
-        var diff = endY - startY;
-
-        if (diff > 80) {
-
-            collapseMenu();
-
-        }
-
-        if (diff < -80) {
-
-            expandMenu();
-
-        }
-
-    });
-
-});
-
-function collapseMenu() {
-
-    var panel = document.getElementById("menuPanel");
-
+    // свайп панели
     if (panel) {
 
-        panel.classList.add("collapsed");
+        panel.addEventListener("touchstart", function (e) {
+
+            startY = e.touches[0].clientY;
+
+        });
+
+        panel.addEventListener("touchend", function (e) {
+
+            endY = e.changedTouches[0].clientY;
+
+            var diff = endY - startY;
+
+            if (diff > 80) {
+                collapseMenu();
+            }
+
+            if (diff < -80) {
+                expandMenu();
+            }
+
+        });
 
     }
 
-}
+    // твоя логика загрузки
 
-function expandMenu() {
-
-    var panel = document.getElementById("menuPanel");
-
-    if (panel) {
-
-        panel.classList.remove("collapsed");
-
-    }
-
-}
-
-window.onload = function() {
     startCategoriesCarousel();
-    loadAllRatings();
-    loadPlanRatings();
-    try {
-        if (window.ymaps && typeof ymaps.ready === 'function') {
-            ymaps.ready(init);
-        } else {
-            console.warn('ymaps is not available at load time');
-        }
 
-        // остальные функции тут...
+    loadAllRatings();
+
+    loadPlanRatings();
+
+    try {
+
+        if (window.ymaps && typeof ymaps.ready === "function") {
+
+            ymaps.ready(init);
+
+        } else {
+
+            console.warn("ymaps is not available at load time");
+
+        }
 
     } catch (e) {
-        console.error('Error while initializing ymaps:', e);
+
+        console.error("Error while initializing ymaps:", e);
+
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
+
         var welcome = document.getElementById("welcome");
+
         if (welcome) {
+
             welcome.classList.add("show");
+
         }
+
     }, 200);
 
     try {
+
         window.renderPlaceRatingControls = renderPlaceRatingControls;
+
         window.ensurePlanNextButton = ensurePlanNextButton;
+
     } catch (e) {}
 
-};
+});
 
 function getPlaceImage(place) {
 
