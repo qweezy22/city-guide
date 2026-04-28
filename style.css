@@ -72,7 +72,7 @@ body {
 
 #menu {
     width: 460px;
-    height: calc(100vh - 16px);
+    height: 496px;
 
     position: fixed;
 
