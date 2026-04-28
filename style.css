@@ -247,7 +247,7 @@ button {
 
 #welcome {
 
-    position: relative;
+    position: absolute;
     width: 100%;
     max-width: 360px;
     padding: 28px;
@@ -256,8 +256,9 @@ button {
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.35);
     text-align: center;
-    top: 50%;
-    left 50%;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     /* ВАЖНО — вертикальная колонка */
 
     display: block;
@@ -712,25 +713,11 @@ button {
 
 }
 
-/* ================= MOBILE ================= */
-
-@media (max-width: 768px) {
-    #menu {
-        width: 90%;
-        max-width: 320px;
-        height: 95vh;
-        left: 50%;
-        top: 50%;
-        transform: translateX(-50%);
-        border-radius: 24px;
-
-    }
-
 
 #menuToggleBtn {
     position: absolute;      /* привязка к меню */
     top: 12px;               /* сверху по умолчанию */
-    right: 12px;             /* справа */
+    left: 50%;         /* справа */
     width: 44px;
     transform: translateX(-50%); /* выравнивание по центру */
     height: 44px;
@@ -798,7 +785,7 @@ button {
     #menu {
         width: 90%;
         max-width: 320px;
-        height: 536px;
+        height: 600px;
         left: 50%;
         top: 50%;          /* центр по вертикали */
         transform: translate(-50%, -50%); /* центрирование по центру экрана */
