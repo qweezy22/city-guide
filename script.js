@@ -8,17 +8,13 @@ window.addEventListener("load", function () {
 
     toggleBtn.addEventListener("click", function() {
         if (menuOpened) {
-            menu.style.transform = "translate(-50%, 85%)"; // свернуто
-            toggleBtn.style.top = "auto";
-            toggleBtn.style.bottom = "24px";
+            menu.style.transform = "translate(-50%, 85%)"; // свернуто;
             toggleBtn.querySelector("span").style.transform = "rotate(0deg)";
             document.body.classList.remove("menu-open");
             document.body.classList.add("menu-closed");
             menuOpened = false;
         } else {
             menu.style.transform = "translate(-50%, -50%)"; // открыто
-            toggleBtn.style.bottom = "auto";
-            toggleBtn.style.top = "12px";
             toggleBtn.querySelector("span").style.transform = "rotate(180deg)";
             document.body.classList.remove("menu-closed");
             document.body.classList.add("menu-open");

@@ -246,35 +246,25 @@ button {
 
 /* ПРИВЕТСТВИЕ */
 
+/* Приветствие */
 #welcome {
-
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
+    position: absolute; /* относительно меню */
+    top: 50%;           /* вертикально по центру */
+    left: 50%;          /* горизонтально по центру */
+    transform: translate(-50%, -50%); /* сдвигаем по центру */
     width: 100%;
     max-width: 360px;
-
     padding: 28px;
-
     border-radius: 18px;
-
     background: linear-gradient(-90deg, #38bdf8, #6366f1);
-
     backdrop-filter: blur(10px);
-
     box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-
     text-align: center;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    z-index: 2;
+    align-items: center; /* теперь по центру */
+    z-index: 20;
 }
 
     #welcome.show {
@@ -798,17 +788,28 @@ button {
         max-width: 320px;
         height: 600px;
         left: 50%;
-        top: 50%;          /* центр по вертикали */
-        transform: translate(-50%, -50%); /* центрирование по центру экрана */
+        top: 50%;
+        transform: translate(-50%, -50%);
         border-radius: 24px;
     }
-}
 
     #welcome {
-        max-width: 300px;
-        padding: 18px;
+        position: absolute; /* чтобы центрировалось относительно меню */
         top: 50%;
         left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 300px;
+        padding: 18px;
+    }
+
+    #menuToggleBtn {
+        position: absolute;
+        top: 12px;  /* будет сверху меню */
+        right: 12px; 
+        width: 44px;
+        height: 44px;
+        z-index: 30;
+        transform: none; /* убираем сдвиг */
     }
 }
 
