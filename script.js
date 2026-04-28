@@ -3,33 +3,26 @@ console.log("script.js loaded");
 var menuOpened = true;
 
 window.addEventListener("load", function () {
-
     var toggleBtn = document.getElementById("muneToggleBtn");
     var menu = document.getElementById("menu");
 
-    // изначальная позиция кнопки в меню
-    toggleBtn.style.top = "12px";
-
     toggleBtn.addEventListener("click", function() {
-
         if (menuOpened) {
             // закрыть меню
             menu.style.transform = "translateY(calc(100% - 80px))";
             toggleBtn.style.top = "auto";
-            toggleBtn.style.bottom = "24px"; // кнопка снизу
+            toggleBtn.style.bottom = "24px";  // кнопка снизу
             toggleBtn.querySelector("span").style.transform = "rotate(180deg)";
             menuOpened = false;
         } else {
             // открыть меню
             menu.style.transform = "translateY(0)";
             toggleBtn.style.bottom = "auto";
-            toggleBtn.style.top = "12px"; // кнопка сверху
+            toggleBtn.style.top = "12px";     // кнопка сверху
             toggleBtn.querySelector("span").style.transform = "rotate(0deg)";
             menuOpened = true;
         }
-
     });
-
 });
 
 var panel;
