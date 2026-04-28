@@ -2247,8 +2247,9 @@ function openMenu() {
 
     var menu = document.getElementById("menu");
 
-    menu.style.transform =
-        "translateY(0)";
+    if (isMobile()) {
+        menu.style.transform = "translate(-50%, -50%)";
+    }
 
     document.body.classList.remove("menu-closed");
     document.body.classList.add("menu-open");
@@ -2261,8 +2262,9 @@ function closeMenu() {
 
     var menu = document.getElementById("menu");
 
-    menu.style.transform =
-        "translateY(calc(100% - 80px))";
+    if (isMobile()) {
+        menu.style.transform = "translate(-50%, 90%)";
+    }
 
     document.body.classList.remove("menu-open");
     document.body.classList.add("menu-closed");

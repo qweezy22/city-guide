@@ -801,6 +801,10 @@ button {
         transform: none;
         z-index: 30;
     }
+    #menuToggleBtn span {
+        color: black;
+    }
+
 }
 
 #menuContent {
