@@ -4,57 +4,15 @@ var panel;
 var startY = 0;
 var endY = 0;
 
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
 window.addEventListener("load", function () {
 
     console.log("page loaded");
 
     panel = document.getElementById("menuPanel");
-
-    // свайп панели
-    if (panel) {
-
-        var isDragging = false;
-
-        panel.addEventListener("touchstart", function (e) {
-
-            startY = e.touches[0].clientY;
-            isDragging = true;
-
-        });
-
-        panel.addEventListener("touchmove", function (e) {
-
-            if (!isDragging) return;
-
-            endY = e.touches[0].clientY;
-
-        });
-
-        panel.addEventListener("touchend", function () {
-
-            if (!isDragging) return;
-
-            var diff = endY - startY;
-
-            if (Math.abs(diff) > 80) {
-
-                if (diff > 0) {
-
-                    collapseMenu();
-
-                } else {
-
-                    expandMenu();
-
-                }
-
-            }
-
-            isDragging = false;
-
-        });
-
-    }
 
     // твоя логика загрузки
 
@@ -63,6 +21,28 @@ window.addEventListener("load", function () {
     loadAllRatings();
 
     loadPlanRatings();
+
+    if (!isMobile()) {
+
+        panel.addEventListener("touchstart", function(e) {
+            startY = e.touches[0].clientY;
+        });
+
+        panel.addEventListener("touchmove", function(e) {
+            endY = e.touches[0].clientY;
+        });
+
+        panel.addEventListener("touchend", function() {
+            if (startY - endY > 50) {
+                closeMenu();
+            }
+
+            if (endY - startY > 50) {
+                openMenu();
+            }
+        });
+
+    }
 
     try {
 
@@ -2299,3 +2279,65 @@ function expandMenu() {
     }
 
 }
+
+var menuOpen = true;
+
+window.addEventListener("load", function () {
+
+    var btn = document.getElementById("menuToggleBtn");
+
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+
+        if (menuOpen) {
+
+            collapseMenu();
+
+        } else {
+
+            expandMenu();
+
+        }
+
+    });
+
+});
+
+function collapseMenu() {
+
+    var menu = document.getElementById("menu");
+    var btn = document.getElementById("menuToggleBtn");
+
+    if (!menu) return;
+
+    menu.style.transform =
+        "translateX(-50%) translateY(90%)";
+
+    if (btn) btn.innerText = "▲";
+
+    menuOpen = false;
+
+}
+
+var menuOpened = true;
+
+window.addEventListener("load", function () {
+
+    var toggleBtn = document.getElementById("menuToggleBtn");
+
+    toggleBtn.addEventListener("click", function () {
+
+        if (menuOpened) {
+
+            closeMenu();
+
+        } else {
+
+            openMenu();
+
+        }
+
+    });
+
+});
