@@ -3,23 +3,25 @@ console.log("script.js loaded");
 var menuOpened = true;
 
 window.addEventListener("load", function () {
-    var toggleBtn = document.getElementById("muneToggleBtn");
+    var toggleBtn = document.getElementById("menuToggleBtn");
     var menu = document.getElementById("menu");
 
     toggleBtn.addEventListener("click", function() {
         if (menuOpened) {
-            // закрыть меню
-            menu.style.transform = "translateY(calc(100% - 80px))";
+            menu.style.transform = "translateY(calc(100% - 80px))"; // свернуто
             toggleBtn.style.top = "auto";
-            toggleBtn.style.bottom = "24px";  // кнопка снизу
-            toggleBtn.querySelector("span").style.transform = "rotate(180deg)";
+            toggleBtn.style.bottom = "24px";
+            toggleBtn.querySelector("span").style.transform = "rotate(0deg)";
+            document.body.classList.remove("menu-open");
+            document.body.classList.add("menu-closed");
             menuOpened = false;
         } else {
-            // открыть меню
-            menu.style.transform = "translateY(0)";
+            menu.style.transform = "translateY(0)"; // открыто
             toggleBtn.style.bottom = "auto";
-            toggleBtn.style.top = "12px";     // кнопка сверху
-            toggleBtn.querySelector("span").style.transform = "rotate(0deg)";
+            toggleBtn.style.top = "12px";
+            toggleBtn.querySelector("span").style.transform = "rotate(180deg)";
+            document.body.classList.remove("menu-closed");
+            document.body.classList.add("menu-open");
             menuOpened = true;
         }
     });
