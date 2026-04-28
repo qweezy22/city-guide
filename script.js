@@ -1,28 +1,6 @@
 console.log("script.js loaded");
 
 var menuOpened = true;
-
-window.addEventListener("load", function () {
-    var toggleBtn = document.getElementById("menuToggleBtn");
-    var menu = document.getElementById("menu");
-
-    toggleBtn.addEventListener("click", function() {
-        if (menuOpened) {
-            menu.style.transform = "translate(-50%, 85%)"; // свернуто;
-            toggleBtn.querySelector("span").style.transform = "rotate(0deg)";
-            document.body.classList.remove("menu-open");
-            document.body.classList.add("menu-closed");
-            menuOpened = false;
-        } else {
-            menu.style.transform = "translate(-50%, -50%)"; // открыто
-            toggleBtn.querySelector("span").style.transform = "rotate(180deg)";
-            document.body.classList.remove("menu-closed");
-            document.body.classList.add("menu-open");
-            menuOpened = true;
-        }
-    });
-});
-
 var panel;
 var startY = 0;
 var endY = 0;
@@ -90,13 +68,10 @@ window.addEventListener("load", function () {
         var welcome = document.getElementById("welcome");
 
         if (welcome) {
-
             welcome.classList.add("show");
-
         }
 
-    }, 200);
-
+    });
     try {
 
         window.renderPlaceRatingControls = renderPlaceRatingControls;
@@ -298,13 +273,6 @@ function renderPlaceRatingControls(place) {
 } catch (e) {
     console.warn(e);
 }
-
-setTimeout(function() {
-    var welcome = document.getElementById("welcome");
-    if (welcome) {
-        welcome.classList.add("show");
-    }
-}, 200);
 
 // expose helpers created inside onload to global scope
 try {
@@ -1664,7 +1632,9 @@ function setupRouteButton(place) {
     if (!button) return;
 
     button.onclick = function () {
-        collapseMenu();
+        if (isMobile()) {
+            closeMenu();
+        }
 
         // Try to get user's current position
         if (!navigator.geolocation) {
@@ -2301,13 +2271,12 @@ function closeMenu() {
 
 }
 
-var menuOpened = true;
 
 window.addEventListener("load", function () {
 
     document.body.classList.add("menu-open");
 
-    var toggleBtn = document.getElementById("muneToggleBtn");
+    var toggleBtn = document.getElementById("menuToggleBtn");
 
     toggleBtn.addEventListener("click", toggleMenu);
 
