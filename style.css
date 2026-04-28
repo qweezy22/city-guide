@@ -86,6 +86,7 @@ body {
     border: 1px solid rgba(255,255,255,0.2);
     overflow-y: auto;
     z-index: 10;
+    transition: transform 0.3s ease;
 }
 
 /* КАРТА */

@@ -2263,7 +2263,7 @@ function closeMenu() {
     var menu = document.getElementById("menu");
 
     if (isMobile()) {
-        menu.style.transform = "translate(-50%, 90%)";
+        menu.style.transform = "translate(-50%, calc(100% - 80px))";
     }
 
     document.body.classList.remove("menu-open");
