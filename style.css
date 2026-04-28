@@ -142,7 +142,7 @@ button {
     opacity: 0;
     transform: translateY(10px);
     transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
-    display: block;
+    display: none;
 }
 
 /* inline list inserted under a specific button */
@@ -176,6 +176,7 @@ button {
         max-height: 80vh;
         /* allow internal scrolling when expanded */
         overflow-y: auto;
+        display: block;
     }
 
 /* КАРТОЧКА */
@@ -237,7 +238,7 @@ button {
 
 /* Приветствие */
 #welcome {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -803,6 +804,10 @@ button {
 }
 
 #menuContent {
+
     position: relative;
-    height: auto; /* или просто удалить height */
+
+    height: auto;
+    flex: 0 0 auto;    /* ВАЖНО */
+
 }
