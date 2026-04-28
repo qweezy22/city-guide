@@ -8,7 +8,7 @@ window.addEventListener("load", function () {
 
     toggleBtn.addEventListener("click", function() {
         if (menuOpened) {
-            menu.style.transform = "translateY(calc(100% - 80px))"; // свернуто
+            menu.style.transform = "translate(-50%, 85%)"; // свернуто
             toggleBtn.style.top = "auto";
             toggleBtn.style.bottom = "24px";
             toggleBtn.querySelector("span").style.transform = "rotate(0deg)";
@@ -16,7 +16,7 @@ window.addEventListener("load", function () {
             document.body.classList.add("menu-closed");
             menuOpened = false;
         } else {
-            menu.style.transform = "translateY(0)"; // открыто
+            menu.style.transform = "translate(-50%, -50%)"; // открыто
             toggleBtn.style.bottom = "auto";
             toggleBtn.style.top = "12px";
             toggleBtn.querySelector("span").style.transform = "rotate(180deg)";
@@ -2305,19 +2305,6 @@ function closeMenu() {
 
 }
 
-function openMenu() {
-
-    var menu = document.getElementById("menu");
-
-    menu.style.transform = "translateY(0)";
-
-    var btn = document.getElementById("muneToggleBtn");
-    btn.innerText = "▲";
-
-    menuOpened = true;
-
-}
-
 var menuOpened = true;
 
 window.addEventListener("load", function () {
@@ -2344,16 +2331,3 @@ function toggleMenu() {
 
 }
 
-function closeMenu() {
-
-    var menu = document.getElementById("menu");
-
-    menu.style.transform =
-        "translateY(calc(100% - 80px))";
-
-    document.body.classList.remove("menu-open");
-    document.body.classList.add("menu-closed");
-
-    menuOpened = false;
-
-}

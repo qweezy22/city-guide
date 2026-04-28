@@ -96,6 +96,7 @@ body {
     z-index: 10;
 
     transition: transform 0.3s ease-in-out;
+    position: fixed;
 }
 
 /* КАРТА */
@@ -248,22 +249,32 @@ button {
 #welcome {
 
     position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
     width: 100%;
     max-width: 360px;
-    padding: 28px;
-    border-radius: 18px;
-    background: linear-gradient( -90deg, #38bdf8, #6366f1 );
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-    text-align: center;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* ВАЖНО — вертикальная колонка */
 
-    display: block;
+    padding: 28px;
+
+    border-radius: 18px;
+
+    background: linear-gradient(-90deg, #38bdf8, #6366f1);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+    text-align: center;
+
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+
+    z-index: 2;
 }
 
     #welcome.show {
@@ -799,4 +810,12 @@ button {
         top: 50%;
         left: 50%;
     }
+}
+
+#menuContent {
+
+    position: relative;
+
+    height: 100%;
+
 }
