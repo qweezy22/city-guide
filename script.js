@@ -2250,73 +2250,44 @@ function refreshVisiblePlacesRatings() {
 
 }
 
-function collapseMenu() {
+function openMenu() {
 
     var menu = document.getElementById("menu");
-
-    if (!menu) return;
-
-    if (window.innerWidth <= 768) {
-
-        menu.style.transform =
-            "translateX(-50%) translateY(90%)";
-
-    }
-
-}
-
-function expandMenu() {
-
-    var menu = document.getElementById("menu");
-
-    if (!menu) return;
-
-    if (window.innerWidth <= 768) {
-
-        menu.style.transform =
-            "translateX(-50%) translateY(0)";
-
-    }
-
-}
-
-var menuOpen = true;
-
-window.addEventListener("load", function () {
-
-    var btn = document.getElementById("menuToggleBtn");
-
-    if (!btn) return;
-
-    btn.addEventListener("click", function () {
-
-        if (menuOpen) {
-
-            collapseMenu();
-
-        } else {
-
-            expandMenu();
-
-        }
-
-    });
-
-});
-
-function collapseMenu() {
-
-    var menu = document.getElementById("menu");
-    var btn = document.getElementById("menuToggleBtn");
-
-    if (!menu) return;
 
     menu.style.transform =
-        "translateX(-50%) translateY(90%)";
+        "translateY(0)";
 
-    if (btn) btn.innerText = "▲";
+    document.body.classList.remove("menu-closed");
+    document.body.classList.add("menu-open");
 
-    menuOpen = false;
+    menuOpened = true;
+
+}
+
+function closeMenu() {
+
+    var menu = document.getElementById("menu");
+
+    menu.style.transform =
+        "translateY(calc(100% - 80px))";
+
+    document.body.classList.remove("menu-open");
+    document.body.classList.add("menu-closed");
+
+    menuOpened = false;
+
+}
+
+function openMenu() {
+
+    var menu = document.getElementById("menu");
+
+    menu.style.transform = "translateY(0)";
+
+    var btn = document.getElementById("muneToggleBtn");
+    btn.innerText = "▲";
+
+    menuOpened = true;
 
 }
 
@@ -2324,20 +2295,38 @@ var menuOpened = true;
 
 window.addEventListener("load", function () {
 
-    var toggleBtn = document.getElementById("menuToggleBtn");
+    document.body.classList.add("menu-open");
 
-    toggleBtn.addEventListener("click", function () {
+    var toggleBtn = document.getElementById("muneToggleBtn");
 
-        if (menuOpened) {
-
-            closeMenu();
-
-        } else {
-
-            openMenu();
-
-        }
-
-    });
+    toggleBtn.addEventListener("click", toggleMenu);
 
 });
+
+function toggleMenu() {
+
+    if (menuOpened) {
+
+        closeMenu();
+
+    } else {
+
+        openMenu();
+
+    }
+
+}
+
+function closeMenu() {
+
+    var menu = document.getElementById("menu");
+
+    menu.style.transform =
+        "translateY(calc(100% - 80px))";
+
+    document.body.classList.remove("menu-open");
+    document.body.classList.add("menu-closed");
+
+    menuOpened = false;
+
+}

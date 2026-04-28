@@ -726,19 +726,15 @@ button {
     }
 
 
-/* ===== КРУГЛАЯ КНОПКА СТРЕЛКА ===== */
-
 #menuToggleBtn {
 
     position: fixed;
 
-    bottom: 20px;
     left: 50%;
-
     transform: translateX(-50%);
 
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
 
     border-radius: 50%;
 
@@ -746,16 +742,67 @@ button {
 
     color: white;
 
-    font-size: 22px;
-
-    border: none;
+    font-size: 18px;
 
     z-index: 1000;
+
+    transition: all 0.3s ease;
+
+}
+
+/* когда меню открыто */
+
+.menu-open #menuToggleBtn {
+
+    top: 16px;
+
+}
+
+/* когда меню закрыто */
+
+.menu-closed #menuToggleBtn {
+
+    bottom: 24px;
+
+}
+#menuToggleBtn {
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+#menuToggleBtn span {
+
+    display: inline-block;
+
+    transition: transform 0.3s ease;
+
+}
+
+.menu-open #muneToggleBtn span {
+
+    transform: rotate(180deg);
+
+}
+
+.menu-closed #muneToggleBtn span {
+
+    transform: rotate(0deg);
+
+}
+
+@media (max-width: 768px) {
+
+    #welcome {
+
+        max-width: 300px;
+
+        padding: 18px;
+
+        margin-bottom: 160px;
+
+    }
 
 }
