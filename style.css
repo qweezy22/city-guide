@@ -254,7 +254,7 @@ button {
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.35);
     text-align: left;
-    margin-top: auto;
+    margin-top: 100;
     margin-bottom: 280px;
     /* ВАЖНО — вертикальная колонка */
 
@@ -726,28 +726,27 @@ button {
     }
 
 
-#menuToggleBtn {
-
-    position: fixed;
-
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 52px;
-    height: 52px;
-
-    border-radius: 50%;
-
-    background: rgba(15, 23, 42, 0.9);
-
+#muneToggleBtn {
+    position: absolute; /* привязка к блоку меню */
+    top: 12px; /* будет корректироваться JS */
+    right: 12px; /* например справа */
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: none; /* полностью прозрачный */
     color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
 
-    font-size: 18px;
-
-    z-index: 1000;
-
-    transition: all 0.3s ease;
-
+#muneToggleBtn span {
+    display: inline-block;
+    transition: transform 0.3s ease;
 }
 
 /* когда меню открыто */
@@ -801,7 +800,7 @@ button {
 
         padding: 18px;
 
-        margin-bottom: 160px;
+        margin-bottom: 100px;
 
     }
 
