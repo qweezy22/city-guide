@@ -948,7 +948,7 @@ function openRoutePlan(planId) {
         var hh = document.createElement('h4'); hh.innerText = placeObj.name; hh.style.margin = '0 0 6px 0'; hh.style.fontSize = '15px';
         var dd = document.createElement('p'); dd.innerText = placeObj.address || ''; dd.style.margin = '0'; dd.style.fontSize = '13px'; dd.className = 'description';
         meta.appendChild(hh); meta.appendChild(dd);
-        content.appendChild(img); content.appendChild(meta);\
+        content.appendChild(img); content.appendChild(meta);
         var rmeta = document.createElement('div'); rmeta.className = 'route-meta';
         var dist = document.createElement('div'); dist.innerText = '— KM'; dist.className = 'route-dist';
         var time = document.createElement('div'); time.innerText = '— МИН'; time.className = 'route-time';
