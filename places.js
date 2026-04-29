@@ -910,7 +910,6 @@ var places = [
 
 ];
 
-// === Автоматическое добавление подробных описаний ===
 
 var fullDescriptions = {
 
@@ -1048,8 +1047,6 @@ var fullDescriptions = {
 
 };
 
-
-// применяем описания автоматически
 
 for (var i = 0; i < places.length; i++) {
     var name = places[i].name;

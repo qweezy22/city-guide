@@ -9,10 +9,6 @@ app.use(express.json());
 
 const db = new sqlite3.Database("./database.db");
 
-//
-// ПОЛУЧИТЬ РЕЙТИНГ МЕСТА
-//
-
 app.get("/rating/place/:name", (req, res) => {
 
     const name = req.params.name;
@@ -39,10 +35,6 @@ app.get("/rating/place/:name", (req, res) => {
     );
 
 });
-
-//
-// ДОБАВИТЬ ОЦЕНКУ МЕСТА
-//
 
 app.post("/rating/place", (req, res) => {
 
@@ -93,10 +85,6 @@ app.post("/rating/place", (req, res) => {
     );
 
 });
-
-//
-// РЕЙТИНГ ПЛАНА
-//
 
 app.post("/rating/plan", (req, res) => {
 

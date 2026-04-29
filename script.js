@@ -12,27 +12,18 @@ function isMobile() {
 window.addEventListener("load", function () {
 
     console.log("page loaded");
-
     panel = document.getElementById("menuPanel");
-
-    // твоя логика загрузки
-
     startCategoriesCarousel();
-
     loadAllRatings();
-
     loadPlanRatings();
-
     if (!isMobile()) {
 
         panel.addEventListener("touchstart", function(e) {
             startY = e.touches[0].clientY;
         });
-
         panel.addEventListener("touchmove", function(e) {
             endY = e.touches[0].clientY;
         });
-
         panel.addEventListener("touchend", function() {
             if (startY - endY > 50) {
                 closeMenu();
@@ -96,7 +87,7 @@ function getPlaceImage(place) {
 
 }
 
-// Ensure Next button exists in details and is wired (used when opening details while plan active)
+// проверка кнопки далее 
 function ensurePlanNextButton() {
     try {
         if (!activePlan) return;
@@ -110,7 +101,6 @@ function ensurePlanNextButton() {
             nextBtn.className = 'plan-next-btn';
             detailsContainer.appendChild(nextBtn);
         }
-        // replace to remove previous handlers
         try { nextBtn.replaceWith(nextBtn.cloneNode(true)); nextBtn = document.getElementById('planNextButton'); } catch(e) {}
         updatePlanNextButton();
         nextBtn.addEventListener('click', function(){
@@ -130,7 +120,7 @@ function ensurePlanNextButton() {
     } catch (e) { console.warn(e); }
 }
 
-// Render place rating controls (stars + submit) and show current avg/votes
+// визуал рейтинга
 function renderPlaceRatingControls(place) {
     try {
         var container = document.getElementById('placeRating');
@@ -243,14 +233,8 @@ function renderPlaceRatingControls(place) {
                 submit.disabled = true;
                 submit.style.opacity = "0.6";
                 submit.style.cursor = "default";
-
-                // обновить блок рейтинга в деталях
                 renderPlaceRatingControls(place);
-
-                // обновить карточки в списке
                 refreshVisiblePlacesRatings();
-                // если пользователь сейчас в интересных местах — обновить список
-
                 if (listOwner === "interesting") {
                     showInterestingPlaces();
                 }
@@ -266,7 +250,7 @@ function renderPlaceRatingControls(place) {
                 console.warn("Rating error:", err);
             });
 
-        });   // ← ВАЖНО: закрываем addEventListener
+        });   
 
         container.appendChild(submit);
 
@@ -274,7 +258,6 @@ function renderPlaceRatingControls(place) {
     console.warn(e);
 }
 
-// expose helpers created inside onload to global scope
 try {
     window.renderPlaceRatingControls = renderPlaceRatingControls;
     window.ensurePlanNextButton = ensurePlanNextButton;
@@ -282,7 +265,7 @@ try {
 
 };
 
-// Show finish dialog when user completes plan
+// конец плана
 function showPlanFinishDialog(planId) {
     try {
         var container = document.createElement('div');
@@ -299,8 +282,6 @@ function showPlanFinishDialog(planId) {
 
         var h = document.createElement('h3'); h.innerText = 'Вы прошли маршрут! Каковы впечатления?'; h.style.marginTop = '0';
         container.appendChild(h);
-
-        // stars input
         var starsWrap = document.createElement('div'); starsWrap.style.display = 'flex'; starsWrap.style.gap = '6px'; starsWrap.style.margin = '12px 0';
         var selected = 0;
         for (var s = 1; s <= 5; s++) {
@@ -359,8 +340,6 @@ function showPlanFinishDialog(planId) {
 
                 updateRoutePlanRating(planId);
 
-                // ВОТ ЭТО ДОБАВИТЬ
-
                 if (currentScreen === "routePlanner") {
 
                     openRoutePlanner();
@@ -395,28 +374,22 @@ var map;
 var currentCategory = null;
 var prevScreen = null;
 var prevCategory = null;
-// состояние видимости списка мест
 var listOpen = false;
-var listOwner = null; // 'categories' | 'interesting' | 'search' | etc
+var listOwner = null; 
 var prevListOpenState = false;
 var prevListOwnerState = null;
-// navigation stack for proper back behavior
 var screenStack = [];
-// remember if placesList was active before opening details
 var prevListWasActive = false;
 var prevListParent = null;
 var prevListNextSibling = null;
 var listHiddenForDetails = false;
 var listInsertedScreenId = null;
-// keep reference to last route so we remove it cleanly
 var lastRoute = null;
-var lastMarkers = []; // markers added as part of routing/fallback
-var activePlan = null; // { ids: [placeObjs], index: 0 }
+var lastMarkers = []; 
+var activePlan = null;
 var carouselTimer = null;
 var searchOriginScreen = null;
 var currentScreen = "welcome";
-
-// Plans metadata: names and place lists and ratings
 var plansData = {
     'hour': {
         title: 'Маршрут на час',
@@ -482,11 +455,9 @@ var plansData = {
     }
 };
 
-// references to inline container elements that were visible before opening details
 var prevVisibleInlines = [];
-// Start executing a plan: builds UI state and opens first place details
 
-// Remove all temporary inline lists that were inserted under buttons
+// авто закрытие списка
 function removeInlineLists(allowedScreenId) {
     try {
         var inlines = document.querySelectorAll('[data-inline="1"]');
@@ -512,10 +483,7 @@ function removeInlineLists(allowedScreenId) {
     }
 }
 
-// Start executing a plan: builds UI state and opens first place details
-// startPlan function removed; use window.startPlan wrapper to manage plans consistently
-
-// update Next button text based on activePlan state
+// кнопка закончить путеш
 function updatePlanNextButton() {
     try {
         var btn = document.getElementById('planNextButton');
@@ -533,7 +501,7 @@ function updatePlanNextButton() {
     } catch (e) {}
 }
 
-// Expose startPlan to global scope (wrapper) so onclick handlers always find it
+// условия появления кнопки далее
 window.startPlan = function(planId) {
     try {
         var pd = plansData[planId];
@@ -560,9 +528,7 @@ window.startPlan = function(planId) {
                     nextBtn.innerText = 'Далее';
                     detailsContainer.appendChild(nextBtn);
                 }
-                // update label
                 updatePlanNextButton();
-                // ensure single listener
                 try { nextBtn.onclick = null; } catch(e) {}
                 nextBtn.addEventListener('click', function(){
                     if (!activePlan) return;
@@ -583,7 +549,7 @@ window.startPlan = function(planId) {
     } catch (e) { console.warn(e); }
 };
 
-// Central navigation helper: records history and switches screens
+// сохранение истории экранов
 function navigate(toId) {
     try {
         if (currentScreen && currentScreen !== toId) {
@@ -594,11 +560,10 @@ function navigate(toId) {
     currentScreen = toId;
 }
 
-// Хелперы для отслеживания позиции пользователя (в верхней области)
+
 var watchId = null;
 var userMarker = null;
 var followUser = true;
-
 function startTracking(enableFollow) {
     followUser = !!enableFollow;
     if (!navigator.geolocation) {
@@ -635,12 +600,10 @@ function stopTracking() {
             watchId = null;
         }
     } catch (e) {}
-    // keep the marker on map until clearRoute() called; if you want to remove it now, call clearRoute()
+    
 }
 // удаление маршрутов и маркеров мест
 function clearRoute() {
-
-    // удалить только маршрут
 
     try {
         if (lastRoute) {
@@ -673,31 +636,26 @@ function clearRoute() {
 
 }
 
-// Нормализуем массив координат в формат [lat, lon]
+// нормальные координаты
 function normalizeCoords(coord) {
     if (!coord || coord.length < 2) return coord;
     var a = Number(coord[0]);
     var b = Number(coord[1]);
     if (isNaN(a) || isNaN(b)) return coord;
-    // if first value is outside valid latitude range, likely swapped -> swap
     if (Math.abs(a) > 90 && Math.abs(b) <= 90) {
         return [b, a];
     }
-    // otherwise return as [lat, lon]
     return [a, b];
 }
 
-// Хелпер для показа/скрытия списка мест с CSS-переходами
+// список мест
 function showListBelowButton(list, button) {
-    // Always use canonical #placesList for consistent behavior across screens.
     if (!list) list = document.getElementById('placesList');
     try {
-        // If a button (or header) is provided, move the canonical list directly after that element
         if (button && button.parentNode) {
             try {
                 button.parentNode.insertBefore(list, button.nextSibling);
             } catch (e) {
-                // fallback to appending to menu
                 var menu = document.getElementById('menu');
                 if (menu && list.parentNode !== menu) menu.appendChild(list);
             }
@@ -706,7 +664,6 @@ function showListBelowButton(list, button) {
             if (menu && list.parentNode !== menu) menu.appendChild(list);
         }
         list.style.display = '';
-        // caller is expected to populate list before adding 'active' to trigger animation
         list.style.overflowY = 'auto';
         return list;
     } catch (e) {
@@ -717,24 +674,17 @@ function showListBelowButton(list, button) {
 
 function hideList(list) {
     if (!list) return;
-    // убираем класс active, чтобы началcя эффект сворачивания
     try {
         prevListWasActive = list.classList.contains('active');
-        // remove only 'active' to trigger CSS transition;
-        // keep 'inline-places-list' class until after transition so CSS rules remain available
         list.classList.remove('active');
-        // wait for CSS transition to finish before hiding and restoring parent
         setTimeout(function() {
             try {
-                // For inline temporary containers: hide but keep in DOM so they can be restored
                 if (list.getAttribute && list.getAttribute('data-inline') === '1') {
                     try {
                         list.style.display = 'none';
                         list.style.overflowY = '';
-                        // keep data-inline marker so showListBelowButton can reuse it
                     } catch(e) {}
                 } else {
-                    // canonical list: hide and restore parent if it was moved
                     list.style.display = 'none';
                     list.style.overflowY = '';
                     if (prevListParent && list.parentNode !== prevListParent) {
@@ -770,7 +720,7 @@ function init() {
 
 }
 
-// Экспортируем функции в глобальную область, чтобы inline onclick работал
+// экспорт функций
 window.showAll = showAll;
 window.showCategory = showCategory;
 window.getRatingStars = getRatingStars;
@@ -786,35 +736,29 @@ window.showPhotos = showPhotos;
 window.startTracking = startTracking;
 window.stopTracking = stopTracking;
 
-// Поиск мест по запросу
+// поиск мест
 function searchPlaces(query) {
     if (!searchOriginScreen) {
     searchOriginScreen = currentScreen;
     }
-    // use canonical list container
     var list = document.getElementById('placesList');
     var searchInput = document.getElementById('searchInput');
     list = showListBelowButton(null, searchInput);
     if (!list) return;
     query = (query || '').trim().toLowerCase();
     if (!query) {
-        // сброс поиска и нач. экрана
         hideList(list);
         searchOriginScreen = null;
-        // remove inline search container if present
         try { removeInlineLists(); } catch (e) {}
         currentScreen = 'categories';
         return;
     }
 
     clearRoute();
-    // reset active to allow re-triggering animation
     try { list.classList.remove('active'); } catch (e) {}
     list.innerHTML = "";
-
     listOwner = 'search';
     listOpen = true;
-
     var found = false;
     for (var i = 0; i < places.length; i++) {
         var p = places[i];
@@ -849,17 +793,14 @@ function searchPlaces(query) {
         }
     }
     if (!found) list.innerHTML = '<p>Ничего не найдено</p>';
-    // trigger appear animation
     void list.offsetWidth;
     list.classList.add('active');
     currentScreen = 'list';
 }
 
+// категория показать все
 function showAll(button) {
-
-    // toggle: if already showing 'all' category, close it
     if (currentCategory === 'all') {
-        // try to find inline under this button and hide
         var maybeInline = button && button.nextSibling && button.nextSibling.getAttribute && button.nextSibling.getAttribute('data-inline') === '1' ? button.nextSibling : null;
         if (maybeInline) hideList(maybeInline); else { var canonical = document.getElementById('placesList'); if (canonical) hideList(canonical); }
         currentCategory = null; currentScreen = 'categories'; listOpen = false; listOwner = null; return;
@@ -867,7 +808,6 @@ function showAll(button) {
 
     currentCategory = 'all';
     clearRoute();
-    // use canonical list
     var list = document.getElementById('placesList');
     showListBelowButton(list, button);
     listOwner = 'all'; listOpen = true;
@@ -892,7 +832,7 @@ function showAll(button) {
 
 }
 
-// Открыть детали плана маршрута
+// список для планов
 function openRoutePlan(planId) {
 
     var container = document.getElementById('routePlanDetails');
@@ -925,7 +865,6 @@ function openRoutePlan(planId) {
     }
 
     container.appendChild(ratingBlock);
-    // build list of place objects for each plan
     var plans = {
         'hour': [
             'Александровский сад',
@@ -977,15 +916,13 @@ function openRoutePlan(planId) {
         var p = document.createElement('p'); p.innerText = 'Пока что места не заданы. Добавьте места для этого плана маршрута.'; container.appendChild(p);
         return;
     }
-
-    // add Build Route button
+    // создание элементов инта
     var buildBtn = document.createElement('button');
     buildBtn.innerText = 'Построить маршрут';
     buildBtn.style.margin = '12px 0';
     buildBtn.onclick = function(){ try { if (window.startPlan) window.startPlan(planId); else startPlan(planId); } catch(e){ console.warn('startPlan call failed', e); } };
     container.appendChild(buildBtn);
 
-    // For each name, find place object and render route card
     for (var i = 0; i < names.length; i++) {
         var pname = names[i];
         var placeObj = null;
@@ -995,15 +932,11 @@ function openRoutePlan(planId) {
         if (!placeObj) continue;
         var card = document.createElement('div');
         card.className = 'place-card route-plan-card';
-
-        // timeline column (dot + vertical line)
         var timeline = document.createElement('div');
         timeline.className = 'route-line';
         var dot = document.createElement('div'); dot.className = 'route-dot';
         var vline = document.createElement('div'); vline.className = 'route-vline';
         timeline.appendChild(dot); timeline.appendChild(vline);
-
-        // main content: thumbnail + meta
         var content = document.createElement('div'); content.className = 'route-content';
         content.style.display = 'flex'; content.style.gap = '12px'; content.style.alignItems = 'center';
         var img = document.createElement('img');
@@ -1015,9 +948,7 @@ function openRoutePlan(planId) {
         var hh = document.createElement('h4'); hh.innerText = placeObj.name; hh.style.margin = '0 0 6px 0'; hh.style.fontSize = '15px';
         var dd = document.createElement('p'); dd.innerText = placeObj.address || ''; dd.style.margin = '0'; dd.style.fontSize = '13px'; dd.className = 'description';
         meta.appendChild(hh); meta.appendChild(dd);
-        content.appendChild(img); content.appendChild(meta);
-
-        // meta column: distance and time, always right-aligned
+        content.appendChild(img); content.appendChild(meta);\
         var rmeta = document.createElement('div'); rmeta.className = 'route-meta';
         var dist = document.createElement('div'); dist.innerText = '— KM'; dist.className = 'route-dist';
         var time = document.createElement('div'); time.innerText = '— МИН'; time.className = 'route-time';
@@ -1026,21 +957,16 @@ function openRoutePlan(planId) {
         card.appendChild(timeline);
         card.appendChild(content);
         card.appendChild(rmeta);
-
-        // store coords for later routing; clicking opens details
         (function(p){ card.onclick = function(){ openPlaceDetails(p); }; })(placeObj);
         container.appendChild(card);
     }
 }
 
 function showCategory(category, button) {
-    // if already opened the same category — close it
     if (currentCategory === category) {
-        // find any inline container under this button (next element sibling) and hide it
         var maybeInline = button && button.nextElementSibling && button.nextElementSibling.getAttribute && button.nextElementSibling.getAttribute('data-inline') === '1' ? button.nextElementSibling : null;
         if (maybeInline) hideList(maybeInline);
         else {
-            // fallback: hide canonical list
             var canonical = document.getElementById('placesList');
             if (canonical) hideList(canonical);
         }
@@ -1053,21 +979,14 @@ function showCategory(category, button) {
 
     console.log("clicked category:", category);
     console.log("places:", places);
-
-    // clear any existing route/markers when opening categories
     clearRoute();
-
     currentCategory = category;
-
-    // use canonical list for categories as well
     var list = document.getElementById('placesList');
     showListBelowButton(list, button);
-    // помечаем, что список активен для категории
     listOwner = 'category';
     listOpen = true;
     try { list.classList.remove('active'); } catch (e) {}
     list.innerHTML = "";
-    // remember history so back button returns correctly
     screenStack.push(currentScreen);
 
     var found = false;
@@ -1083,7 +1002,7 @@ function showCategory(category, button) {
             (Array.isArray(cat) && cat.includes(category))
         ) {
 
-            found = true;   // ВОТ ЭТА СТРОКА
+            found = true;   
 
             var card = document.createElement("div");
 
@@ -1116,8 +1035,6 @@ function showCategory(category, button) {
             "<p>Места не найдены</p>";
 
     }
-
-    // trigger appear animation
     void list.offsetWidth;
     list.classList.add('active');
 
@@ -1186,15 +1103,12 @@ function goBack() {
 
     if (currentScreen === "placeDetails") {
 
-        // remove route/markers when leaving place details
         clearRoute();
 
-        // возвращаемся на предыдущий экран (prevScreen), если он записан
         var target = screenStack.length
             ? screenStack.pop()
             : (prevScreen || 'categories');
 
-        // защита от мусора в стеке
         var validScreens = [
             'welcome',
             'mainMenu',
@@ -1207,17 +1121,14 @@ function goBack() {
             target = 'categories';
         }
 
-        // если вдруг получили list — идём ещё назад
         if (target === 'list') {
             target = screenStack.length
                 ? screenStack.pop()
                 : 'categories';
         }
-        // переключаемся обратно на target
         switchScreen('placeDetails', target);
         currentScreen = target;
 
-        // восстановим список мест, если он был открыт до перехода в детали
         try {
             var listEl = document.getElementById('placesList');
             if (listEl) {
@@ -1230,11 +1141,9 @@ function goBack() {
             }
         } catch (e) {}
 
-        // восстановим сохранённое состояние списка
         listOpen = prevListOpenState;
         listOwner = prevListOwnerState;
 
-        // restore any inline containers that were visible before opening details
         try {
             for (var i = 0; i < prevVisibleInlines.length; i++) {
                 var el = prevVisibleInlines[i];
@@ -1255,7 +1164,6 @@ function goBack() {
     }
 
     if (currentScreen === "list") {
-        // при возврате из списка просто скрываем его и возвращаемся к родительскому экрану
         hideList(list);
 
         currentCategory = null;
@@ -1264,7 +1172,6 @@ function goBack() {
             switchScreen('list', 'interesting');
             currentScreen = 'interesting';
         } else if (listOwner === 'search') {
-            // при поиске возвращаемся в категории (убираем список)
             switchScreen('list', 'categories');
             currentScreen = 'categories';
         } else {
@@ -1272,7 +1179,6 @@ function goBack() {
             currentScreen = 'categories';
         }
 
-        // сбросим статус списка
         listOpen = false;
         listOwner = null;
 
@@ -1330,7 +1236,6 @@ function openCategories() {
 function openInterestingPlaces() {
     var input = document.getElementById("searchInput");
     if (input) input.value = "";
-    // Переключаемся на отдельный экран "интересные места" и показываем список
     switchScreen('mainMenu', 'interesting');
     document.getElementById('backButton').style.display = 'block';
     screenStack.push(currentScreen);
@@ -1339,7 +1244,6 @@ function openInterestingPlaces() {
 
 }
 
-// Показать список популярных/интересных мест (по имени из списка)
 function showInterestingPlaces() {
     var popularNames = [
         'Криолло',
@@ -1369,12 +1273,10 @@ function showInterestingPlaces() {
     ];
 
     clearRoute();
-    // use canonical list and place it after the interesting header
     var header = document.querySelector('#interesting h2');
     if (!header) header = document.querySelector('#categories h2');
     var list = document.getElementById('placesList');
     showListBelowButton(list, header);
-    // reset animation and content
     try { list.classList.remove('active'); } catch (e) {}
     list.innerHTML = "";
     listOwner = 'interesting';
@@ -1399,14 +1301,11 @@ function showInterestingPlaces() {
         }
     }
     if (!found) list.innerHTML = '<p>Популярные места не найдены</p>';
-    // trigger appear animation
     void list.offsetWidth;
     list.classList.add('active');
 }
 
 function openRoutePlanner() {
-
-    // Показываем экран планировщика маршрутов
     switchScreen('mainMenu', 'routePlanner');
     document.getElementById('routePlanDetails').style.display = 'none';
     document.getElementById('backButton').style.display = 'block';
@@ -1418,11 +1317,8 @@ function openRoutePlanner() {
 }
 
 function openPlaceDetails(place) {
-    // определяем откуда были открыты детали (чтобы корректно возвращаться)
     var from = currentScreen || 'categories';
     if (from === 'list') {
-
-        // возвращаемся туда, откуда реально пришли
         if (screenStack.length) {
             prevScreen = screenStack[screenStack.length - 1];
         } else {
@@ -1438,19 +1334,14 @@ function openPlaceDetails(place) {
     }
 
     }
-    // перед показом деталей: сохраним состояние и удалим/скроем все inline-списки
     try {
-        // save canonical list state
         var listEl = document.getElementById('placesList');
         if (listEl) {
             prevListOpenState = listEl.classList.contains('active');
             prevListOwnerState = listOwner;
-            // hide canonical with animation
             hideList(listEl);
-            // mark that lists are hidden due to details
             listHiddenForDetails = true;
         }
-        // Remember currently visible inline container elements so we can restore them on Back
         try {
             prevVisibleInlines = [];
             var inlines = document.querySelectorAll('[data-inline="1"]');
@@ -1460,33 +1351,27 @@ function openPlaceDetails(place) {
                     if (el.style.display !== 'none' && el.classList.contains('active')) {
                         prevVisibleInlines.push(el);
                     }
-                    // hide inline with animation (keeps element in DOM)
                     hideList(el);
                 } catch (e) {}
             }
         } catch (e) {}
     } catch (e) {}
-    // push previous screen so back returns correctly
     if (!activePlan) {
     screenStack.push(prevScreen || currentScreen);
     }
-    // переключаемся на экран деталей после анимации скрытия списков
     setTimeout(function() {
         try { switchScreen(prevScreen, 'placeDetails'); } catch (e) { console.warn(e); }
     }, 360);
 
     document.getElementById("placeTitle").innerText = place.name;
 
-    // показываем подробное описание (description_full из places.js)
     document.getElementById("placeDescription").innerText = place.description_full || place.description || '';
 
     showPhotos(place);
 
     setupRouteButton(place);
 
-    // render rating controls for this place
     try { renderPlaceRatingControls(place); } catch (e) {}
-    // ensure plan next button exists/updated when viewing place details during a plan
     try { ensurePlanNextButton(); } catch(e) {}
 
     currentScreen = "placeDetails";
@@ -1636,33 +1521,25 @@ function setupRouteButton(place) {
             closeMenu();
         }
 
-        // Try to get user's current position
         if (!navigator.geolocation) {
             alert('Геолокация не поддерживается в этом браузере.');
             return;
         }
 
-        // show simple feedback
         button.disabled = true;
         var originalText = button.innerText;
         button.innerText = 'Строим маршрут...';
 
         var geoSuccess = function(pos) {
             var userCoords = [pos.coords.latitude, pos.coords.longitude];
-
-            // нормализуем координаты (гарантируем формат [lat, lon])
             userCoords = normalizeCoords(userCoords);
             var destCoords = normalizeCoords(place.coords);
-
-            // Попробуем построить маршрут и выполнить несколько fallback'ов при ошибке
             console.log('userCoords', userCoords, 'place.coords', destCoords);
-
-            // помощник: расстояние в метрах между двумя координатами
             function haversineDistance(a, b) {
                 var toRad = function(x) { return x * Math.PI / 180; };
                 var lat1 = a[0], lon1 = a[1];
                 var lat2 = b[0], lon2 = b[1];
-                var R = 6371000; // meters
+                var R = 6371000; 
                 var dLat = toRad(lat2 - lat1);
                 var dLon = toRad(lon2 - lon1);
                 var A = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
@@ -1670,7 +1547,6 @@ function setupRouteButton(place) {
                 return R * C;
             }
 
-            // если точки очень близко — не строим маршрут, просто показываем метки
             try {
                 var dist = haversineDistance(userCoords, destCoords);
                 console.log('distance meters:', dist);
@@ -1678,7 +1554,6 @@ function setupRouteButton(place) {
                     console.log('Points are very close — skipping routing.');
                     var markPlace = new ymaps.Placemark(destCoords, { hintContent: place.name });
                     map.geoObjects.add(markPlace);
-                    // track markers so they can be cleared later
                     lastMarkers.push(markPlace);
                     map.setCenter(destCoords, 14, { duration: 600 });
                     button.disabled = false;
@@ -1694,9 +1569,7 @@ function setupRouteButton(place) {
             }
 
             function onRoute(route) {
-                // clear previous route and markers
                 clearRoute();
-                // добавить маршрут на карту
                 map.geoObjects.add(route);
                 lastRoute = route;
                 setTimeout(function () {
@@ -1717,34 +1590,26 @@ function setupRouteButton(place) {
                         console.warn(e);
                     }
                 }, 100);
-                // запускаем отслеживание пользователя пока маршрут активен
                 try { startTracking(true); } catch (e) {}
-                // пометить точки
                 try {
                     if (wayPoints && wayPoints.get && wayPoints.get(1)) {
                         wayPoints.get(1).properties.set('iconCaption', place.name);
                     }
                 } catch (e) {}
-                // вернуть кнопку
                 button.disabled = false;
                 button.innerText = originalText;
             }
 
-            // Основная попытка: авто
             tryBuildRoute(userCoords, destCoords, 'auto').then(onRoute, function(err) {
                 console.warn('auto failed, retry pedestrian', err);
-                // Попробовать пеший маршрут
                 tryBuildRoute(userCoords, destCoords, 'pedestrian').then(onRoute, function(err2) {
                     console.warn('pedestrian failed, try swapping coords', err2);
-                    // попробовать переставить порядок координат (на случай формата [lon,lat])
                     var swappedStart = [userCoords[1], userCoords[0]];
                     var swappedEnd = [destCoords[1], destCoords[0]];
                     tryBuildRoute(swappedStart, swappedEnd, 'auto').then(onRoute, function(err3) {
                         console.warn('swapped coords failed', err3);
-                        // последний вариант: попробовать MultiRoute (multiRouter)
                         try {
                             console.warn('All routing attempts failed, showing markers and fitting bounds');
-                            // remove previous route only
                             try { if (lastRoute) map.geoObjects.remove(lastRoute); } catch (e) {}
                             lastRoute = null;
                             var markUserF = new ymaps.Placemark(userCoords, { iconCaption: 'Вы здесь' });
@@ -1753,11 +1618,9 @@ function setupRouteButton(place) {
                             map.geoObjects.add(markPlaceF);
                             lastMarkers.push(markUserF);
                             lastMarkers.push(markPlaceF);
-                            // fit map to both points
                             try {
                                 map.setBounds([userCoords, destCoords], { checkZoomRange: true, duration: 600 });
                             } catch (e) {
-                                // fallback to center on destination
                                 map.setCenter(destCoords, 12, { duration: 600 });
                             }
                             button.disabled = false; button.innerText = originalText;
@@ -1774,7 +1637,6 @@ function setupRouteButton(place) {
         var geoError = function(err) {
             console.warn('Geolocation error', err);
             alert('Не удалось определить ваше местоположение. Покажу объект на карте.');
-            // fallback: just show the place
             try { clearRoute(); } catch (e) {}
             var dest = normalizeCoords(place.coords);
             var mark = new ymaps.Placemark(dest, { hintContent: place.name });
@@ -1831,7 +1693,6 @@ function switchScreen(fromId, toId) {
         to.style.display = "block";
     }
 
-    // ↓ ВСЁ ЭТО ДОЛЖНО БЫТЬ ВНУТРИ ФУНКЦИИ
 
     try {
         var searchWrap = document.getElementById('searchWrapper');
@@ -1866,7 +1727,6 @@ function switchScreen(fromId, toId) {
         }
     } catch (e) {}
 
-    // управление поиском
     var search = document.getElementById("searchWrapper");
 
     if (search) {
@@ -1901,8 +1761,6 @@ function openPhotoModal(images, index) {
     content.className =
         "photo-modal-content";
 
-    // СЛАЙДЕР
-
     var slider =
         document.createElement("div");
 
@@ -1935,11 +1793,9 @@ function openPhotoModal(images, index) {
         var containerWidth =
             content.clientWidth;
 
-        // реальная позиция элемента
         var slideLeft =
             slide.offsetLeft;
 
-        // центрирование
         var offset =
             slideLeft -
             (containerWidth - slideWidth) / 2;
@@ -1950,7 +1806,6 @@ function openPhotoModal(images, index) {
             "px)";
     }
 
-    // стрелка влево
 
     if (modalImages.length > 1) {
 
@@ -1992,7 +1847,6 @@ function openPhotoModal(images, index) {
         content.appendChild(right);
     }
 
-    // кнопка закрытия
 
     var close =
         document.createElement("div");
@@ -2092,8 +1946,6 @@ function loadAllRatings() {
 
                 if (!data) return;
 
-                // ВАЖНО: сохраняем рейтинг в place
-
                 place._rating = {
                     avg: data.avg,
                     votes: data.votes
@@ -2111,7 +1963,6 @@ function loadAllRatings() {
 
     }
 
-    // Когда все рейтинги загрузились — обновляем карточки
 
     Promise.all(promises).then(function(){
 

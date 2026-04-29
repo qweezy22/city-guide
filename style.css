@@ -1,12 +1,9 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Arial;
-    /* ВАЖНО */
-
     background: transparent;
 }
 
-/* route plan specific card layout */
 .route-plan-card {
     display: flex;
     align-items: center;
@@ -41,7 +38,6 @@ body {
         display: block;
     }
 
-/* timeline visuals for route plan */
 .route-line { display:flex; flex-direction:column; align-items:center; width:32px; }
 .route-dot { width:8px; height:8px; background:white; border-radius:50%; margin:6px 0; }
 .route-vline { width:2px; background: rgba(255,255,255,0.12); flex:1; margin-top:4px; }
@@ -50,7 +46,6 @@ body {
 .route-dist { font-weight:600; }
 .route-time { font-size:13px; color: rgba(255,255,255,0.8); }
 
-/* СТИЛИ ДЛЯ ПОЛЯ ПОИСКА */
 #searchInput {
     width: 100%;
     padding: 10px 12px;
@@ -60,15 +55,12 @@ body {
     color: white;
 }
 
-/* РЕЙТИНГ В КАРТОЧКЕ */
 .place-card .rating {
     display: block;
     margin-top: 8px;
     color: gold;
     font-size: 16px;
 }
-
-/* МЕНЮ */
 
 #menu {
     width: 460px;
@@ -89,8 +81,6 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* КАРТА */
-
 #map {
     position: fixed;
     left: 0;
@@ -98,8 +88,6 @@ body {
     width: 100%;
     height: 100vh;
 }
-
-/* КНОПКИ */
 
 button {
     width: 100%;
@@ -119,8 +107,6 @@ button {
         transform: translateX(6px);
     }
 
-    /* но НЕ для меню */
-
     button:not(.menu-btn):hover {
         transform: translateX(6px);
         background: linear-gradient( 90deg, #38bdf8, #6366f1 );
@@ -130,12 +116,8 @@ button {
         transform: scale(0.96);
     }
 
-/* СПИСОК */
-
-/* placesList now animates via max-height + opacity/transform to avoid layout jump */
 #placesList {
     width: 100%;
-    /* collapsed by default to reserve flow space when inserted */
     max-height: 0;
     overflow: hidden;
     overflow-x: hidden;
@@ -146,10 +128,8 @@ button {
     display: none;
 }
 
-/* inline list inserted under a specific button */
 .inline-places-list {
     width: 100%;
-    /* collapsed by default like #placesList */
     max-height: 0;
     overflow: hidden;
     margin-top: 12px;
@@ -165,7 +145,6 @@ button {
 .inline-places-list.active {
     opacity: 1;
     transform: translateY(0);
-    /* match canonical list max-height so inline lists are full-sized */
     max-height: 80vh;
     overflow-y: auto;
 }
@@ -173,14 +152,10 @@ button {
     #placesList.active {
         opacity: 1;
         transform: translateY(0);
-        /* allow the list to grow up to this size */
         max-height: 80vh;
-        /* allow internal scrolling when expanded */
         overflow-y: auto;
         display: block;
     }
-
-/* КАРТОЧКА */
 
 .place-card {
     padding: 14px;
@@ -198,16 +173,12 @@ button {
         background: rgba(255,255,255,0.2);
     }
 
-    /* ФОТО */
-
     .place-card img {
         width: 100%;
         height: 160px;
         border-radius: 12px;
         object-fit: cover;
     }
-
-    /* НАЗВАНИЕ */
 
     .place-card h3 {
         margin: 0;
@@ -228,16 +199,11 @@ button {
         cursor: pointer;
     }
 
-/* РЕЙТИНГ */
-
 .rating {
     color: gold;
     font-size: 18px;
 }
 
-/* ПРИВЕТСТВИЕ */
-
-/* Приветствие */
 #welcome {
     position: absolute;
     top: 50%;
@@ -253,7 +219,6 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* ВАЖНО */
     opacity: 0;
     transition: opacity 0.25s ease;
     will-change: opacity, transform;
@@ -276,8 +241,6 @@ button {
         color: #e2e8f0;
         text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
-
-/* КНОПКА ПЕРЕХОДА */
 
 #welcomeButton {
     margin-top: 24px;
@@ -311,9 +274,7 @@ button {
     }
 }
 
-/* ===== ТОНКИЙ СКРОЛЛ ===== */
-
-/* Chrome / Edge */
+/* скролл */
 
 #menu::-webkit-scrollbar,
 #placesList::-webkit-scrollbar,
@@ -340,8 +301,6 @@ button {
         background: rgba(255,255,255,0.55);
     }
 
-/* Firefox */
-
 #menu,
 #placesList {
     scrollbar-width: thin;
@@ -355,8 +314,6 @@ button {
     color: rgba(255,255,255,0.85);
 }
 
-/* КНОПКА НАЗАД */
-
 #backButton {
     font-family: inherit;
     width: 44px;
@@ -368,8 +325,6 @@ button {
     color: white;
     font-size: 22px;
     cursor: pointer;
-    /* ВАЖНО — центрирование */
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -399,18 +354,16 @@ button {
     position: relative;
     width: 100%;
     height: 180px;
-    overflow: hidden; /* УБИРАЕТ СКРОЛЛ */
+    overflow: hidden; 
     border-radius: 12px;
 }
 
-/* контейнер для всех фото */
 .carousel-track {
     display: flex;
     height: 100%;
-    transition: transform 0.6s ease; /* ПЛАВНАЯ АНИМАЦИЯ */
+    transition: transform 0.6s ease; 
 }
 
-    /* каждое фото */
     .carousel-track img {
         width: 100%;
         height: 100%;
@@ -489,8 +442,7 @@ button {
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M15 18l-6-6 6-6'/%3E%3C/svg%3E") no-repeat center;
 }
 
-/* ФУЛЛСКРИН ФОТО */
-
+/*фулскрин фото*/
 .photo-modal {
     position: fixed;
     inset: 0;
@@ -508,7 +460,7 @@ button {
     height: 80vh;
     max-width: 1100px;
     max-height: 800px;
-    padding: 0; /* важно */
+    padding: 0; 
 
     border-radius: 20px;
     background: rgba(15, 23, 42, 0.45);
@@ -603,22 +555,20 @@ button {
     display: flex;
     height: 100%;
     width: 100%;
-    gap: 40px; /* расстояние между фото */
+    gap: 40px; 
     align-items: center;
     will-change: transform;
     transition: transform 0.5s ease;
 }
     .photo-modal-slider img {
-        width: calc(100% - 80px); /* отступы по краям */
+        width: calc(100% - 80px); 
         height: calc(100% - 80px);
         margin: 40px;
-        object-fit: contain; /* важно — показывает полностью */
+        object-fit: contain; 
 
         border-radius: 16px;
         flex: 0 0 auto;
     }
-
-/* КНОПКИ С ФОТО В МЕНЮ */
 
 .menu-btn {
     position: relative;
@@ -677,7 +627,6 @@ button {
 }
 
 /* меню для мобилок */
-
 #menuPanel {
     position: fixed;
 
@@ -697,8 +646,6 @@ button {
     pointer-events: auto;
 }
 
-/* свернутое состояние */
-
 #menuPanel.collapsed {
 
     transform: translateY(85%);
@@ -707,14 +654,14 @@ button {
 
 
 #menuToggleBtn {
-    position: absolute;      /* привязка к меню */
-    top: 12px;               /* сверху по умолчанию */
-    left: 50%;         /* справа */
+    position: absolute;     
+    top: 12px;             
+    left: 50%;         
     width: 44px;
-    transform: translateX(-50%); /* выравнивание по центру */
+    transform: translateX(-50%); 
     height: 44px;
     border: none;
-    background: none;        /* прозрачная */
+    background: none;        
     color: white;
     font-size: 20px;
     display: flex;
@@ -730,15 +677,11 @@ button {
     transition: transform 0.3s ease;
 }
 
-/* когда меню открыто */
-
 .menu-open #menuToggleBtn {
 
     top: 16px;
 
 }
-
-/* когда меню закрыто */
 
 .menu-closed #menuToggleBtn {
 
@@ -777,7 +720,7 @@ button {
     #menu {
         width: 90%;
         max-width: 320px;
-        height: 95vh; /* ВАЖНО */
+        height: 95vh; 
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -785,7 +728,7 @@ button {
     }
 
     #welcome {
-        position: absolute; /* чтобы центрировалось относительно меню */
+        position: absolute; 
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -813,6 +756,6 @@ button {
     position: relative;
 
     height: auto;
-    flex: 0 0 auto;    /* ВАЖНО */
+    flex: 0 0 auto;    
 
 }
