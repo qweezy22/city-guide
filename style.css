@@ -79,6 +79,7 @@ body {
     overflow-y: auto;
     z-index: 10;
     transition: transform 0.3s ease;
+    overflow-x: visible;
 }
 
 #map {
@@ -758,4 +759,139 @@ button {
     height: auto;
     flex: 0 0 auto;    
 
+}
+
+#langToggle {
+    position: absolute;
+    top: 305px;
+    right: 185px;
+    width: 52px;
+    height: 32px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: 0.2s;
+}
+
+    #langToggle:hover {
+        transform: scale(1.12);
+        background: rgba(255,255,255,0.25);
+    }
+    #langToggle:active {
+    transform: scale(0.92);
+}
+
+.education-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.education-main {
+    width: 100%;
+}
+
+.education-side-panel {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+
+    margin-top: 14px;
+
+    padding: 18px;
+
+    border-radius: 24px;
+
+    background: rgba(255,255,255,0.03);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    transition: 0.35s ease;
+}
+
+.education-side-panel button {
+
+    width: 100% !important;
+
+    height: 110px !important;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        height 0.35s ease;
+
+}
+
+.education-side-panel button:hover {
+    transform: scale(1.03);
+}
+.education-side-panel button.education-active {
+
+    grid-column: 1 / -1;
+
+    height: 54px !important;
+
+    border-radius: 18px;
+
+    font-size: 18px;
+
+    background: rgba(255,255,255,0.12);
+
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.education-hidden {
+
+    opacity: 0;
+
+    transform: scale(0.9);
+
+    pointer-events: none;
+
+}
+
+.inline-places-list {
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    margin-top: 12px;
+}
+
+.education-closing {
+
+    opacity: 0;
+
+    transform: translateY(-10px);
+
+    transition: 0.35s ease;
+}
+
+@keyframes educationPopup {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#students {
+    position: relative;
 }

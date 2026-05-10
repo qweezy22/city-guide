@@ -1,5 +1,266 @@
 console.log("script.js loaded");
 
+var currentLang =
+    localStorage.getItem("lang") ||
+    (navigator.language.startsWith("ru") ? "ru" : "en");
+
+const translations = {
+
+    ru: {
+        welcomeTitle: "Мини-гид по Кирову",
+        welcomeText: "Выберите категорию и откройте интересные места города.",
+        welcomeButton: "В путешествие →",
+        interesting: "Интересные места",
+        routes: "Планы маршрутов",
+        categories: "Категории",
+        youAreHere: "Вы здесь",
+        search: "Поиск мест...",
+        showAll: "Показать все",
+        tradecenters: "Торговые центры",
+        food: "Еда",
+        nature: "Природа",
+        water: "Реки и озёра",
+        cave: "Пещеры и скалы",
+        spring: "Родники",
+        history: "История",
+        museums: "Музеи и театры",
+        park: "Природные комплексы",
+        kids: "Для детей",
+        noReviews: "Нет отзывов",
+        rate: "Оценить",
+        reviewSent: "Отзыв оставлен!",
+        thanksReview: "Спасибо за отзыв!",
+        putStars: "Поставьте звёзды перед отправкой.",
+        nothingFound: "Ничего не найдено",
+        noReviewsYet: "Пока отзывов нет",
+        reviews: "Отзывы",
+        routePlansTitle: "Планы маршрутов",
+        routePlansText: "Выберите готовый план маршрута для туристов.",
+        buildRoute: "Построить маршрут",
+        buildingRoute: "Строим маршрут...",
+        routeHour: "Маршрут на час",
+        routeKids: "Маршрут с детьми",
+        routeWalking: "Пешеходный маршрут",
+        routeCulture: "Культурный маршрут",
+        routePhoto: "Фото-маршрут",
+        ratingNoReviews: "Рейтинг: пока нет отзывов",
+        sendReview: "Отправить отзыв",
+        close: "Закрыть",
+        next: "Далее",
+        finishJourney: "Закончить путешествие",
+        routeBuildError: "Не удалось построить маршрут и показать метки.",
+        geoError: "Не удалось определить ваше местоположение. Покажу объект на карте.",
+        routeCompleted: "Вы прошли маршрут! Каковы впечатления?",
+        km: "КМ",
+        min: "МИН",
+        votes: "голос.",
+        reviewsWord: "отзывов",
+        students: "Студентам",
+        print: "Печать",
+        educ: "Образование",
+        studentFood: "Где поесть",
+        education: "Образование",
+        vyatsu: "ВятГУ",
+        vgek: "ВГЭК",
+        kpk: "КПК",
+        kpias: "КПиАС",
+        vemt: "ВЭМТ",
+        vzt: "ВЖТ",
+        kat: "КАТ",
+    },
+
+    en: {
+        welcomeTitle: "Mini Guide to Kirov",
+        welcomeText: "Choose a category and discover interesting places in the city.",
+        welcomeButton: "Start journey →",
+        sendReview: "Send review",
+        close: "Close",
+        interesting: "Interesting places",
+        routes: "Route plans",
+        categories: "Categories",
+        youAreHere: "You are here",
+        search: "Search places...",
+        showAll: "Show all",
+        tradecenters: "Shopping malls",
+        food: "Food",
+        nature: "Nature",
+        water: "Rivers and lakes",
+        cave: "Caves and rocks",
+        spring: "Springs",
+        history: "History",
+        museums: "Museums and theaters",
+        park: "Nature parks",
+        kids: "For children",
+        noReviews: "No reviews",
+        rate: "Rate",
+        reviewSent: "Review sent!",
+        thanksReview: "Thanks for your review!",
+        putStars: "Please select stars before sending.",
+        nothingFound: "Nothing found",
+        noReviewsYet: "No reviews yet",
+        reviews: "Reviews",
+        routePlansTitle: "Route plans",
+        routePlansText: "Choose a ready-made tourist route.",
+        buildRoute: "Build route",
+        buildingRoute: "Building route...",
+        routeHour: "1-hour route",
+        routeKids: "Route with children",
+        routeWalking: "Walking route",
+        routeCulture: "Cultural route",
+        routePhoto: "Photo route",
+        ratingNoReviews: "Rating: no reviews yet",
+        next: "Next",
+        finishJourney: "Finish journey",
+        routeBuildError: "Failed to build route and show markers.",
+        geoError: "Could not determine your location. Showing place on map.",
+        routeCompleted: "You completed the route! What are your impressions?",
+        km: "KM",
+        min: "MIN",
+        votes: "votes",
+        reviewsWord: "reviews",
+        students: "Students",
+        print: "Printing",
+        educ: "Education",
+        studentFood: "Where to eat",
+        education: "Education",
+        vyatsu: "VyatSu",
+        vgek: "VGEC",
+        kpk: "KPK",
+        kpias: "KPiAS",
+        vemt: "VEMT",
+        vzt: "VZhT",
+        kat: "KAT",
+    }
+
+};
+
+function applyTranslations() {
+
+    const t = translations[currentLang];
+
+    document.querySelector("#welcome h2").innerText =
+        t.welcomeTitle;
+
+    document.querySelector("#welcome p").innerText =
+        t.welcomeText;
+
+    document.getElementById("welcomeButton").innerText =
+        t.welcomeButton;
+
+    document.querySelector("#mainMenu button:nth-child(1) span").innerText =
+        t.interesting;
+
+    document.querySelector("#interesting h2").innerText =
+        t.interesting;
+
+    document.querySelector("#mainMenu button:nth-child(2) span").innerText =
+        t.routes;
+
+    document.querySelector("#mainMenu button:nth-child(3) span").innerText =
+        t.categories;
+    
+    document.querySelector("#categories h2").innerText =
+        t.categories;
+
+    document.getElementById("searchInput").placeholder =
+        t.search;
+
+    document.getElementById("reviewsTitle").innerText =
+        t.reviews;
+
+    document.getElementById("reviews").innerText =
+        t.noReviewsYet;
+
+    document.getElementById("routePlannerTitle").innerText =
+        t.routePlansTitle;
+    
+    document.querySelector("#routePlanner h2").innerText =
+        t.routePlansTitle;
+
+    document.getElementById("routePlannerText").innerText =
+        t.routePlansText;
+
+    document.getElementById("routeHour").innerText =
+        t.routeHour;
+
+    document.getElementById("routeKids").innerText =
+        t.routeKids;
+
+    document.getElementById("routeWalking").innerText =
+        t.routeWalking;
+
+    document.getElementById("routeCulture").innerText =
+        t.routeCulture;
+
+    document.getElementById("routePhoto").innerText =
+        t.routePhoto;
+
+    document.querySelector("#mainMenu button:nth-child(4) span").innerText =
+        t.students;
+
+    document.getElementById("studentsTitle").innerText =
+        t.students;
+        
+
+    const studentButtons =
+        document.querySelectorAll("#students button");
+
+    studentButtons[0].innerText = t.print;
+    studentButtons[1].innerText = t.educ;
+    studentButtons[2].innerText = t.studentFood;
+
+    var routeBtn = document.getElementById("routeButton");
+
+    if (routeBtn) {
+        routeBtn.innerText = t.buildRoute;
+    }
+
+    const categoryButtons =
+        document.querySelectorAll("#categories button");
+    categoryButtons[0].innerText = t.showAll;
+    categoryButtons[1].innerText = t.tradecenters;
+    categoryButtons[2].innerText = t.food;
+    categoryButtons[3].innerText = t.nature;
+    categoryButtons[4].innerText = t.water;
+    categoryButtons[5].innerText = t.cave;
+    categoryButtons[6].innerText = t.spring;
+    categoryButtons[7].innerText = t.history;
+    categoryButtons[8].innerText = t.museums;
+    categoryButtons[9].innerText = t.park;
+    categoryButtons[10].innerText = t.kids;
+    updateLanguageButton();
+
+}
+
+function toggleLanguage() {
+
+    currentLang =
+        currentLang === "ru"
+            ? "en"
+            : "ru";
+
+    localStorage.setItem("lang", currentLang);
+
+    applyTranslations();
+
+    updateLanguageButton();
+
+}
+
+function updateLanguageButton() {
+
+    var btn =
+        document.getElementById("langToggle");
+
+    if (!btn) return;
+
+    btn.innerText =
+        currentLang === "ru"
+            ? "EN"
+            : "RU";
+
+}
+
 var menuOpened = true;
 var panel;
 var startY = 0;
@@ -10,7 +271,7 @@ function isMobile() {
 }
 
 window.addEventListener("load", function () {
-
+    applyTranslations();
     console.log("page loaded");
     panel = document.getElementById("menuPanel");
     startCategoriesCarousel();
@@ -97,7 +358,7 @@ function ensurePlanNextButton() {
             nextBtn = document.createElement('button');
             nextBtn.id = 'planNextButton';
             nextBtn.style.marginTop = '12px';
-            nextBtn.innerText = 'Далее';
+            nextBtn.innerText = translations[currentLang].next;
             nextBtn.className = 'plan-next-btn';
             detailsContainer.appendChild(nextBtn);
         }
@@ -107,9 +368,9 @@ function ensurePlanNextButton() {
             if (!activePlan) return;
             if (activePlan.index >= activePlan.ids.length - 1) {
                 try { var b = document.getElementById('planNextButton'); if (b) b.parentNode.removeChild(b); } catch(e) {}
-                var pid = activePlan.planId || null;
+                var finishedPlanId = activePlan.planId || planId || null;
+                showPlanFinishDialog(finishedPlanId)
                 activePlan = null;
-                showPlanFinishDialog(pid);
                 return;
             }
             activePlan.index++;
@@ -136,7 +397,11 @@ function renderPlaceRatingControls(place) {
         header.style.gap = '8px';
 
         var txt = document.createElement('div');
-        txt.innerText = votes ? (avg.toFixed(1) + ' (' + votes + ' гол.)') : 'Нет отзывов';
+        const t = translations[currentLang];
+
+        txt.innerText = votes
+            ? (avg.toFixed(1) + ' (' + votes + ')')
+            : t.noReviews;
         txt.style.fontSize = '14px';
         txt.style.color = 'white';
         header.appendChild(txt);
@@ -170,6 +435,7 @@ function renderPlaceRatingControls(place) {
         container.appendChild(starsWrap);
 
         function render() {
+        const t = translations[currentLang];
             for (var i = 0; i < starButtons.length; i++) {
                 starButtons[i].innerText = (i < selected) ? '★' : '☆';
             }
@@ -185,7 +451,7 @@ function renderPlaceRatingControls(place) {
 
         } else {
 
-            submit.innerText = "Оценить";
+            submit.innerText = t.rate;
 
         }
         submit.style.marginTop = '8px';
@@ -194,7 +460,7 @@ function renderPlaceRatingControls(place) {
         submit.style.cursor = 'pointer';
         submit.addEventListener('click', function(){
             if (selected <= 0) {
-            alert("Поставьте звёзды перед отправкой.");
+            alert(t.putStars);
             return;
         }
 
@@ -207,7 +473,7 @@ function renderPlaceRatingControls(place) {
                 },
 
                 body: JSON.stringify({
-                    name: place.name,
+                    name: place.name[currentLang],
                     rating: selected
                 })
 
@@ -280,7 +546,7 @@ function showPlanFinishDialog(planId) {
         container.style.borderRadius = '12px';
         container.style.zIndex = 2000;
 
-        var h = document.createElement('h3'); h.innerText = 'Вы прошли маршрут! Каковы впечатления?'; h.style.marginTop = '0';
+        var h = document.createElement('h3'); const t = translations[currentLang]; h.innerText = t.routeCompleted; h.style.marginTop = '0';
         container.appendChild(h);
         var starsWrap = document.createElement('div'); starsWrap.style.display = 'flex'; starsWrap.style.gap = '6px'; starsWrap.style.margin = '12px 0';
         var selected = 0;
@@ -299,17 +565,18 @@ function showPlanFinishDialog(planId) {
         container.appendChild(starsWrap);
 
         function renderStars(){
+        const t = translations[currentLang];
             var btns = starsWrap.querySelectorAll('button');
             for (var i = 0; i < btns.length; i++) {
                 btns[i].innerText = (i < selected) ? '★' : '☆';
             }
         }
 
-        var ok = document.createElement('button'); ok.innerText = 'Отправить отзыв'; ok.style.marginRight = '8px';
+        var ok = document.createElement('button'); ok.innerText = t.sendReview; ok.style.marginRight = '8px';
         ok.onclick = function(){
 
             if (selected <= 0) {
-                alert("Поставьте звёзды перед отправкой.");
+                alert(t.putStars);
                 return;
             }
 
@@ -349,8 +616,11 @@ function showPlanFinishDialog(planId) {
                 try {
                     container.parentNode.removeChild(container);
                 } catch(e) {}
-
-                alert("Спасибо за отзыв!");
+                activePlan = null;
+                switchScreen("placeDetails", "routePlanner");
+                currentScreen = "routePlanner";
+                prevScreen = "routePlanner";
+                alert(t.thanksReview);
 
             })
 
@@ -360,8 +630,21 @@ function showPlanFinishDialog(planId) {
 
         };
 
-        var cancel = document.createElement('button'); cancel.innerText = 'Закрыть';
-        cancel.onclick = function(){ try { container.parentNode.removeChild(container); } catch(e) {} };
+        var cancel = document.createElement('button'); cancel.innerText = t.close;
+        cancel.onclick = function(){
+
+            activePlan = null;
+
+            currentScreen = "routePlanner";
+
+            prevScreen = "routePlanner";
+
+            try {
+                container.parentNode.removeChild(container);
+            } catch(e) {}
+
+            switchScreen("placeDetails", "routePlanner");
+        };
 
         var foot = document.createElement('div'); foot.style.marginTop = '12px'; foot.appendChild(ok); foot.appendChild(cancel);
         container.appendChild(foot);
@@ -393,64 +676,27 @@ var currentScreen = "welcome";
 var plansData = {
     'hour': {
         title: 'Маршрут на час',
-        places: [
-            'Александровский сад',
-            'Кировский областной краеведческий музей имени П. В. Алабина',
-            'Сквер Алые Паруса',
-            'Парк имени С. М. Кирова'
-        ],
+        places: [55, 59, 48, 52],
         rating: { avg: 0, votes: 0 }
     },
     'kids': {
         title: 'Маршрут с детьми',
-        places: [
-            'Юркин парк',
-            'Кировский государственный цирк',
-            'Музей истории мороженого Артико',
-            'Криолло',
-            'Дымковская игрушка',
-            'Кочуровский парк',
-            'ТЦ Глобус'
-        ],
+        places: [34, 46, 60, 57, 61, 40, 41],
         rating: { avg: 0, votes: 0 }
     },
     'walking': {
         title: 'Пешеходный маршрут',
-        places: [
-            'Александровский сад',
-            'Музей истории Хлынова',
-            'Кировский областной краеведческий музей имени П. В. Алабина',
-            'Криолло',
-            'Музей К.Э. Циолковского, авиации и космонавтики',
-            'Сквер Алые Паруса',
-            'Парк имени С. М. Кирова'
-        ],
+        places: [55, 58, 59, 57, 56, 48, 52],
         rating: { avg: 0, votes: 0 }
     },
     'culture': {
         title: 'Культурный маршрут',
-        places: [
-            'Музей К.Э. Циолковского, авиации и космонаватики',
-            'Кировский областной краеведческий музей имени П. В. Алабина',
-            'Музей истории Хлынова',
-            'Дымковская игрушка',
-            'Кировский государственный театр юного зрителя театр на Спасской',
-            'Кировский театр кукол имени А. Н. Афанасьева',
-            'Кировский областной ордена Трудового Красного Знамени драматический театр имени С. М. Кирова'
-        ],
+        places: [56, 59, 58, 61, 62, 64, 63],
         rating: { avg: 0, votes: 0 }
     },
     'photo': {
         title: 'Фото-маршрут',
-        places: [
-            'Александровский сад',
-            'Сквер Алые Паруса',
-            'Парк имени С. М. Кирова',
-            'Кировский ботанический сад',
-            'Ежовский озерно-родниковый комплекс',
-            'Парк Победы',
-            'Филейский парк'
-        ],
+        places: [55, 48, 52, 26, 4, 43, 54],
         rating: { avg: 0, votes: 0 }
     }
 };
@@ -485,6 +731,7 @@ function removeInlineLists(allowedScreenId) {
 
 // кнопка закончить путеш
 function updatePlanNextButton() {
+    const t = translations[currentLang];
     try {
         var btn = document.getElementById('planNextButton');
         if (!btn) return;
@@ -493,12 +740,13 @@ function updatePlanNextButton() {
             return;
         }
         if (activePlan.index >= activePlan.ids.length - 1) {
-            btn.innerText = 'Закончить путешествие';
+            btn.innerText = t.finishJourney;
         } else {
-            btn.innerText = 'Далее';
+            btn.innerText = t.next;
         }
         btn.style.display = '';
     } catch (e) {}
+
 }
 
 // условия появления кнопки далее
@@ -510,12 +758,12 @@ window.startPlan = function(planId) {
         var list = [];
         for (var i = 0; i < names.length; i++) {
             for (var j = 0; j < places.length; j++) {
-                if (places[j].name === names[i]) { list.push(places[j]); break; }
+                if (places[j].id === names[i]) { list.push(places[j]); break; }
             }
         }
         if (!list.length) return;
         activePlan = { ids: list, index: 0, planId: planId };
-        screenStack.push('routePlanner');   // ← ДОБАВИТЬ
+        screenStack.push('routePlanner');  
         openPlaceDetails(list[0]);
         setTimeout(function(){
             try {
@@ -534,9 +782,9 @@ window.startPlan = function(planId) {
                     if (!activePlan) return;
                     if (activePlan.index >= activePlan.ids.length - 1) {
                         try { var b = document.getElementById('planNextButton'); if (b) b.parentNode.removeChild(b); } catch(e) {}
-                        var pid = activePlan.planId || planId || null;
+                        var finishedPlanId = activePlan.planId || planId || null;
+                        showPlanFinishDialog(finishedPlanId);
                         activePlan = null;
-                        showPlanFinishDialog(pid);
                         return;
                     }
                     activePlan.index++;
@@ -570,13 +818,13 @@ function startTracking(enableFollow) {
         alert('Геолокация не поддерживается в этом браузере.');
         return;
     }
-    if (watchId !== null) return; // already tracking
+    if (watchId !== null) return;
 
     watchId = navigator.geolocation.watchPosition(function(pos) {
         var coords = normalizeCoords([pos.coords.latitude, pos.coords.longitude]);
 
         if (!userMarker) {
-            userMarker = new ymaps.Placemark(coords, { iconCaption: 'Вы здесь' }, { preset: 'islands#circleIcon', iconColor: '#3b82f6' });
+            userMarker = new ymaps.Placemark(coords, { iconCaption: translations[currentLang].youAreHere }, { preset: 'islands#circleIcon', iconColor: '#3b82f6' });
             map.geoObjects.add(userMarker);
         } else {
             try { userMarker.geometry.setCoordinates(coords); } catch (e) { console.warn(e); }
@@ -735,13 +983,17 @@ window.switchScreen = switchScreen;
 window.showPhotos = showPhotos;
 window.startTracking = startTracking;
 window.stopTracking = stopTracking;
+window.openStudents = openStudents;
 
 // поиск мест
 function searchPlaces(query) {
+    const t = translations[currentLang];
     if (!searchOriginScreen) {
     searchOriginScreen = currentScreen;
     }
-    var list = document.getElementById('placesList');
+    var list =
+    document.getElementById('placesList') ||
+    document.querySelector('.inline-places-list');
     var searchInput = document.getElementById('searchInput');
     list = showListBelowButton(null, searchInput);
     if (!list) return;
@@ -762,7 +1014,7 @@ function searchPlaces(query) {
     var found = false;
     for (var i = 0; i < places.length; i++) {
         var p = places[i];
-        var text = (p.name + ' ' + (p.address||'') + ' ' + (p.description||'')).toLowerCase();
+        var text = (p.name[currentLang] + ' ' + (p.address[currentLang]||'') + ' ' + (p.description[currentLang]||'')).toLowerCase();
         var cat = p.category;
         if (Array.isArray(cat)) cat = cat.join(' ');
         if (text.indexOf(query) !== -1 || (cat && cat.toLowerCase().indexOf(query) !== -1)) {
@@ -770,20 +1022,20 @@ function searchPlaces(query) {
             var card = document.createElement('div');
             card.className = 'place-card';
             card.innerHTML = "<img src='" + (p.images && p.images.length ? getPlaceImage(p) : p.image) + "'>" +
-                "<h3>" + p.name + "</h3>" +
-                "<p>" + p.address + "</p>" +
-                "<p class='description'>" + (p.description || '') + "</p>" +
+                "<h3>" + p.name[currentLang] + "</h3>" +
+                "<p>" + p.address[currentLang] + "</p>" +
+                "<p class='description'>" + (p.description[currentLang] || '') + "</p>" +
                 "<span class='rating'>" + getRatingStars(
                     p._rating ? p._rating.avg : p.rating
                 ) + "</span>";
             (function(pp){
                 card.onclick = function(){
 
-                    var list = document.getElementById('placesList');
+                    var list =
+                    document.getElementById('placesList') ||
+                    document.querySelector('.inline-places-list');
 
                     if (list) hideList(list);
-
-                    screenStack.push(currentScreen);
 
                     openPlaceDetails(pp);
 
@@ -792,7 +1044,7 @@ function searchPlaces(query) {
             list.appendChild(card);
         }
     }
-    if (!found) list.innerHTML = '<p>Ничего не найдено</p>';
+    if (!found) list.innerHTML = '<p>' + t.nothingFound + '</p>';
     void list.offsetWidth;
     list.classList.add('active');
     currentScreen = 'list';
@@ -808,10 +1060,11 @@ function showAll(button) {
 
     currentCategory = 'all';
     clearRoute();
-    var list = document.getElementById('placesList');
+    var list =
+    document.getElementById('placesList') ||
+    document.querySelector('.inline-places-list');
     showListBelowButton(list, button);
     listOwner = 'all'; listOpen = true;
-    screenStack.push(currentScreen);
     try { list.classList.remove('active'); } catch (e) {}
     list.innerHTML = "";
     for (var i = 0; i < places.length; i++) {
@@ -819,9 +1072,9 @@ function showAll(button) {
         var card = document.createElement('div');
         card.className = 'place-card';
         card.innerHTML = "<img src='" + (place.images && place.images.length ? place.images[0] : place.image) + "'>" +
-            "<h3>" + place.name + "</h3>" +
-            "<p>" + place.address + "</p>" +
-            "<p class='description'>" + (place.description || '') + "</p>" +
+            "<h3>" + place.name[currentLang] + "</h3>" +
+            "<p>" + place.address[currentLang] + "</p>" +
+            "<p class='description'>" + (place.description[currentLang] || '') + "</p>" +
             "<span class='rating'>" + getRatingStars(place._rating ? place._rating.avg : place.rating) + "</span>";
         (function(pp){ card.onclick = function(){ openPlaceDetails(pp); }; })(place);
         list.appendChild(card);
@@ -834,6 +1087,7 @@ function showAll(button) {
 
 // список для планов
 function openRoutePlan(planId) {
+    const t = translations[currentLang];
 
     var container = document.getElementById('routePlanDetails');
 
@@ -851,7 +1105,7 @@ function openRoutePlan(planId) {
     if (!pd.votes) {
 
         ratingBlock.innerText =
-            "Рейтинг: пока нет отзывов";
+            t.ratingNoReviews;
 
     } else {
 
@@ -865,69 +1119,26 @@ function openRoutePlan(planId) {
     }
 
     container.appendChild(ratingBlock);
-    var plans = {
-        'hour': [
-            'Александровский сад',
-            'Кировский областной краеведческий музей имени П. В. Алабина',
-            'Сквер Алые Паруса',
-            'Парк имени С. М. Кирова'
-        ],
-        'kids': [
-            'Юркин парк',
-            'Кировский государственный цирк',
-            'Музей истории мороженого Артико',
-            'Криолло',
-            'Дымковская игрушка',
-            'Кочуровский парк',
-            'ТЦ Глобус'
-        ],
-        'walking': [
-            'Александровский сад',
-            'Музей истории Хлынова',
-            'Кировский областной краеведческий музей имени П. В. Алабина',
-            'Криолло',
-            'Музей К.Э. Циолковского, авиации и космонавтики',
-            'Сквер Алые Паруса',
-            'Парк имени С. М. Кирова'
-        ],
-        'culture': [
-            'Музей К.Э. Циолковского, авиации и космонаватики',
-            'Кировский областной краеведческий музей имени П. В. Алабина',
-            'Музей истории Хлынова',
-            'Дымковская игрушка',
-            'Кировский государственный театр юного зрителя театр на Спасской',
-            'Кировский театр кукол имени А. Н. Афанасьева',
-            'Кировский областной ордена Трудового Красного Знамени драматический театр имени С. М. Кирова'
-        ],
-        'photo': [
-            'Александровский сад',
-            'Сквер Алые Паруса',
-            'Парк имени С. М. Кирова',
-            'Кировский ботанический сад',
-            'Ежовский озерно-родниковый комплекс',
-            'Парк Победы',
-            'Филейский парк'
-        ]
-    };
-
-    var names = plans[planId] || [];
-
-    if (!names.length) {
-        var p = document.createElement('p'); p.innerText = 'Пока что места не заданы. Добавьте места для этого плана маршрута.'; container.appendChild(p);
+    var ids = plansData[planId].places || [];
+    if (!ids.length) {
+        var p = document.createElement('p');
+        p.innerText =
+            'Пока что места не заданы. Добавьте места для этого плана маршрута.';
+        container.appendChild(p);
         return;
     }
     // создание элементов инта
     var buildBtn = document.createElement('button');
-    buildBtn.innerText = 'Построить маршрут';
+    buildBtn.innerText = t.buildRoute;
     buildBtn.style.margin = '12px 0';
     buildBtn.onclick = function(){ try { if (window.startPlan) window.startPlan(planId); else startPlan(planId); } catch(e){ console.warn('startPlan call failed', e); } };
     container.appendChild(buildBtn);
 
-    for (var i = 0; i < names.length; i++) {
-        var pname = names[i];
+    for (var i = 0; i < ids.length; i++) {
+        var pid = ids[i];
         var placeObj = null;
         for (var j = 0; j < places.length; j++) {
-            if (places[j].name === pname) { placeObj = places[j]; break; }
+            if (places[j].id === pid) { placeObj = places[j]; break; }
         }
         if (!placeObj) continue;
         var card = document.createElement('div');
@@ -945,13 +1156,13 @@ function openRoutePlan(planId) {
             ? placeObj.images[0]
             : placeObj.image;
         var meta = document.createElement('div');
-        var hh = document.createElement('h4'); hh.innerText = placeObj.name; hh.style.margin = '0 0 6px 0'; hh.style.fontSize = '15px';
-        var dd = document.createElement('p'); dd.innerText = placeObj.address || ''; dd.style.margin = '0'; dd.style.fontSize = '13px'; dd.className = 'description';
+        var hh = document.createElement('h4'); hh.innerText = placeObj.name[currentLang]; hh.style.margin = '0 0 6px 0'; hh.style.fontSize = '15px';
+        var dd = document.createElement('p'); dd.innerText = placeObj.address[currentLang] || ''; dd.style.margin = '0'; dd.style.fontSize = '13px'; dd.className = 'description';
         meta.appendChild(hh); meta.appendChild(dd);
         content.appendChild(img); content.appendChild(meta);
         var rmeta = document.createElement('div'); rmeta.className = 'route-meta';
-        var dist = document.createElement('div'); dist.innerText = '— KM'; dist.className = 'route-dist';
-        var time = document.createElement('div'); time.innerText = '— МИН'; time.className = 'route-time';
+        var dist = document.createElement('div'); dist.innerText = '— ' + t.km; dist.className = 'route-dist';
+        var time = document.createElement('div'); time.innerText = '— ' + t.min; time.className = 'route-time';
         rmeta.appendChild(dist); rmeta.appendChild(time);
 
         card.appendChild(timeline);
@@ -962,8 +1173,17 @@ function openRoutePlan(planId) {
     }
 }
 
-function showCategory(category, button) {
+function showCategory(category, button, owner) {
     if (currentCategory === category) {
+        const t = translations[currentLang];
+        var list =
+            document.getElementById('placesList') ||
+            document.querySelector('.inline-places-list');
+
+        if (!list) {
+            console.error("placesList not found");
+            return;
+        }
         var maybeInline = button && button.nextElementSibling && button.nextElementSibling.getAttribute && button.nextElementSibling.getAttribute('data-inline') === '1' ? button.nextElementSibling : null;
         if (maybeInline) hideList(maybeInline);
         else {
@@ -974,6 +1194,9 @@ function showCategory(category, button) {
         currentScreen = 'categories';
         listOpen = false;
         listOwner = null;
+        if (owner) {
+            listOwner = owner;
+        }
         return;
     }
 
@@ -981,13 +1204,27 @@ function showCategory(category, button) {
     console.log("places:", places);
     clearRoute();
     currentCategory = category;
-    var list = document.getElementById('placesList');
+    listOwner = owner || 'categories';
+    var list = button?.nextElementSibling;
+
+    if (
+        !list ||
+        !list.classList.contains("inline-places-list")
+    ) {
+
+        list = document.createElement("div");
+
+        list.className = "inline-places-list";
+
+        list.setAttribute("data-inline", "1");
+
+        button.parentNode.insertBefore(
+            list,
+            button.nextSibling
+        );
+    }
     showListBelowButton(list, button);
-    listOwner = 'category';
-    listOpen = true;
-    try { list.classList.remove('active'); } catch (e) {}
     list.innerHTML = "";
-    screenStack.push(currentScreen);
 
     var found = false;
 
@@ -1010,10 +1247,10 @@ function showCategory(category, button) {
 
             card.innerHTML =
                 "<img src='" + getPlaceImage(place) + "'>" +
-                "<h3>" + place.name + "</h3>" +
-                "<p>" + place.address + "</p>" +
+                "<h3>" + place.name[currentLang] + "</h3>" +
+                "<p>" + place.address[currentLang] + "</p>" +
                 "<p class='description'>" +
-                (place.description || "") +
+                (place.description[currentLang] || "") +
                 "</p>" +
                 "<span class='rating'>" +
                 getRatingStars(place._rating ? place._rating.avg : place.rating) +
@@ -1043,9 +1280,10 @@ function showCategory(category, button) {
 }
 
 function getRatingStars(rating) {
+    const t = translations[currentLang];
 
     if (rating === 0 || rating === undefined || rating === null) {
-        return "Нет отзывов";
+        return t.noReviews;
     }
 
     var stars = "";
@@ -1095,6 +1333,11 @@ function goBack() {
             return;
         }
 
+        if (target === "students") {
+            openStudents();
+            return;
+        }
+
         switchScreen(currentScreen, target);
         currentScreen = target;
 
@@ -1105,62 +1348,59 @@ function goBack() {
 
         clearRoute();
 
-        var target = screenStack.length
-            ? screenStack.pop()
-            : (prevScreen || 'categories');
+        let target = prevScreen || "categories";
 
-        var validScreens = [
-            'welcome',
-            'mainMenu',
-            'categories',
-            'interesting',
-            'routePlanner'
-        ];
+        switchScreen("placeDetails", target);
 
-        if (!validScreens.includes(target)) {
-            target = 'categories';
-        }
-
-        if (target === 'list') {
-            target = screenStack.length
-                ? screenStack.pop()
-                : 'categories';
-        }
-        switchScreen('placeDetails', target);
         currentScreen = target;
 
         try {
             var listEl = document.getElementById('placesList');
+
             if (listEl) {
+
                 listEl.style.display = '';
+
                 if (prevListOpenState) {
+
                     listEl.classList.add('active');
+
                 } else {
+
                     listEl.classList.remove('active');
+
                 }
             }
+
         } catch (e) {}
 
         listOpen = prevListOpenState;
         listOwner = prevListOwnerState;
 
         try {
+
             for (var i = 0; i < prevVisibleInlines.length; i++) {
+
                 var el = prevVisibleInlines[i];
+
                 if (el && el.parentNode) {
-                    try {
-                        el.style.display = '';
-                        void el.offsetWidth;
-                        el.classList.add('active');
-                        el.style.overflowY = 'auto';
-                    } catch (e) {}
+
+                    el.style.display = '';
+
+                    void el.offsetWidth;
+
+                    el.classList.add('active');
+
+                    el.style.overflowY = 'auto';
+
                 }
             }
+
         } catch (e) {}
+
         prevVisibleInlines = [];
 
         return;
-
     }
 
     if (currentScreen === "list") {
@@ -1169,14 +1409,25 @@ function goBack() {
         currentCategory = null;
 
         if (listOwner === 'interesting') {
+
             switchScreen('list', 'interesting');
             currentScreen = 'interesting';
+
+        } else if (listOwner === 'students') {
+
+            switchScreen('list', 'students');
+            currentScreen = 'students';
+
         } else if (listOwner === 'search') {
+
             switchScreen('list', 'categories');
             currentScreen = 'categories';
+
         } else {
+
             switchScreen('list', 'categories');
             currentScreen = 'categories';
+
         }
 
         listOpen = false;
@@ -1186,12 +1437,18 @@ function goBack() {
 
     }
 
-    if (currentScreen === "categories" || currentScreen === "interesting" || currentScreen === "routePlanner") {
+    if (
+        currentScreen === "categories" ||
+        currentScreen === "interesting" ||
+        currentScreen === "routePlanner" ||
+        currentScreen === "students"
+    ) {
 
         switchScreen(currentScreen, 'mainMenu');
-        currentScreen = 'mainMenu';
-        return;
 
+        currentScreen = 'mainMenu';
+
+        return;
     }
 
     if (currentScreen === "mainMenu") {
@@ -1210,11 +1467,8 @@ function goBack() {
             "welcome";
 
         return;
-
     }
-
 }
-
 function openMainMenu() {
     var input = document.getElementById("searchInput");
     if (input) input.value = "";
@@ -1231,51 +1485,32 @@ function openCategories() {
 
 }
 
+function openStudents() {
+    var input = document.getElementById("searchInput");
+    if (input) input.value = "";
+    navigate('students');
 
+}
 
 function openInterestingPlaces() {
     var input = document.getElementById("searchInput");
     if (input) input.value = "";
     switchScreen('mainMenu', 'interesting');
     document.getElementById('backButton').style.display = 'block';
-    screenStack.push(currentScreen);
     showInterestingPlaces();
     currentScreen = 'interesting';
 
 }
 
 function showInterestingPlaces() {
-    var popularNames = [
-        'Криолло',
-        'Музей К.Э. Циолковского, авиации и космонавтики',
-        'Александровский сад',
-        'Сквер Трудовой славы',
-        'Парк имени С. М. Кирова',
-        'Аполло',
-        'Сквер 60-летия СССР',
-        'Вятка-ЦУМ',
-        'Кировский государственный цирк',
-        'Парк имени С. М. Кирова',
-        'Море парк',
-        'ТЦ Макси',
-        'ТЦ Глобус',
-        'Ипподром',
-        'Зубаревский лес',
-        'Динки Парк',
-        'Кафе Паприка',
-        'Нижнеивкинские источники',
-        'Жуковлянские валуны',
-        'Кировский ботанический сад',
-        'Комплекс Великорецкое',
-        'Динопарк',
-        'Комплекс Порошино',
-        'Юркин парк'
-    ];
+    var popularIds = [57, 56, 55, 53, 52, 51, 50, 47, 46, 45, 42, 41, 38, 39, 37, 36, 18, 22, 26, 27, 33, 35, 34];
 
     clearRoute();
     var header = document.querySelector('#interesting h2');
     if (!header) header = document.querySelector('#categories h2');
-    var list = document.getElementById('placesList');
+    var list =
+    document.getElementById('placesList') ||
+    document.querySelector('.inline-places-list');
     showListBelowButton(list, header);
     try { list.classList.remove('active'); } catch (e) {}
     list.innerHTML = "";
@@ -1285,14 +1520,14 @@ function showInterestingPlaces() {
     var found = false;
     for (var i = 0; i < places.length; i++) {
         var p = places[i];
-        if (popularNames.includes(p.name) || popularNames.some(function(n){ return p.name.indexOf(n) !== -1; })) {
+        if (popularIds.includes(p.id) || popularIds.some(function(n){ return p.name[currentLang].indexOf(n) !== -1; })) {
             found = true;
             var card = document.createElement('div');
             card.className = 'place-card';
             card.innerHTML = "<img src='"+(p.images && p.images.length ? getPlaceImage(p) : p.image)+"'>"+
-                "<h3>"+p.name+"</h3>"+
-                "<p>"+p.address+"</p>"+
-                "<p class='description'>"+(p.description||'')+"</p>"+
+                "<h3>"+p.name[currentLang]+"</h3>"+
+                "<p>"+p.address[currentLang]+"</p>"+
+                "<p class='description'>"+(p.description[currentLang]||'')+"</p>"+
                 "<span class='rating'>" + getRatingStars(
                     p._rating ? p._rating.avg : p.rating
                 ) + "</span>";
@@ -1309,7 +1544,6 @@ function openRoutePlanner() {
     switchScreen('mainMenu', 'routePlanner');
     document.getElementById('routePlanDetails').style.display = 'none';
     document.getElementById('backButton').style.display = 'block';
-    screenStack.push(currentScreen);
     currentScreen = 'routePlanner';
     listOpen = false;
     listOwner = null;
@@ -1318,20 +1552,14 @@ function openRoutePlanner() {
 
 function openPlaceDetails(place) {
     var from = currentScreen || 'categories';
+    screenStack = [];
     if (from === 'list') {
-        if (screenStack.length) {
-            prevScreen = screenStack[screenStack.length - 1];
-        } else {
-            prevScreen = 'categories';
-        }
+
+        prevScreen = listOwner || 'categories';
 
     } else {
 
         prevScreen = from;
-
-    if (currentScreen !== "placeDetails") {
-    screenStack.push(currentScreen);
-    }
 
     }
     try {
@@ -1356,16 +1584,13 @@ function openPlaceDetails(place) {
             }
         } catch (e) {}
     } catch (e) {}
-    if (!activePlan) {
-    screenStack.push(prevScreen || currentScreen);
-    }
     setTimeout(function() {
         try { switchScreen(prevScreen, 'placeDetails'); } catch (e) { console.warn(e); }
     }, 360);
 
-    document.getElementById("placeTitle").innerText = place.name;
+    document.getElementById("placeTitle").innerText = place.name[currentLang];
 
-    document.getElementById("placeDescription").innerText = place.description_full || place.description || '';
+    document.getElementById("placeDescription").innerText = place.description_full[currentLang] || place.description[currentLang] || '';
 
     showPhotos(place);
 
@@ -1376,7 +1601,7 @@ function openPlaceDetails(place) {
 
     currentScreen = "placeDetails";
 
-    fetch("/rating/place/" + encodeURIComponent(place.name))
+    fetch("/rating/place/" + encodeURIComponent(place.name[currentLang]))
     .then(function(res) {
 
         if (!res.ok) {
@@ -1528,7 +1753,7 @@ function setupRouteButton(place) {
 
         button.disabled = true;
         var originalText = button.innerText;
-        button.innerText = 'Строим маршрут...';
+        button.innerText = translations[currentLang].buildingRoute;
 
         var geoSuccess = function(pos) {
             var userCoords = [pos.coords.latitude, pos.coords.longitude];
@@ -1552,7 +1777,7 @@ function setupRouteButton(place) {
                 console.log('distance meters:', dist);
                 if (dist < 50) {
                     console.log('Points are very close — skipping routing.');
-                    var markPlace = new ymaps.Placemark(destCoords, { hintContent: place.name });
+                    var markPlace = new ymaps.Placemark(destCoords, { hintContent: place.name[currentLang] });
                     map.geoObjects.add(markPlace);
                     lastMarkers.push(markPlace);
                     map.setCenter(destCoords, 14, { duration: 600 });
@@ -1593,7 +1818,7 @@ function setupRouteButton(place) {
                 try { startTracking(true); } catch (e) {}
                 try {
                     if (wayPoints && wayPoints.get && wayPoints.get(1)) {
-                        wayPoints.get(1).properties.set('iconCaption', place.name);
+                        wayPoints.get(1).properties.set('iconCaption', place.name[currentLang]);
                     }
                 } catch (e) {}
                 button.disabled = false;
@@ -1613,7 +1838,7 @@ function setupRouteButton(place) {
                             try { if (lastRoute) map.geoObjects.remove(lastRoute); } catch (e) {}
                             lastRoute = null;
                             var markUserF = new ymaps.Placemark(userCoords, { iconCaption: 'Вы здесь' });
-                            var markPlaceF = new ymaps.Placemark(destCoords, { hintContent: place.name });
+                            var markPlaceF = new ymaps.Placemark(destCoords, { hintContent: place.name[currentLang] });
                             map.geoObjects.add(markUserF);
                             map.geoObjects.add(markPlaceF);
                             lastMarkers.push(markUserF);
@@ -1626,7 +1851,7 @@ function setupRouteButton(place) {
                             button.disabled = false; button.innerText = originalText;
                         } catch (e) {
                             console.error('final fallback failed', e, err, err2, err3);
-                            alert('Не удалось построить маршрут и показать метки.');
+                            alert(translations[currentLang].routeBuildError);
                             button.disabled = false; button.innerText = originalText;
                         }
                     });
@@ -1636,10 +1861,10 @@ function setupRouteButton(place) {
 
         var geoError = function(err) {
             console.warn('Geolocation error', err);
-            alert('Не удалось определить ваше местоположение. Покажу объект на карте.');
+            alert(translations[currentLang].geoError);
             try { clearRoute(); } catch (e) {}
             var dest = normalizeCoords(place.coords);
-            var mark = new ymaps.Placemark(dest, { hintContent: place.name });
+            var mark = new ymaps.Placemark(dest, { hintContent: place.name[currentLang]  });
             try { map.geoObjects.add(mark); lastMarkers.push(mark); map.setCenter(dest, 14, { duration: 600 }); } catch (e) {}
             button.disabled = false;
             button.innerText = originalText;
@@ -1675,7 +1900,9 @@ function setupRouteButton(place) {
 
 function switchScreen(fromId, toId) {
 
-    var list = document.getElementById('placesList');
+    var list =
+    document.getElementById('placesList') ||
+    document.querySelector('.inline-places-list');
 
     if (list && toId !== 'interesting') {
         hideList(list);
@@ -1910,7 +2137,7 @@ function startCategoriesCarousel() {
 
 function loadRatingForPlace(place) {
 
-    fetch("/rating/place/" + encodeURIComponent(place.name))
+    fetch("/rating/place/" + encodeURIComponent(place.name[currentLang]))
     .then(res => res.json())
     .then(data => {
 
@@ -1932,7 +2159,7 @@ function loadAllRatings() {
 
         (function(place){
 
-            var request = fetch("/rating/place/" + encodeURIComponent(place.name))
+            var request = fetch("/rating/place/" + encodeURIComponent(place.name[currentLang]))
 
             .then(function(res){
 
@@ -2068,7 +2295,7 @@ function refreshVisiblePlacesRatings() {
 
         for (var j = 0; j < places.length; j++) {
 
-            if (places[j].name === name) {
+            if (places[j].name[currentLang] === name) {
 
                 var ratingSpan =
                     cards[i].querySelector(".rating");
@@ -2149,3 +2376,160 @@ function toggleMenu() {
 
 }
 
+function toggleEducation(button) {
+
+    const wrapper = button.parentNode;
+
+    let panel =
+        wrapper.querySelector(".education-side-panel");
+
+    // ЗАКРЫТИЕ
+    if (panel) {
+
+        // удалить списки мест
+        const inline =
+            wrapper.querySelector(".inline-places-list");
+
+        if (inline) {
+            inline.remove();
+        }
+
+        // вернуть кнопки
+        const eduButtons =
+            panel.querySelectorAll("button");
+
+        eduButtons.forEach(btn => {
+
+            btn.classList.remove(
+                "education-active"
+            );
+
+            btn.classList.remove(
+                "education-hidden"
+            );
+
+        });
+
+        panel.classList.add(
+            "education-closing"
+        );
+
+        setTimeout(() => {
+
+            panel.remove();
+
+        }, 350);
+
+        return;
+    }
+
+    // СОЗДАНИЕ
+    panel = document.createElement("div");
+
+    panel.className =
+        "education-side-panel";
+
+    const t = translations[currentLang];
+
+    panel.innerHTML = `
+        <button onclick="showCategory('vyatsu', this, 'students')">
+            ${t.vyatsu}
+        </button>
+
+        <button onclick="showCategory('vgek', this, 'students')">
+            ${t.vgek}
+        </button>
+
+        <button onclick="showCategory('kpk', this, 'students')">
+            ${t.kpk}
+        </button>
+
+        <button onclick="showCategory('kpias', this, 'students')">
+            ${t.kpias}
+        </button>
+
+        <button onclick="showCategory('vemt', this, 'students')">
+            ${t.vemt}
+        </button>
+
+        <button onclick="showCategory('vzt', this, 'students')">
+            ${t.vzt}
+        </button>
+
+        <button onclick="showCategory('kat', this, 'students')">
+            ${t.kat}
+        </button>
+    `;
+
+    const eduButtons =
+        panel.querySelectorAll("button");
+
+    eduButtons.forEach(btn => {
+
+        btn.addEventListener("click", function () {
+
+            // ЕСЛИ уже активна → вернуть всё назад
+            if (btn.classList.contains("education-active")) {
+
+                eduButtons.forEach(b => {
+
+                    b.classList.remove(
+                        "education-active"
+                    );
+
+                    b.classList.remove(
+                        "education-hidden"
+                    );
+
+                });
+
+                // удалить список мест
+                const inline =
+                    wrapper.querySelector(
+                        ".inline-places-list"
+                    );
+
+                if (inline) {
+                    inline.remove();
+                }
+
+                currentCategory = null;
+
+                return;
+            }
+
+            // обычное открытие
+            eduButtons.forEach(b => {
+
+                b.classList.remove(
+                    "education-active"
+                );
+
+                b.classList.remove(
+                    "education-hidden"
+                );
+
+            });
+
+            eduButtons.forEach(b => {
+
+                if (b !== btn) {
+
+                    b.classList.add(
+                        "education-hidden"
+                    );
+
+                }
+
+            });
+
+            btn.classList.add(
+                "education-active"
+            );
+
+        });
+
+    });
+
+    wrapper.appendChild(panel);
+}

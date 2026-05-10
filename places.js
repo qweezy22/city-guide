@@ -2,10 +2,13 @@ console.log("places.js загружен");
 var places = [
 
 {
-    name: "Заповедник Нургуш",
+    id: 1,
+    name: {ru: "Заповедник Нургуш",
+           en: "Nurgush Nature Reserve"},
     category: "nature",
     coords: [58.020964, 48.446023],
-    address: "Кировская область, Котельничский район, Морозовское сельское поселение, государственный природный заповедник Нургуш.",
+    address: {ru: "Кировская область, Котельничский район, Морозовское сельское поселение, государственный природный заповедник Нургуш.",
+              en: "Kirov region, Kotelnich district, Morozovskoye rural settlement, Nurgush Nature Reserve."},
     rating: null,
     images: [
     "images/nurgush.jpg",
@@ -13,14 +16,18 @@ var places = [
     "images/nurgush3.webp",
     "images/nurgush4.webp"
     ],
-    description: "Особо охраняемая природная территория с экотропами."
+    description: {ru: "Особо охраняемая природная территория с экотропами.",
+                  en: "A specially protected natural area with eco-trails."}
 },
 
 {
-    name: "Скальный массив Камень",
+    id: 2,
+    name: {ru: "Скальный массив Камень",
+           en: "Kamen Rock Massif"},
     category: "cave",
     coords: [57.428887, 48.948001],
-    address: "Кировская область, Советский район, Родыгинское сельское поселение, Берег реки Немды.",
+    address: {ru: "Кировская область, Советский район, Родыгинское сельское поселение, Берег реки Немды.",
+              en: "Kirov region, Sovetsky district, Rodyginskoye rural settlement, bank of the Nemda river."},
     rating: null,
     images: [ 
     "images/scalniy_massive_kamen.jpg",
@@ -28,27 +35,35 @@ var places = [
     "images/kamen3.webp",
     "images/kamen4.webp"
     ],
-    description: "Известняковые скалы с гротами и пещерами."
+    description: {ru: "Известняковые скалы с гротами и пещерами.",
+                  en: "Limestone rocks with grottoes and caves."}
 },
 
 {
-    name: "Озеро Шайтан",
+    id: 3,        
+    name: {ru: "Озеро Шайтан",
+           en: "Shaitan Lake"},
     category: "water",
     coords: [57.096172, 49.462219],
-    address: "озеро Шайтан, Буйское сельское поселение, Уржумский муниципальный район, Кировская область.",
+    address: {ru: "озеро Шайтан, Буйское сельское поселение, Уржумский муниципальный район, Кировская область.",
+              en: "Shaitan Lake, Buyskoe rural settlement, Urzhumsky municipal district, Kirov region."},
     rating: null,
     images: [
     "images/ozero_shaitan.jpg",
     "images/shaitan.jpg"
     ],
-    description: "Озеро с плавающими островами."
+    description: {ru: "Озеро с плавающими островами.",
+                  en: "A lake with floating islands."}
 },
 
 {
-    name: "Ежовский озерно-родниковый комплекс",
+    id: 4,
+    name: {ru: "Ежовский озерно-родниковый комплекс",
+           en: "Ezhovsky Lake and Spring Complex"},
     category: "spring",
     coords: [58.591619, 49.690516],
-    address: "Киров, Первомайский район.",
+    address: {ru: "Киров, Первомайский район.",
+              en: "Kirov, Pervomaysky district."},
     rating: null,
     images: [
     "images/ezhovkiy_rodnik.jpg",
@@ -56,14 +71,18 @@ var places = [
     "images/ezhov2.webp",
     "images/ezhov3.webp"
     ],
-    description: "Гидрологический памятник природы."
+    description: {ru: "Гидрологический памятник природы.",
+                  en: "Hydrological natural monument."}
 },
 
-{
-    name: "Река Немда",
+{        
+    id: 5,
+    name: {ru: "Река Немда",
+           en: "Nemda River"},
     category: "water",
     coords: [57.165403, 48.947592],
-    address: "река Немда, Кировская область, Немский район.",
+    address: {ru: "река Немда, Кировская область, Немский район.",
+              en: "Nemda River, Kirov region, Nemsky district."},   
     rating: null,
     images: [
     "images/nemda.jpg",
@@ -71,14 +90,18 @@ var places = [
     "images/nemda3.jpg",
     "images/nemda4.jpg"
     ],
-    description: "Живописная река среди скал."
+    description: {ru: "Живописная река среди скал.",
+                  en: "A picturesque river among the rocks."}
 },
 
 {
-    name: "Озеро Лежнинское",
+    id: 6,
+    name: {ru: "Озеро Лежнинское",
+           en: "Lezhninskoe Lake"},
     category: "water",
     coords: [57.535767, 48.593045],
-    address: "озеро Лежнинское, Пижанский муниципальный округ, Кировская область.",
+    address: {ru: "озеро Лежнинское, Пижанский муниципальный округ, Кировская область.",
+              en: "Lezhninskoe Lake, Pizhansky municipal district, Kirov region."},
     rating: null,
     images: [
     "images/ozero_lezhnitskoe.jpg",
@@ -86,14 +109,18 @@ var places = [
     "images/lezhnitskoe3.jpg",
     "images/lezhnitskoe4.jpg"
     ],
-    description: "Самое глубокое озеро региона."
+    description: {ru: "Самое глубокое озеро региона.",
+                  en: "The deepest lake in the region."}
 },
 
 {
-    name: "Береснятский водопад",
+    id: 7,
+    name: {ru: "Береснятский водопад",
+           en: "Beresnyatsky Waterfall"},
     category: "water",
     coords: [57.387997, 49.029146],
-    address: "Кировская область, Советский район, 20 км от Советска.",
+    address: {ru: "Кировская область, Советский район, 20 км от Советска.",
+              en: "Kirov region, Sovetsky district, 20 km from Sovetsk."},
     rating: null,
     images: [
     "images/beresnyatskiy_vodopad.jpg",
@@ -101,28 +128,36 @@ var places = [
     "images/beresv3.jpg",
     "images/beresv.jpg"
     ],
-    description: "Красивый водопад из трёх каскадов."
+    description: {ru: "Красивый водопад из трёх каскадов.",
+                  en: "A beautiful waterfall with three cascades."}
 },
 
 {
-    name: "Пруд Белохолуницкий",
+    id: 8,
+    name: {ru: "Пруд Белохолуницкий",
+           en: "Belokholunitsky Pond"},
     category: "water",
     coords: [58.879300, 50.903395],
-    address: "Белохолуницкий пруд, Белохолуницкое городское поселение, Кировская область.",
+    address: {ru: "Белохолуницкий пруд, Белохолуницкое городское поселение, Кировская область.",
+              en: "Belokholunitsky Pond, Belokholunitskoye urban settlement, Kirov region."},
     rating: null,
     images:  [
     "images/beloholonitskiy_prud.jpg",
     "images/belhol.jpg",
     "images/belhol2.jpg"
     ],
-    description: "Белохолуницкий пруд - крупнейшее искусственное водохранилище Кировской области."     
+    description: {ru: "Белохолуницкий пруд - крупнейшее искусственное водохранилище Кировской области.",
+                  en: "Belokholunitsky Pond is the largest artificial reservoir in the Kirov region."}
 },
 
 {
-    name: "Озеро Чваниха",
+    id: 9,
+    name: {ru: "Озеро Чваниха",
+           en: "Chvaniha Lake"},
     category: "water",
     coords: [57.398329, 50.103176],
-    address: "Озеро Чваниха, Медведский Бор, Медведское сельское поселение, Нолинский муниципальный район, Кировская область.",
+    address: {ru: "Озеро Чваниха, Медведский Бор, Медведское сельское поселение, Нолинский муниципальный район, Кировская область.",
+              en: "Chvaniha Lake, Medvedsky Bor, Medvedskoye rural settlement, Nolinsky municipal district, Kirov region."},
     rating: null,
     images: [
     "images/ozero_chvaniha.jpg",
@@ -130,28 +165,36 @@ var places = [
     "images/chaniha2.jpg",
     "images/chaniha3.jpg"
     ],
-    description: "Карстовое озеро с изумрудной водой."    
+    description: {ru: "Карстовое озеро с изумрудной водой.",
+                  en: "Karst lake with emerald water."}
 },
 
 {
-    name: "Бошляковское озеро",
+    id: 10,
+    name: {ru: "Бошляковское озеро",
+           en: "Boshlyakovskoe Lake"},
     category: "water",
     coords: [57.922950, 49.674073],
-    address: "озеро Бошляковское, Большевистское сельское поселение, Сунский муниципальный район, Кировская область.",
+    address: {ru: "озеро Бошляковское, Большевистское сельское поселение, Сунский муниципальный район, Кировская область.",
+              en: "Boshlyakovskoe Lake, Bolshevistskoye rural settlement, Sunsky municipal district, Kirov region."},
     rating: null,
     images: [
     "images/boshlyak_ozero.jpg",
     "images/boshlyak2.jpg",
     "images/boshlyak3.jpg"
     ],
-    description: "Озеро с бурлящей водой."    
+    description: {ru: "Озеро с бурлящей водой.",
+                  en: "Lake with bubbling water."}
 },
 
 {
-    name: "Озеро Холуново",
+    id: 11,
+    name: {ru: "Озеро Холуново",
+           en: "Holunovo Lake"},
     category: "water",
     coords: [58.536557, 49.770512],
-    address: "озеро Холуново, муниципальное образование Киров.",
+    address: {ru: "озеро Холуново, муниципальное образование Киров.",
+              en: "Holunovo Lake, Kirov municipality."},
     rating: null,
     images: [
     "images/holunovo_ozero.jpg",
@@ -159,62 +202,82 @@ var places = [
     "images/holunovo3.jpg",
     "images/holunovo2.jpg"
     ],  
-    description: "Популярное место для осенней рыбалки."    
+    description: {ru: "Популярное место для осенней рыбалки.",
+                  en: "A popular spot for autumn fishing."}
 },
 
 {
-    name: "Озеро Падун",
+    id: 12,
+    name: {ru: "Озеро Падун",
+           en: "Padun Lake"},
     category: "water",
     coords: [59.778276, 52.300634],
-    address: "озеро Падун, Верхнекамский муниципальный округ, Кировская область.",
+    address: {ru: "озеро Падун, Верхнекамский муниципальный округ, Кировская область.",
+              en: "Padun Lake, Verkhnekamsky municipal district, Kirov region."},
     rating: null,
     images: [
     "images/padun_ozero.jpg",
     "images/padun.jpg",
     "images/padun2.jpg"
     ],
-    description: "Озеро с прозрачной водой, \"Вятский Байкал\"."    
+    description: {ru: "Озеро с прозрачной водой, \"Вятский Байкал\".",
+                  en: "Lake with clear water, \"Vyatka Baikal\"."}
 },
 
 {
-    name: "Водопад Помяловка",
+    id: 13,
+    name: {ru: "Водопад Помяловка",
+           en: "Pomyalevka Waterfall"},
     category: "water",
     coords: [56.188703, 51.242643],
-    address: "д. Куршино.",
+    address: {ru: "д. Куршино.",
+              en: "v. Kurshino."},
     rating: null,
     image: "images/pomyalovka_vodopad.jpg",
-    description: "Небольшой родниковый водопад."    
+    description: {ru: "Небольшой родниковый водопад.",
+                  en: "A small spring waterfall."}    
 },
 
 {
-    name: "Озеро Акшубень",
+    id: 14,
+    name: {ru: "Озеро Акшубень",
+           en: "Akshuben Lake"},
     category: "water",
     coords: [57.642762, 47.956454],
-    address: "озеро Акшубень, Тужинское городское поселение, Кировская область.",
+    address: {ru: "озеро Акшубень, Тужинское городское поселение, Кировская область.",
+              en: "Akshuben Lake, Tuzhinskoye urban settlement, Kirov region."},
     rating: null,
     images: [
     "images/akshuben.jpg",
     "images/akshuben2.jpg",
     "images/akshuben3.jpg"
     ],
-    description: "Самое большое озеро области."    
+    description: {ru: "Самое большое озеро области.",
+                  en: "The largest lake in the region."}
 },
 
 {
-    name: "Скала Часовой",
+    id: 15,
+    name: {ru: "Скала Часовой",
+           en: "Chasovoy Rock"},
     category: "cave",
     coords: [57.426111, 48.939480],
-    address: "Чимбулатский комплекс.",
+    address: {ru: "Чимбулатский комплекс.",
+              en: "Chimbulat Complex."},
     rating: null,
     image: "images/skala_chasovoy.jpg",
-    description: "Известняковая скала высотой 8 м."    
+    description: {ru: "Известняковая скала высотой 8 м.",
+                  en: "Limestone rock 8 m high."}
 },
 
 {
-    name: "Зараменская пещера",
+    id: 16,
+    name: {ru: "Зараменская пещера",
+           en: "Zaramen Cave"},
     category: "cave",
     coords: [57.541853, 48.938562],
-    address: "Кировская область, Советский район, Родыгинское сельское поселение.",
+    address: {ru: "Кировская область, Советский район, Родыгинское сельское поселение.",
+              en: "Kirov region, Sovetsky district, Rodyginskoye rural settlement."},
     rating: null,
     images: [
     "images/zaramen_peshera.jpg",
@@ -222,71 +285,95 @@ var places = [
     "images/zaramen2.jpg",
     "images/zaramen3.jpg"
     ],  
-    description: "Ее второе название Чертова печь, ведь именно на печной горн похож вход."    
+    description: {ru: "Ее второе название Чертова печь, ведь именно на печной горн похож вход.",
+                  en: "Its second name is Devil's Furnace, as the entrance resembles a furnace."}    
 },
 
 {
-    name: "Мухинская пещера",
+    id: 17,
+    name: {ru: "Мухинская пещера",
+           en: "Mukhinskaya Cave"},
     category: "cave",
     coords: [56.258433, 51.060537],
-    address: "д. Мухино, рядом с г. Вятские Поляны",
+    address: {ru: "д. Мухино, рядом с г. Вятские Поляны",
+              en: "v. Mukhino, near Vyatskiye Polyany"},
     rating: null,
     image: "images/muhinskaya_peshera.jpg",
-    description: "Пещера на берегу реки Вятки."    
+    description: {ru: "Пещера на берегу реки Вятки.",
+                  en: "Cave on the bank of the Vyatka River."}    
 },
 
 {
-    name: "Нижнеивкинские источники",
+    id: 18,
+    name: {ru: "Нижнеивкинские источники",
+           en: "Nizhneivkinskiye Springs"},
     category: "spring",
     coords: [58.199611, 49.523056],
-    address: "Кировская область, Кумёнский район, пгт Нижнеивкино, ул. Курортная, д. 11 (санаторий «Нижне-Ивкино»).",
+    address: {ru: "Кировская область, Кумёнский район, пгт Нижнеивкино, ул. Курортная, д. 11 (санаторий «Нижне-Ивкино»).",
+              en: "Kirov region, Kumen district, Nizhneivkino, Kurortnaya St., 11 (Nizhne-Ivkino sanatorium)."},
     rating: null,
     images: [
     "images/nizhneiv_istoch.jpg",
     "images/nizhneiv.webp",
     "images/nizhneiv2.webp"
     ],
-    description: "Минеральные источники."    
+    description: {ru: "Минеральные источники.",
+                  en: "Mineral springs."}    
 },
 
 {
-    name: "Родник под Сокольей горой",
+    id: 19,
+    name: {ru: "Родник под Сокольей горой",
+           en: "Spring under Sokolya Mountain"},
     category: "spring",
     coords: [58.161564, 48.347921],
-    address: "Кировская область.",
+    address: {ru: "Кировская область.",
+              en: "Kirov region."}, 
     rating: null,
     images: [
     "images/rodnik_soloiya_gora.jpg",
     "images/rodniksokol.jpg"
     ],
-    description: "Реликтовый источник."    
+    description: {ru: "Реликтовый источник.", 
+                  en: "The Relict Source."}
 },
 
 {
-    name: "Святые источники Аджим",
+    id: 20,
+    name: {ru: "Святые источники Аджим",
+           en: "Holy Springs of Adzhim"},
     category: "spring",
     coords: [56.740278, 50.276667],
-    address: "село Аджим.",
+    address: {ru: "село Аджим.",
+              en: "village Adzhim."},
     rating: null,
     image: "images/adshim_istochnik.jpg",
-    description: "Система родников."    
+    description: {ru: "Система родников.",
+                  en: "System of springs."}    
 },
 
 {
-    name: "Кугерский родник",
+    id: 21,
+    name: {ru: "Кугерский родник",
+           en: "Kugersky Spring"},
     category: "spring",
     coords: [57.101465, 49.858545],
-    address: "Кировская область, Уржумский район, деревня Кугерь.",
+    address: {ru: "Кировская область, Уржумский район, деревня Кугерь.",
+              en: "Kirov region, Urzhum district, village Kuger."},
     rating: null,
     image: "images/kuger_rodnik.jpg",
-    description: "Святой источник."    
+    description: {ru: "Святой источник.",
+                  en: "The holy spring."}
 },
 
 {
-    name: "Жуковлянские валуны",
+    id: 22,
+    name: {ru: "Жуковлянские валуны",
+           en: "Zhukovlyansky Boulders"},
     category: "history",
     coords: [58.304727, 48.018566],
-    address: "Кировская область, Котельничский район, Александровское сельское поселение.",
+    address: {ru: "Кировская область, Котельничский район, Александровское сельское поселение.",
+              en: "Kirov region, Kotelnichsky district, Alexandrovskoye rural settlement."},
     rating: null,
     images: [
     "images/zhukov_valun.jpg",
@@ -295,51 +382,67 @@ var places = [
     "images/zhukov3.webp",
     "images/zhukov4.webp"
     ],
-    description: "Крупные камни неизвестного происхождения."    
+    description: {ru: "Крупные камни неизвестного происхождения.",
+                  en: "Large stones of unknown origin."}    
 },
 
 {
-    name: "Ковровское городище",
+    id: 23,
+    name: {ru: "Ковровское городище",
+           en: "Kovrov Settlement"},
     category: "history",
     coords: [58.349286, 48.478476],
-    address: "д. Ковровы.",
+    address: {ru: "д. Ковровы.",
+              en: "v. Kovrovy."},
     rating: null,
     images: [
     "images/kovrov_gorodishe.jpg",
     "images/kovrov.jpg",
     "images/kovrov2.jpg"
     ],
-    description: "Древнее поселение."    
+    description: {ru: "Древнее поселение.",
+                  en: "Ancient settlement."}    
 },
 
 {
-    name: "Кладбище парейазавров",
+    id: 24,
+    name: {ru: "Кладбище парейазавров",
+           en: "Pareiasaur Cemetery"},
     category: "history",
     coords: [58.162390, 48.356391],
-    address: "г. Котельнич",
+    address: {ru: "г. Котельнич",
+              en: "c. Kotelnich"},
     rating: null,
     image: "images/pareivazavr.jpg",
-    description: "Место находок древних животных."    
+    description: {ru: "Место находок древних животных.",
+                  en: "Place of ancient animal findings."}
 },
 
 {
-    name: "Истобенское городище",
+    id: 25,
+    name: {ru: "Истобенское городище",
+           en: "Istobensk Settlement"},
     category: "history",
     coords: [58.425827, 48.826946],
-    address: "с. Истобенск, Кировская область.",
+    address: {ru: "с. Истобенск, Кировская область.",
+              en: "v. Istobensk, Kirov region."},
     rating: null,
     images: [
     "images/istoben_gorodishe.jpg",
     "images/istoben.jpg"
     ],
-    description: "Памятник археологии."   
+    description: {ru: "Памятник археологии.",
+                  en: "Archaeological monument."}
 },
 
 {
-    name: "Кировский ботанический сад",
+    id: 26,
+    name: {ru: "Кировский ботанический сад",
+           en: "Kirov Botanical Garden"},
     category: "park",
     coords: [58.597146, 49.668111],
-    address: "Киров, Владимирская ул., 95.",
+    address: {ru: "Киров, Владимирская ул., 95.",
+              en: "Kirov, Vladimirskaya St., 95."},
     rating: null,
     images: [
     "images/botanic_garden.jpg",
@@ -347,14 +450,18 @@ var places = [
     "images/botsad2.webp",
     "images/botsad3.webp"
     ],
-    description: "Более 400 видов растений."    
+    description: {ru: "Более 400 видов растений.",
+                  en: "More than 400 species of plants."}    
 },
 
 {
-    name: "Комплекс Великорецкое",
+    id: 27,
+    name: {ru: "Комплекс Великорецкое",
+           en: "Velikoretskoe Complex"},
     category: "park",
     coords: [58.892707, 49.032493],
-    address: "село Великорецкое.",
+    address: {ru: "село Великорецкое.",
+              en: "village Velikoretskoe."},
     rating: null,
     images: [
     "images/velikoretskoe.jpg",
@@ -363,85 +470,113 @@ var places = [
     "images/velikor3.webp", 
     "images/velikor4.webp"
     ],
-    description: "Паломнический центр."    
+    description: {ru: "Паломнический центр.",
+                  en: "Pilgrimage center."}
 },
 
 {
-    name: "Бушковский лес",
+    id: 28, 
+    name: {ru: "Бушковский лес",
+           en: "Bushkovsky forest."},
     category: "park",
     coords: [57.107242, 49.517720],
-    address: "Кировская область.",
+    address: {ru: "Кировская область.",
+              en: "Kirov region."},
     rating: null,
     image: "images/bushkov_les.jpg",
-    description: "Заказник южной тайги."   
+    description: {ru: "Заказник южной тайги.",
+                  en: "Southern taiga reserve."}
 },
 
 {
-    name: "Медведский бор",
+    id: 29,
+    name: {ru: "Медведский бор",
+           en: "Medvedsky Bor"},
     category: "park",
     coords: [57.393152, 50.094310],
-    address: "Кировская область.",
+    address: {ru: "Кировская область.",
+              en: "Kirov region."},
     rating: null,
     images: [
     "images/medved_bor.jpg",
     "images/medbor.jpg",
     "images/medbor2.jpg"
     ],
-    description: "Сосновый бор."    
+    description: {ru: "Сосновый бор.",
+                  en: "Pine forest."}    
 },
 
 {
-    name: "Атарская лука",
+    id: 30,
+    name: {ru: "Атарская лука",
+           en: "Atarskaya Luka"},
     category: "park",
     coords: [57.521667, 49.290000],
-    address: "Кировская область, Лебяжский муниципальный округ.",
+    address: {ru: "Кировская область, Лебяжский муниципальный округ.",
+              en: "Kirov region, Lebyazhsky municipal district."},
     rating: null,
     images: [
     "images/atar_luka.jpg",
     "images/atar.jpg"
     ],
-    description: "Проектируемый национальный парк."    
+    description: {ru: "Проектируемый национальный парк.",
+                  en: "Projected national park."}    
 },
 
 {
-    name: "Комплекс Ошеть",
+    id: 31,
+    name: {ru: "Комплекс Ошеть",
+           en: "Oshet Complex"},
     category: "park",
     coords: [58.005450, 50.054304],
-    address: "Кировская область, Верхошижемский район, Зоновское сельское поселение, памятник природы Южно-таежный комплекс елово-пихтовых лесов Ошеть.",
+    address: {ru: "Кировская область, Верхошижемский район, Зоновское сельское поселение, памятник природы Южно-таежный комплекс елово-пихтовых лесов Ошеть.",
+              en: "Kirov region, Verkhoshizhemsky district, Zonovskoe rural settlement, natural monument South Taiga complex of spruce-fir forests Oshet."},
     rating: null,
     image: "images/oshet.jpg",
-    description: "Природный памятник."    
+    description: {ru: "Природный памятник.",
+                  en: "Natural monument."}    
 },
 
 {
-    name: "Популяция кортузы Маттиоли",
+    id: 32,
+    name: {ru: "Популяция кортузы Маттиоли",
+           en: "Population of Cortusa Matthioli"},
     category: "park",
     coords: [58.649087, 49.609907],
-    address: "Филейка м-н, Октябрьский район, Киров.",
+    address: {ru: "Филейка м-н, Октябрьский район, Киров.",
+              en: "Fileyka m-n, Oktyabrsky district, Kirov."},
     rating: null,
     image: "images/mattioli.jpg",
-    description: "Редкое растение ледникового периода."    
+    description: {ru: "Редкое растение ледникового периода.",
+                  en: "Rare plant of the glacial period."}    
 },
 
 {
-    name: "Динопарк",
+    id: 33,
+    name: {ru: "Динопарк",
+           en: "Dinopark"},
     category: ["kids", "park"],
     coords: [58.306059, 48.353075],
-    address: "Котельнич, ул. Володарского, 10.",
+    address: {ru: "Котельнич, ул. Володарского, 10.",
+              en: "Kotel'nich, ul. Volodarskogo, 10."},
     rating: null,
     images: [
     "images/dinopark.jpg",
     "images/dinopark2.webp",
     "images/dinopark3.webp"
     ],
-    description: "Парк динозавров."    
+    description: {ru: "Парк динозавров.",
+                  en: "Dinosaur park."}    
 },
 
 {
-    name: "Юркин парк",
+    id: 34,     
+    name: {ru: "Юркин парк",
+           en: "Yurkin Park"},
     category: ["kids", "park"],
     coords: [58.612854, 49.781534],
-    address: "Киров, село Талица, 50/1.",
+    address: {ru: "Киров, село Талица, 50/1.",
+              en: "Kirov, village Talitsa, 50/1."},
     rating: null,
     images: [
     "images/urkin_park.jpg",
@@ -449,24 +584,32 @@ var places = [
     "images/urkin3.webp",
     "images/urkin.webp"
     ],
-    description: "Интерактивный парк."    
+    description: {ru: "Интерактивный парк.",
+                  en: "Interactive park."}    
 },
 
 {
-    name: "Комплекс Порошино",
+    id: 35,
+    name: {ru: "Комплекс Порошино",
+           en: "Poroshino Complex"},
     category: ["kids", "park"],
     coords: [58.605667, 49.809466],
-    address: "село Порошино",
+    address: {ru: "село Порошино",
+              en: "Poroshino village"},
     rating: null,
     image: "images/poroshino.jpg",
-    description: "Активный отдых."   
+    description: {ru: "Активный отдых.",
+                  en: "Active recreation."}   
 },
 
 {
-    name: "Кафе Паприка",
+    id: 36,
+    name: {ru: "Кафе Паприка",
+           en: "Cafe Paprika"},
     category: ["kids", "food"],
     coords: [58.580350, 49.563626],
-    address: "Киров, ул. Капитана Дорофеева, 26",
+    address: {ru: "Киров, ул. Капитана Дорофеева, 26",
+              en: "Kirov, Kapitana Dorofeev St., 26"},
     rating: null,
     images: [
     "images/paprika_cafe.jpg",
@@ -474,14 +617,18 @@ var places = [
     "images/paprika2.webp",
     "images/paprika3.webp"
     ],
-    description: "Кафедоставка еды и обедов."    
+    description: {ru: "Кафе доставка еды и обедов.",
+                  en: "Cafe food and lunch delivery."}      
 },
 
 {
-    name: "Динки Парк",
+    id: 37,
+    name: {ru: "Динки Парк",
+           en: "Dinki Park"},
     category: ["kids", "tradecenters", "food"],         
     coords: [58.591601, 49.595233],
-    address: "Киров, микрорайон Юго-Западный, ул. Космонавта Владислава Волкова, 6А, ТЦ Фестиваль.",
+    address: {ru: "Киров, микрорайон Юго-Западный, ул. Космонавта Владислава Волкова, 6А, ТЦ Фестиваль.",
+              en: "Kirov, Yugo-Zapadny microdistrict, Kosmonavta Vladislava Volkova St., 6A, TC Festival."},
     rating: null,
     images: [
     "images/dinki_park.jpg",
@@ -490,28 +637,36 @@ var places = [
     "images/dinki3.webp",
     "images/dinki4.webp"
     ],
-    description: "Развлекательный центр."    
+    description: {ru: "Развлекательный центр.",
+                  en: "Entertainment center."}    
 },
 
 {
-    name: "Ипподром",
+    id: 38,
+    name: {ru: "Ипподром",
+           en: "Hippodrome"},
     category: ["kids", "park"],
     coords: [58.587687, 49.582191],
-    address: "Киров, Ленинский район.",
+    address: {ru: "Киров, Ленинский район.",
+              en: "Kirov, Leninsky district."},
     rating: null,
     images: [
     "images/ipodrom.jpg",
     "images/ipod.webp",
     "images/ipod2.webp"
     ],
-    description: "Конный клуб."     
+    description: {ru: "Конный клуб.",
+                  en: "Equestrian club."}     
 },
 
 {
-    name: "Зубаревский лес",
+    id: 39,
+    name: {ru: "Зубаревский лес",
+           en: "Zubarevsky Forest"},
     category: ["kids", "park"],
     coords: [58.593530, 49.575988],
-    address: "Киров, Зубаревский лес.",
+    address: {ru: "Киров, Зубаревский лес.",
+              en: "Kirov, Zubarevsky Forest."},
     rating: null,
     images: [
     "images/zub_les.jpg",   
@@ -520,14 +675,18 @@ var places = [
     "images/zubles3.webp",
     "images/zubles4.webp"
     ],
-    description: "Лесопарк."   
+    description: {ru: "Лесопарк.",
+                  en: "Forest park."}   
 },
 
 {
-    name: "Кочуровский парк",
+    id: 40,
+    name: {ru: "Кочуровский парк",
+           en: "Kochurovsky Park"}, 
     category: ["kids", "park"],
     coords: [58.593361, 49.602712],
-    address: "Киров, Кочуровский парк.",
+    address: {ru: "Киров, Кочуровский парк.",
+              en: "Kirov, Kochurovsky Park."},
     rating: null,
     images: [
     "images/kochur_park.jpg",
@@ -536,34 +695,46 @@ var places = [
     "images/koch3.webp",
     "images/koch2.webp"
     ],
-    description: "Городской парк."    
+    description: {ru: "Городской парк.",
+                  en: "City park."}    
 },
 
 {
-    name: "ТЦ Глобус",
+    id: 41,
+    name: {ru: "ТЦ Глобус",
+           en: "Globus Shopping Center"},
     category: ["kids", "tradecenters", "food"],
     coords: [58.598077, 49.607028],
-    address: "Киров, ул. Воровского, 135.",
+    address: {ru: "Киров, ул. Воровского, 135.",
+              en: "Kirov, Vorovskogo St., 135."},
     rating: null,
     image: "images/globus.jpg",
-    description: "Развлекательный торговый центр."    
+    description: {ru: "Развлекательный торговый центр.",
+                  en: "Entertainment shopping center."}    
 },
 
 {
-    name: "ТЦ Макси",
+    id: 42,
+    name: {ru: "ТЦ Макси",
+           en: "TC Maxi"},
     category: ["kids", "tradecenters", "food"],
     coords: [58.616505, 49.594573],
-    address: "Киров, Луганская ул., 53/2.",
+    address: {ru: "Киров, Луганская ул., 53/2.",
+              en: "Kirov, Luganskaya St., 53/2."},
     rating: null,
     image: "images/maksi.jpg",
-    description: "Развлекательный торговый центр."    
+    description: {ru: "Развлекательный торговый центр.",
+                  en: "Entertainment shopping center."}    
 },
 
 {
-    name: "Парк Победы",
+    id: 43,
+    name: {ru: "Парк Победы",
+           en: "Victory Park"},
     category: ["kids", "park"],
     coords: [58.609566, 49.611205],
-    address: "Киров, парк Победы.",
+    address: {ru: "Киров, парк Победы.",
+              en: "Kirov, Victory Park."},
     rating: null,
     images: [
     "images/park_pobedy.jpg",
@@ -571,28 +742,36 @@ var places = [
     "images/parkpobed3.webp",
     "images/parkpobed.webp",
     ],
-    description: "Городской парк."    
+    description: {ru: "Городской парк.",
+                  en: "City park."}
 },
 
 {
-    name: "Парк имени 50-летия ВЛКСМ",
+    id: 44,
+    name: {ru: "Парк имени 50-летия ВЛКСМ",
+           en: "Park named after the 50th anniversary of the VLKSM"},    
     category: ["kids", "park"],
     coords: [58.584987, 49.634166],
-    address: "Киров, ул. Сурикова, 21.",
+    address: {ru: "Киров, ул. Сурикова, 21.",
+              en: "Kirov, Surikova St., 21."},
     rating: null,
     images: [
     "images/park50.webp",
     "images/park501.webp",
     "images/park502.webp"
     ],
-    description: "Городской парк."    
+    description: {ru: "Городской парк.",
+                  en: "City park."}    
 },
 
 {
-    name: "Море парк",
+    id: 45,
+    name: {ru: "Море парк",
+           en: "More Park"},
     category: ["kids", "tradecenters"],
     coords: [58.582653, 49.631654],
-    address: "Киров, ул. Некрасова, 49.",
+    address: {ru: "Киров, ул. Некрасова, 49.",
+              en: "Kirov, Nekrasova St., 49."},
     rating: null,
     images: [
     "images/more_park.jpg",
@@ -600,68 +779,92 @@ var places = [
     "images/morepark3.webp",
     "images/morepark2.webp"
     ],
-    description: "Оздоровительный центр."    
+    description: {ru: "Оздоровительный центр.",
+                  en: "Wellness center."}    
 },
 
 {       
-    name: "Кировский государственный цирк",
+    id: 46,
+    name: {ru: "Кировский государственный цирк",
+           en: "Kirov State Circus"},
     category: "kids",
     coords: [58.588125, 49.655795],
-    address: "Киров, парк имени Кирова.",
+    address: {ru: "Киров, парк имени Кирова.",
+              en: "Kirov, Kirov Park."},    
     rating: null,
     image: "images/circ.jpg",
-    description: "Цирк."    
+    description: {ru: "Цирк.",
+                  en: "Circus."}
 },
 
 {
-    name: "Вятка-ЦУМ",
+    id: 47,
+    name: {ru: "Вятка-ЦУМ",
+           en: "Vyatka TSUM"},
     category: ["kids", "tradecenters", "food"],     
     coords: [58.594043, 49.656317],
-    address: "Киров, ул. Воровского, 77.",
+    address: {ru: "Киров, ул. Воровского, 77.",
+              en: "Kirov, Vorovskogo St., 77."},
     rating: null,
     image: "images/tsum.jpg",
-    description: "Торговый центр."    
+    description: {ru: "Торговый центр.",
+                  en: "Trade center."}
 },
 
 {
-    name: "Сквер Алые Паруса",
+    id: 48,
+    name: {ru: "Сквер Алые Паруса",
+           en: "Scarlet Sails Square"},
     category: ["kids", "park"],
     coords: [58.603731, 49.653322],
-    address: "Киров, сквер Алые Паруса.",
+    address: {ru: "Киров, сквер Алые Паруса.",
+              en: "Kirov, Scarlet Sails Square."},
     rating: null,
     image: "images/alye_parusa_skver.jpg",
-    description: "Городской парк."
+    description: {ru: "Городской парк.",
+                  en: "City park."}
 },
 
 {
-    name: "ТЦ Европейский",
+    id: 49,
+    name: {ru: "ТЦ Европейский",
+           en: "European Shopping Center"},
     category: ["kids", "tradecenters", "food"],
     coords: [58.594450, 49.666501],
-    address: "Киров, ул. Воровского, 43.",
+    address: {ru: "Киров, ул. Воровского, 43.",
+              en: "Kirov, Vorovskogo St., 43."},
     rating: null,
     image: "images/evrop_tc.jpg",
-    description: "Городской парк." 
+    description: {ru: "Городской парк.",
+                  en: "City park."}
 },
 
 {
-    name: "Сквер 60-летия СССР",
+    id: 50,
+    name: {ru: "Сквер 60-летия СССР",
+           en: "60th Anniversary of the USSR Square"},
     category: ["kids", "park"],
     coords: [58.597222, 49.670845],
-    address: "Киров, сквер 60-летия СССР.",
+    address: {ru: "Киров, сквер 60-летия СССР.",
+              en: "Kirov, 60th Anniversary of the USSR Square."},
     rating: null,
     images: [
     "images/skver_60.jpg",
     "images/60let.webp",
     "images/60let2.webp"
     ],
-    description: "Городской парк."    
+    description: {ru: "Городской парк.",
+                  en: "City park."}     
 },
 
 {
-    name: "Аполло",
+    id: 51,
+    name: {ru: "Аполло",
+           en: "Apollo"},
     category: ["kids", "park"],
     coords: [58.601004, 49.674048],
-    address: "Киров, Первомайский район, ул. Володарского, 106.",
+    address: {ru: "Киров, Первомайский район, ул. Володарского, 106.",
+              en: "Kirov, Pervomaysky District, Volodarskogo St., 106."},
     rating: null,
     images: [
     "images/apollo.jpg",
@@ -669,14 +872,18 @@ var places = [
     "images/apollo3.webp",
     "images/apollo4.webp"
     ],
-    description: "Городской парк."   
+    description: {ru: "Городской парк.",
+                  en: "City park."}   
 },
 
 {
-    name: "Парк имени С. М. Кирова",
+    id: 52,
+    name: {ru: "Парк имени С. М. Кирова",
+           en: "S. M. Kirov Park"},
     category: ["kids", "park"],
     coords: [58.588046, 49.652520],
-    address: "Киров, парк имени С. М. Кирова.",
+    address: {ru: "Киров, парк имени С. М. Кирова.",
+              en: "Kirov, S. M. Kirov Park."},      
     rating: null,
     images: [
     "images/kirova.webp",
@@ -686,28 +893,36 @@ var places = [
     "images/kirova5.webp",
     "images/kirova6.webp"
     ],
-    description: "Городской парк."    
+    description: {ru: "Городской парк.",
+                  en: "City park."}    
 },
 
 {
-    name: "Сквер Трудовой славы",
+    id: 53,
+    name: {ru: "Сквер Трудовой славы",
+           en: "Labor Glory Square"},
     category: ["kids", "park"],
     coords: [58.615612, 49.664394],
-    address: "Киров, сквер Трудовой славы.",
+    address: {ru: "Киров, сквер Трудовой славы.",
+              en: "Kirov, Labor Glory Square."},
     rating: null,
     images: [
     "images/skver_trud_slava.jpg",
     "images/trud.webp",
     "images/trud2.webp"
     ],
-    description: "Городской парк."   
+    description: {ru: "Городской парк.",
+                  en: "City park."}   
 },
 
 {
-    name: "Филейский парк",
+    id: 54,
+    name: {ru: "Филейский парк",
+           en: "Fileysky Park"},
     category: ["kids", "park"],
     coords: [58.651521, 49.612323],
-    address: "Киров, Филейский парк.",
+    address: {ru: "Киров, Филейский парк.",
+              en: "Kirov, Fileysky Park."},
     rating: null,
     images: [
     "images/fil_park.jpg",
@@ -715,14 +930,18 @@ var places = [
     "images/filpark2.webp",
     "images/filpark3.webp"
     ],
-    description: "Городской парк."   
+    description: {ru: "Городской парк.",
+                  en: "City park."}   
 },
 
 {
-    name: "Александровский сад",
+    id: 55,
+    name: {ru: "Александровский сад",
+           en: "Alexandrovsky Garden"},
     category: ["kids", "park"],
     coords: [58.607916, 49.686325],
-    address: "Киров, Александровский сад.",
+    address: {ru: "Киров, Александровский сад.",
+              en: "Kirov, Alexandrovsky Garden."},
     rating: null,
     images: [
     "images/aleks_sad.jpg",
@@ -734,14 +953,18 @@ var places = [
     "images/aleks6.webp",
     "images/aleks7.webp"
     ],
-    description: "Городской парк."   
+    description: {ru: "Городской парк.",
+                  en: "City park."}   
 },
 
 {
-    name: "Музей К.Э. Циолковского, авиации и космонавтики",
+    id: 56, 
+    name: {ru: "Музей К.Э. Циолковского, авиации и космонавтики",
+           en: "K. E. Tsiolkovsky Museum of Aviation and Cosmonautics"},
     category: ["kids", "museums"],
     coords: [58.605327, 49.679048],
-    address: "Киров, Октябрьский район, Преображенская ул., 16.",
+    address: {ru: "Киров, Октябрьский район, Преображенская ул., 16.",
+              en: "Kirov, Oktyabrsky District, Preobrazhenskaya St., 16."},
     rating: null,
     images: [
     "images/cosmo_museum.jpg",
@@ -750,14 +973,18 @@ var places = [
     "images/cosmo3.webp",
     "images/cosmo4.webp"
     ],
-    description: "Планетарий."   
+    description: {ru: "Планетарий.",
+                  en: "Planetarium."}   
 },
 
 {
-    name: "Криолло",
+    id: 57, 
+    name: {ru: "Криолло",
+           en: "Criollo"},
     category: ["kids", "museums"],
     coords: [58.602301, 49.682914],
-    address: "Киров, Спасская ул., 15.",
+    address: {ru: "Киров, Спасская ул., 15.",
+              en: "Kirov, Spasskaya St., 15."},
     rating: null,
     images: [
     "images/kriollo.jpg",
@@ -765,14 +992,18 @@ var places = [
     "images/kriollo3.webp",
     "images/kriollo4.webp"
     ],
-    description: "Музей шоколада."   
+    description: {ru: "Музей шоколада.",
+                  en: "Chocolate Museum."}   
 },
 
 {
-    name: "Музей истории Хлынова",
+    id: 58,
+    name: {ru: "Музей истории Хлынова",
+           en: "Museum of the History of Khlynov"},
     category: ["kids", "museums"],
     coords: [58.600602, 49.676293],
-    address: "Киров, ул. Герцена, 15В.",
+    address: {ru: "Киров, ул. Герцена, 15В.",
+              en: "Kirov, Herzen St., 15V."},
     rating: null,
     images: [
     "images/hlinov_museum.jpg",
@@ -781,14 +1012,18 @@ var places = [
     "images/hlinov3.webp",
     "images/hlinov5.webp"
     ],
-    description: "Музей." 
+    description: {ru: "Музей.", 
+                  en: "Museum."}
 },
 
 {
-    name: "Кировский областной краеведческий музей имени П. В. Алабина",
+    id: 59,
+    name: {ru: "Кировский областной краеведческий музей имени П. В. Алабина",
+           en: "Kirov Regional Museum of Local Lore named after P. V. Alabin"},
     category: ["kids", "museums"],
     coords: [58.602087, 49.683457],
-    address: "Киров, Спасская ул., 6.",
+    address: {ru: "Киров, Спасская ул., 6.",
+              en: "Kirov, Spasskaya St., 6."},
     rating: null,
     images: [
     "images/kraev_museum.jpg",
@@ -798,14 +1033,18 @@ var places = [
     "images/kraev4.webp",
     "images/kraev5.webp",
     ],
-    description: "Музей."    
+    description: {ru: "Музей.",
+                  en: "Museum."}
 },
 
 {
-    name: "Музей истории мороженого Артико",
+    id: 60, 
+    name: {ru: "Музей истории мороженого Артико",
+           en: "Artico Ice Cream Museum"},
     category: ["kids", "museums"],
     coords: [58.602449, 49.684122],
-    address: "Киров, Спасская ул., 15.",
+    address: {ru: "Киров, Спасская ул., 15.",
+              en: "Kirov, Spasskaya St., 15."},
     rating: null,
     images: [
     "images/icream_museum.jpg",
@@ -814,14 +1053,18 @@ var places = [
     "images/artiko3.webp",
     "images/artiko4.webp"
     ],
-    description: "Музей."    
+    description: {ru: "Музей.",
+                  en: "Museum."}   
 },
 
 {
-    name: "Дымковская игрушка",
+    id: 61,
+    name: {ru: "Дымковская игрушка",
+           en: "Dymkovo Toy"},
     category: ["kids", "museums"],
     coords: [58.602943, 49.676439],
-    address: "Киров, ул. Свободы, 67.",
+    address: {ru: "Киров, ул. Свободы, 67.",
+              en: "Kirov, Svobody St., 67."},
     rating: null,
     images: [
     "images/dim_toy.jpg",
@@ -829,14 +1072,18 @@ var places = [
     "images/dim2.webp",
     "images/dim3.webp"
     ],
-    description: "Музей."    
+    description: {ru: "Музей.",
+                  en: "Museum."}   
 },
 
 {
-    name: "Кировский государственный театр юного зрителя театр на Спасской",
+    id: 62, 
+    name: {ru: "Кировский государственный театр юного зрителя театр на Спасской",
+           en: "Kirov State Youth Theatre on Spasskaya"},
     category: ["kids", "museums"],
     coords: [58.602307, 49.681962],
-    address: "Киров, Спасская ул., 17.",
+    address: {ru: "Киров, Спасская ул., 17.",
+              en: "Kirov, Spasskaya St., 17."},
     rating: null,
     images: [
     "images/theatre_unzrit.jpg",
@@ -844,14 +1091,18 @@ var places = [
     "images/unzrit2.webp",
     "images/unzrit3.webp"
     ],
-    description: "Театр."    
+    description: {ru: "Театр.",
+                  en: "Theatre."}    
 },
 
 {
-    name: "Кировский областной ордена Трудового Красного Знамени драматический театр имени С. М. Кирова",
+    id: 63, 
+    name: {ru: "Кировский областной ордена Трудового Красного Знамени драматический театр имени С. М. Кирова",
+           en: "Kirov Regional Order of the Red Banner of Labor Drama Theater named after S. M. Kirov"},
     category: ["kids", "museums"],
     coords: [58.604605, 49.667966],
-    address: "Киров, Московская ул., 37.",
+    address: {ru: "Киров, Московская ул., 37.",
+              en: "Kirov, Moskovskaya St., 37."},
     rating: null,
     images: [
     "images/dram_thet.jpg",
@@ -860,14 +1111,18 @@ var places = [
     "images/dram3.webp",
     "images/dram4.webp"
     ],
-    description: "Театр."    
+    description: {ru: "Театр.",
+                  en: "Theatre."}    
 },
 
 {
-    name: "Кировский театр кукол имени А. Н. Афанасьева",
+    id: 64,
+    name: {ru: "Кировский театр кукол имени А. Н. Афанасьева",
+           en: "Kirov Puppet Theater named after A. N. Afanasyev"},
     category: ["kids", "museums"],
     coords: [58.601610, 49.671731],
-    address: "Киров, Спасская ул., 22.",
+    address: {ru: "Киров, Спасская ул., 22.",
+              en: "Kirov, Spasskaya St., 22."},
     rating: null,
     images: [
     "images/thet_kukl.jpg",
@@ -875,14 +1130,18 @@ var places = [
     "images/kukl2.webp",
     "images/kukl3.webp"
     ],
-    description: "Театр."    
+    description: {ru: "Театр.",
+                  en: "Theatre."}    
 },
 
 {
-    name: "Академия Кавказской Кухни",
+    id: 65,
+    name: {ru: "Академия Кавказской Кухни",
+           en: "Academy of Caucasian Cuisine"},
     category: ["kids", "food"],
     coords: [58.611641, 49.789392],
-    address: "Киров, село Талица, ул. Янтарная Слобода, 14В.",
+    address: {ru: "Киров, село Талица, ул. Янтарная Слобода, 14В.",
+              en: "Kirov, Talitsa village, Yantarnaya Sloboda St., 14V."},
     rating: null,
     images: [
     "images/akk.jpg",
@@ -890,14 +1149,18 @@ var places = [
     "images/akk3.webp",
     "images/akk4.webp"
     ],
-    description: "Ресторан."    
+    description: {ru: "Ресторан.",
+                  en: "Restaurant."}    
 },
 
 {
-    name: "Академия Кавказской Кухни",
+    id: 66,
+    name: {ru: "Академия Кавказской Кухни",
+           en: "Academy of Caucasian Cuisine"},
     category: ["kids", "food"],
     coords: [58.611641, 49.789392],
-    address: "Киров, село Талица, ул. Янтарная Слобода, 14В.",
+    address: {ru: "Киров, село Талица, ул. Янтарная Слобода, 14В.",
+              en: "Kirov, Talitsa village, Yantarnaya Sloboda St., 14V."},
     rating: null,
     images: [
     "images/akk.jpg",
@@ -905,8 +1168,401 @@ var places = [
     "images/akk3.webp",
     "images/akk4.webp"
     ],
-    description: "Ресторан."    
-}
+    description: {ru: "Ресторан.",
+                  en: "Restaurant."}    
+},
+
+{
+    id: 67,
+    name: {ru: "ФотоКопиЦентр",
+           en: "Photocopying Center"},
+    category: ["students", "print"],
+    coords: [58.589734, 49.669066],
+    address: {ru: "Киров, Владимирская ул., 129.",
+              en: "Kirov, Vladimirskaya St., 129."},
+    rating: null,
+    images: [
+    "images/67(1).webp",
+    "images/67(2).webp",
+    "images/67(3).webp"
+    ],
+    description: {ru: "Копировальный центр, низкие цены.",
+                  en: "Copy Center, low prices."}    
+},
+
+{
+    id: 68,
+    name: {ru: "Вятский государственный университет, корпус №1",
+           en: "Vyatka State University, building No. 1"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.602619, 49.666602],
+    address: {ru: "Киров, Московская ул., 36.",
+              en: "Kirov, Moskovskaya St., 36."},
+    rating: null,
+    images: [
+    "images/68(1).jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 69,
+    name: {ru: "Вятский государственный университет, корпус №2",
+           en: "Vyatka State University, building No. 2"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.604311, 49.665920],
+    address: {ru: "Киров, Московская ул., 39.",
+              en: "Kirov, Moskovskaya St., 39."},
+    rating: null,
+    images: [
+    "images/69(1).jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 70,
+    name: {ru: "Вятский государственный университет, корпус №3",
+           en: "Vyatka State University, building No. 3"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.604275, 49.673887],
+    address: {ru: "Киров, Московская ул., 29.",
+              en: "Kirov, Moskovskaya St., 29."},
+    rating: null,
+    images: [
+    "images/70(1).jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 71,
+    name: {ru: "Вятский государственный университет, корпус №4",
+           en: "Vyatka State University, building No. 4"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.602090, 49.665445],
+    address: {ru: "Киров, ул. Защитников Отечества, 76.",
+              en: "Kirov, Zashchitnikov Otechestva St., 76."},
+    rating: null,
+    images: [
+    "images/71.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 72,
+    name: {ru: "Вятский государственный университет, корпус №5",
+           en: "Vyatka State University, building No. 5"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.599888, 49.667922],
+    address: {ru: "Киров, ул. Карла Маркса, 77.",
+              en: "Kirov, Zashchitnikov Otechestva St., 76."},
+    rating: null,
+    images: [
+    "images/72.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 73,
+    name: {ru: "Вятский государственный университет, корпус №6",
+           en: "Vyatka State University, building No. 6"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.605176, 49.618084],
+    address: {ru: "Киров, Студенческий пр., 9.",
+              en: "Kirov, Studenchesky ave., 9."},
+    rating: null,
+    images: [
+    "images/73.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 74,
+    name: {ru: "Вятский государственный университет, корпус №7",
+           en: "Vyatka State University, building No. 7"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.605260, 49.673673],
+    address: {ru: "Киров, Октябрьский район, Преображенская ул., 32.",
+              en: "Kirov, Oktyabrisky district, Preobrazhenskaya St., 32."},
+    rating: null,
+    images: [
+    "images/74.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 75,
+    name: {ru: "Вятский государственный университет, корпус №8",
+           en: "Vyatka State University, building No. 8"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.604543, 49.618067],
+    address: {ru: "Киров, Студенческий пр., 11.",
+              en: "Kirov, Studencheskiy ave., 11."},
+    rating: null,
+    images: [
+    "images/75.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 76,
+    name: {ru: "Вятский государственный университет, корпус №9",
+           en: "Vyatka State University, building No. 9"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.604614, 49.617471],
+    address: {ru: "Киров, Студенческий пр., 11А.",
+              en: "Kirov, Studencheskiy ave., 11А."},
+    rating: null,
+    images: [
+    "images/76.jpg"
+    ],
+    description: {ru: "ВУЗ, спортивный комплекс.",
+                  en: "University, sport complex."}    
+},
+
+{
+    id: 77,
+    name: {ru: "Вятский государственный университет, корпус №10",
+           en: "Vyatka State University, building No. 10"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.604573, 49.615650],
+    address: {ru: "Киров, ул. Ломоносова, 18а.",
+              en: "Kirov, Lomonosova St., 18a."},
+    rating: null,
+    images: [
+    "images/77.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 78,
+    name: {ru: "Вятский государственный университет, корпус №11",
+           en: "Vyatka State University, building No. 11"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.604573, 49.615650],
+    address: {ru: "Киров, ул. Преображенская, 41.",
+              en: "Kirov, Preobrazhenskaya St., 41."},
+    rating: null,
+    images: [
+    "images/78.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 78,
+    name: {ru: "Вятский государственный университет, корпус №12",
+           en: "Vyatka State University, building No. 12"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.586844, 49.681767],
+    address: {ru: "Киров, ул. Ленина, 127.",
+              en: "Kirov, Lenina St., 127."},
+    rating: null,
+    images: [
+    "images/79.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 79,
+    name: {ru: "Вятский государственный университет, корпус №13",
+           en: "Vyatka State University, building No. 13"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.591336, 49.676773],
+    address: {ru: "Киров, Красноармейская ул., 26.",
+              en: "Kirov, Krasnoarmeyskaya St., 26."},
+    rating: null,
+    images: [
+    "images/80.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 80,
+    name: {ru: "Вятский государственный университет, корпус №14",
+           en: "Vyatka State University, building No. 14"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.591651, 49.681016],
+    address: {ru: "Киров, Красноармейская ул., 16.",
+              en: "Kirov, Krasnoarmeyskaya St., 16."},
+    rating: null,
+    images: [
+    "images/81.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 81,
+    name: {ru: "Вятский государственный университет, корпус №15",
+           en: "Vyatka State University, building No. 15"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.567201, 49.686897],
+    address: {ru: "Киров, ул. Ленина, 198.",
+              en: "Kirov, Lenina St., 198."},
+    rating: null,
+    images: [
+    "images/82.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 82,
+    name: {ru: "Вятский государственный университет, корпус №16",
+           en: "Vyatka State University, building No. 16"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.591229, 49.678197],
+    address: {ru: "Киров, ул. Свободы, 122.",
+              en: "Kirov, Svobody St., 198."},
+    rating: null,
+    images: [
+    "images/83.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 83,
+    name: {ru: "Вятский государственный университет, корпус №17",
+           en: "Vyatka State University, building No. 17"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.590937, 49.680163],
+    address: {ru: "Киров, ул. Ленина, 111А.",
+              en: "Kirov, Lenina St., 111A."},
+    rating: null,
+    images: [
+    "images/84.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 84,
+    name: {ru: "Вятский государственный университет, корпус №18",
+           en: "Vyatka State University, building No. 18"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.598941, 49.686836],
+    address: {ru: "Киров, ул. Молодой Гвардии, 13.",
+              en: "Kirov, Molodaya Gvardiya St., 13."},
+    rating: null,
+    images: [
+    "images/85.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 85,
+    name: {ru: "Вятский государственный университет, корпус №19",
+           en: "Vyatka State University, building No. 19"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.596035, 49.687023],
+    address: {ru: "Киров, Орловская ул., 12.",
+              en: "Kirov, Orlovskaya St., 12."},
+    rating: null,
+    images: [
+    "images/86.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 86,
+    name: {ru: "Вятский государственный университет, корпус №20",
+           en: "Vyatka State University, building No. 20"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.590704, 49.681571],
+    address: {ru: "Киров, ул. Ленина, 113.",
+              en: "Kirov, Lenina St., 113."},
+    rating: null,
+    images: [
+    "images/87.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 87,
+    name: {ru: "Вятский государственный университет, корпус №21",
+           en: "Vyatka State University, building No. 21"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.590937, 49.680163],
+    address: {ru: "Киров, ул. Ленина, 111A.",
+              en: "Kirov, Lenina St., 111A."},
+    rating: null,
+    images: [
+    "images/84.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 88,
+    name: {ru: "Вятский государственный университет, корпус №22",
+           en: "Vyatka State University, building No. 22"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.590937, 49.680163],
+    address: {ru: "Киров, ул. Ленина, 111A.",
+              en: "Kirov, Lenina St., 111A."},
+    rating: null,
+    images: [
+    "images/84.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+{
+    id: 89,
+    name: {ru: "Вятский государственный университет, корпус №23",
+           en: "Vyatka State University, building No. 23"},
+    category: ["students", "educ", "vyatsu"],
+    coords: [58.616200, 49.671650],
+    address: {ru: "Киров, Первомайский район, ул. Володарского, 2.",
+              en: "Kirov, Pervomaysky District, Volodarskogo St., 2."},
+    rating: null,
+    images: [
+    "images/90.jpg"
+    ],
+    description: {ru: "ВУЗ.",
+                  en: "University."}    
+},
+
+
+
+
+
+
 
 ];
 
@@ -1049,14 +1705,25 @@ var fullDescriptions = {
 
 
 for (var i = 0; i < places.length; i++) {
-    var name = places[i].name;
+
+    var name = places[i].name.ru;
 
     if (fullDescriptions[name]) {
-        places[i].description_full = fullDescriptions[name];
+
+        places[i].description_full = {
+            ru: fullDescriptions[name],
+            en: places[i].description.en || ""
+        };
+
     }
 
     if (!places[i].description_full) {
-        places[i].description_full = "";
+
+        places[i].description_full = {
+            ru: "",
+            en: ""
+        };
+
     }
 }
 

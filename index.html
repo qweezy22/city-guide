@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>Мини-гид по городу Киров</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -21,7 +22,7 @@
         </div>
 
         <div id="interesting" class="screen">
-            <h2>Интересные места</h2>
+            <h2 id="interestingTitle">Интересные места</h2>
         </div>
 
         <div id="menuContent">
@@ -29,6 +30,10 @@
         </div>
         
         <div id="welcome" class="screen active">
+
+                <button id="langToggle" onclick="toggleLanguage()">
+                    EN
+                </button>
 
                <h2>Мини-гид по Кирову</h2>
 
@@ -76,6 +81,14 @@
                 </div>
 
                 <span>Категории</span>
+
+            </button>
+
+            <button class="menu-btn" onclick="openStudents()">
+
+                <div class="menu-bg students-btn"></div>
+
+                <span>Студентам</span>
 
             </button>
 
@@ -131,6 +144,33 @@
 
         </div>
 
+        <div id="students" class="screen">
+
+            <h2 id="studentsTitle">
+                Студентам
+            </h2>
+
+            <button onclick="showCategory('print', this, 'students')">
+                Печать
+            </button>
+
+            <div class="education-wrapper">
+
+                <button class="education-main"
+                    onclick="toggleEducation(this)">
+
+                    Образование ▶
+
+                </button>
+
+            </div>
+
+            <button onclick="showCategory('food', this, 'students')">
+                Где поесть
+            </button>
+
+        </div>
+
         <div id="placesList"></div>
         <div id="placeDetails" class="screen">
 
@@ -146,7 +186,7 @@
                     Построить маршрут
                 </button>
 
-                <h3>Отзывы</h3>
+                <h3 id="reviewsTitle">Отзывы</h3>
 
                 <div id="reviews">
                     Пока отзывов нет
@@ -158,14 +198,39 @@
         </div>
 
     <div id="routePlanner" class="screen" style="display:none;">
-        <h2>Планы маршрутов</h2>
-        <p>Выберите готовый план маршрута для туристов:</p>
-        <button onclick="openRoutePlan('hour')">Маршрут на час</button>
-        <button onclick="openRoutePlan('kids')">Маршрут с детьми</button>
-        <button onclick="openRoutePlan('walking')">Пешеходный маршрут</button>
-        <button onclick="openRoutePlan('culture')">Культурный маршрут</button>
-        <button onclick="openRoutePlan('photo')">Фото-маршрут</button>
-        <div id="routePlanDetails" style="margin-top:12px; display:none;"></div>
+
+        <h2 id="routePlannerTitle">
+            Планы маршрутов
+        </h2>
+
+        <p id="routePlannerText">
+            Выберите готовый план маршрута для туристов:
+        </p>
+
+        <button id="routeHour" onclick="openRoutePlan('hour')">
+            Маршрут на час
+        </button>
+
+        <button id="routeKids" onclick="openRoutePlan('kids')">
+            Маршрут с детьми
+        </button>
+
+        <button id="routeWalking" onclick="openRoutePlan('walking')">
+            Пешеходный маршрут
+        </button>
+
+        <button id="routeCulture" onclick="openRoutePlan('culture')">
+            Культурный маршрут
+        </button>
+
+        <button id="routePhoto" onclick="openRoutePlan('photo')">
+            Фото-маршрут
+        </button>
+
+        <div id="routePlanDetails"
+            style="margin-top:12px; display:none;">
+        </div>
+
     </div>
 
     </div>
