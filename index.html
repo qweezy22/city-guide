@@ -148,6 +148,17 @@
     <main class="content-panel">
 
         <button
+            id="menuHandle"
+            class="menu-handle"
+            type="button"
+            aria-label="Toggle menu"
+        >
+            <i class="ph-light ph-caret-double-up" aria-hidden="true"></i>
+        </button>
+
+        <div class="content-panel-scroll">
+
+        <button
             id="backButton"
             class="back-button"
             onclick="goBack()"
@@ -713,16 +724,9 @@
 
         </section>
 
-    </main>
+        </div>
 
-    <button
-        id="menuHandle"
-        class="menu-handle"
-        type="button"
-        aria-label="Toggle menu"
-    >
-        <i class="ph-light ph-caret-up" aria-hidden="true"></i>
-    </button>
+    </main>
 
     <nav
         class="bottom-nav"
@@ -783,15 +787,16 @@
                 <p data-i18n="navAbout">Рћ РїСЂРѕРµРєС‚Рµ</p>
             </button>
 
-            <button
-                class="nav-btn bottom-nav-btn bottom-nav-lang"
-                onclick="toggleLanguage()"
-                aria-label="Switch language"
-            >
-                <span><i class="ph-light ph-translate" aria-hidden="true"></i></span>
-                <p id="mobileLangToggle">EN</p>
-            </button>
         </div>
+
+        <button
+            class="bottom-nav-language"
+            onclick="toggleLanguage()"
+            aria-label="Switch language"
+        >
+            <i class="ph-light ph-translate" aria-hidden="true"></i>
+            <p id="mobileLangToggle">EN</p>
+        </button>
     </nav>
 
 </div>

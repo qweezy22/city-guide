@@ -430,6 +430,7 @@ var currentMapLocale = null;
 var ymapsLoadPromise = null;
 var listHomeRegistry = {};
 var MOBILE_BREAKPOINT = 768;
+var MOBILE_PANEL_HANDLE_REVEAL = 34;
 var panelState = {
     isHidden: false,
     routeControlEnabled: false
@@ -526,21 +527,35 @@ function getPanelElement() {
     return document.querySelector(".content-panel");
 }
 
+function getPanelContentElement() {
+    return document.querySelector(".content-panel-scroll");
+}
+
 function isMobile() {
     return window.matchMedia("(max-width: " + MOBILE_BREAKPOINT + "px)").matches;
+}
+
+function getMobilePanelMetrics(panel) {
+    var height = panel ? panel.offsetHeight : 0;
+    var hiddenOffset = Math.max(0, height - MOBILE_PANEL_HANDLE_REVEAL);
+    return {
+        hiddenOffset: hiddenOffset
+    };
 }
 
 function syncPanelUiState() {
     var panel = getPanelElement();
     var mobileMode = isMobile();
-    var mobileRouteControlEnabled = mobileMode && !!panelState.routeControlEnabled;
+    var mobilePanelControlEnabled = mobileMode;
+    var mobileRouteControlEnabled = mobilePanelControlEnabled && !!panelState.routeControlEnabled;
 
-    document.body.classList.toggle("panel-is-open", mobileRouteControlEnabled && !panelState.isHidden);
+    document.body.classList.toggle("mobile-panel-control-active", mobilePanelControlEnabled);
+    document.body.classList.toggle("panel-is-open", mobilePanelControlEnabled && !panelState.isHidden);
     document.body.classList.toggle("route-menu-control-active", mobileRouteControlEnabled);
 
     if (!panel) return;
 
-    if (!mobileMode || !panelState.routeControlEnabled) {
+    if (!mobilePanelControlEnabled) {
         panelState.isHidden = false;
         panel.classList.remove("panel-hidden");
         panel.classList.remove("panel-dragging");
@@ -549,7 +564,13 @@ function syncPanelUiState() {
         return;
     }
 
+    var metrics = getMobilePanelMetrics(panel);
+    var offset = panelState.isHidden ? metrics.hiddenOffset : 0;
+
     panel.classList.toggle("panel-hidden", !!panelState.isHidden);
+    panel.classList.toggle("panel-dragging", false);
+    panel.style.opacity = "1";
+    panel.style.transform = "translateY(" + offset + "px)";
 }
 
 function setRouteMenuControlEnabled(enabled) {
@@ -568,28 +589,11 @@ function markCurrentRoutePlaceDismissed() {
 }
 
 function openMenu() {
-    var panel = getPanelElement();
     panelState.isHidden = false;
-    if (!panel) {
-        syncPanelUiState();
-        return;
-    }
-
-    if (!isMobile()) {
-        syncPanelUiState();
-        return;
-    }
-
-    panel.classList.remove("panel-dragging");
-    panel.classList.remove("panel-hidden");
-    panel.style.transform = "";
-    panel.style.opacity = "";
     syncPanelUiState();
 }
 
 function closeMenu(reason) {
-    var panel = getPanelElement();
-
     if (reason === "manual") {
         markCurrentRoutePlaceDismissed();
     }
@@ -601,16 +605,6 @@ function closeMenu(reason) {
     }
 
     panelState.isHidden = true;
-
-    if (!panel) {
-        syncPanelUiState();
-        return;
-    }
-
-    panel.classList.remove("panel-dragging");
-    panel.classList.add("panel-hidden");
-    panel.style.transform = "";
-    panel.style.opacity = "";
     syncPanelUiState();
 }
 
@@ -1180,9 +1174,14 @@ function setupPanelInteractions() {
     if (!panel || !handle || handle.dataset.ready === "1") return;
 
     handle.dataset.ready = "1";
+    var suppressNextHandleClick = false;
 
     handle.addEventListener("click", function () {
-        if (!isMobile() || !panelState.routeControlEnabled) return;
+        if (suppressNextHandleClick) {
+            suppressNextHandleClick = false;
+            return;
+        }
+        if (!isMobile()) return;
         if (panelState.isHidden) openMenu();
         else closeMenu("manual");
     });
@@ -1192,26 +1191,29 @@ function setupPanelInteractions() {
     function finishDrag(clientY) {
         if (!dragState) return;
 
-        var hiddenOffset = panel.offsetHeight + 24;
+        var hiddenOffset = getMobilePanelMetrics(panel).hiddenOffset;
         var deltaY = clientY - dragState.startY;
         var finalOffset = Math.max(0, Math.min(hiddenOffset, dragState.startOffset + deltaY));
         var shouldHide = finalOffset > hiddenOffset * 0.42;
+        var wasDragged = dragState.moved;
 
         panel.classList.remove("panel-dragging");
-        panel.style.transform = "";
         dragState = null;
+
+        if (wasDragged) suppressNextHandleClick = true;
 
         if (shouldHide) closeMenu("manual");
         else openMenu();
     }
 
     handle.addEventListener("pointerdown", function (event) {
-        if (!isMobile() || !panelState.routeControlEnabled) return;
+        if (!isMobile()) return;
 
-        var hiddenOffset = panel.offsetHeight + 24;
+        var hiddenOffset = getMobilePanelMetrics(panel).hiddenOffset;
         dragState = {
             startY: event.clientY,
-            startOffset: panelState.isHidden ? hiddenOffset : 0
+            startOffset: panelState.isHidden ? hiddenOffset : 0,
+            moved: false
         };
 
         handle.setPointerCapture(event.pointerId);
@@ -1222,9 +1224,10 @@ function setupPanelInteractions() {
     handle.addEventListener("pointermove", function (event) {
         if (!dragState) return;
 
-        var hiddenOffset = panel.offsetHeight + 24;
+        var hiddenOffset = getMobilePanelMetrics(panel).hiddenOffset;
         var deltaY = event.clientY - dragState.startY;
         var nextOffset = Math.max(0, Math.min(hiddenOffset, dragState.startOffset + deltaY));
+        if (Math.abs(deltaY) > 4) dragState.moved = true;
         panel.style.transform = "translateY(" + nextOffset + "px)";
     });
 
@@ -2119,11 +2122,11 @@ function showListBelowButton(list, button) {
             try {
                 button.parentNode.insertBefore(list, button.nextSibling);
             } catch (e) {
-                var menu = document.querySelector('.content-panel');
+                var menu = getPanelContentElement();
                 if (menu && list.parentNode !== menu) menu.appendChild(list);
             }
         } else {
-            var menu = document.querySelector('.content-panel');
+            var menu = getPanelContentElement();
             if (menu && list.parentNode !== menu) menu.appendChild(list);
         }
         list.style.display = '';
