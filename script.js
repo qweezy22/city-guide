@@ -537,7 +537,11 @@ function isMobile() {
 
 function getMobilePanelMetrics(panel) {
     var height = panel ? panel.offsetHeight : 0;
-    var hiddenOffset = Math.max(0, height - MOBILE_PANEL_HANDLE_REVEAL);
+    var handle = document.getElementById("menuHandle");
+    var bottomNav = document.querySelector(".bottom-nav");
+    var handleReveal = handle ? Math.round(handle.offsetHeight / 2) + 2 : Math.round(MOBILE_PANEL_HANDLE_REVEAL / 2) + 2;
+    var navOffset = panelState.routeControlEnabled || !bottomNav ? 0 : bottomNav.offsetHeight;
+    var hiddenOffset = Math.max(0, height - navOffset - handleReveal);
     return {
         hiddenOffset: hiddenOffset
     };

@@ -858,7 +858,7 @@ body {
         top: 20px;
         left: 0;
         right: 0;
-        bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 10px);
+        bottom: 0;
         width: 100%;
         max-width: none;
         height: auto;
@@ -870,13 +870,17 @@ body {
     }
 
     .content-panel-scroll {
-        padding: 22px 18px 24px;
+        padding: 22px 18px calc(24px + var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
     }
 
     body.route-menu-control-active .content-panel {
         top: 14px;
         bottom: 0;
         height: auto;
+    }
+
+    body.route-menu-control-active .content-panel-scroll {
+        padding-bottom: 24px;
     }
 
     .content-panel.panel-hidden {
@@ -1038,7 +1042,11 @@ body {
 @media (max-width: 640px) {
 
     .content-panel-scroll {
-        padding: 18px 16px 24px;
+        padding: 18px 16px calc(24px + var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+    }
+
+    body.route-menu-control-active .content-panel-scroll {
+        padding-bottom: 24px;
     }
 
     .main-title {
