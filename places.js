@@ -1558,6 +1558,159 @@ var places = [
                   en: "University."}    
 },
 
+{
+    id: 90,
+    name: {ru: "Общежитие ВятГУ №1",
+           en: "VyatSU Dormitory No. 1",
+           zh: "维亚特国立大学宿舍1号"},
+    category: ["students", "dorms"],
+    coords: [58.606258, 49.656327],
+    address: {ru: "Октябрьский пр-кт, д. 113",
+              en: "Oktyabrsky Ave., 113",
+              zh: "十月大街113号"},
+    rating: null,
+    image: "images/obsh1.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
+{
+    id: 91,
+    name: {ru: "Общежитие ВятГУ №2",
+           en: "VyatSU Dormitory No. 2",
+           zh: "维亚特国立大学宿舍2号"},
+    category: ["students", "dorms"],
+    coords: [58.606854, 49.613926],
+    address: {ru: "г. Киров, ул. Ломоносова, 12",
+              en: "Kirov, Lomonosova St., 12",
+              zh: "基洛夫市，罗蒙诺索夫街12号"},
+    rating: null,
+    image: "images/obsh2.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
+{
+    id: 92,
+    name: {ru: "Общежитие ВятГУ №3",
+           en: "VyatSU Dormitory No. 3",
+           zh: "维亚特国立大学宿舍3号"},
+    category: ["students", "dorms"],
+    coords: [58.606891, 49.614914],
+    address: {ru: "г. Киров, ул. Ломоносова, 12а",
+              en: "Kirov, Lomonosova St., 12a",
+              zh: "基洛夫市，罗蒙诺索夫街12a号"},
+    rating: null,
+    image: "images/obsh3.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
+{
+    id: 93,
+    name: {ru: "Общежитие ВятГУ №4",
+           en: "VyatSU Dormitory No. 4",
+           zh: "维亚特国立大学宿舍4号"},
+    category: ["students", "dorms"],
+    coords: [58.605044, 49.615750],
+    address: {ru: "ул. Ломоносова, 16а, корпус 1",
+              en: "Lomonosova St., 16a, building 1",
+              zh: "罗蒙诺索夫街16a号，1号楼"},
+    rating: null,
+    image: "images/obsh4.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
+{
+    id: 94,
+    name: {ru: "Общежитие ВятГУ №5",
+           en: "VyatSU Dormitory No. 5",
+           zh: "维亚特国立大学宿舍5号"},
+    category: ["students", "dorms"],
+    coords: [58.604992, 49.616774],
+    address: {ru: "г. Киров, ул. Ломоносова, д. 16а, корпус 2",
+              en: "Kirov, Lomonosova St., 16a, building 2",
+              zh: "基洛夫市，罗蒙诺索夫街16a号，2号楼"},
+    rating: null,
+    image: "images/obsh5.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
+{
+    id: 95,
+    name: {ru: "Общежитие ВятГУ №6",
+           en: "VyatSU Dormitory No. 6",
+           zh: "维亚特国立大学宿舍6号"},
+    category: ["students", "dorms"],
+    coords: [58.590334, 49.681569],
+    address: {ru: "Киров, ул. Ленина, д. 113а",
+              en: "Kirov, Lenina St., 113a",
+              zh: "基洛夫市，列宁街113a号"},
+    rating: null,
+    image: "images/obsh6.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
+{
+    id: 96,
+    name: {ru: "Общежитие ВятГУ №7",
+           en: "VyatSU Dormitory No. 7",
+           zh: "维亚特国立大学宿舍7号"},
+    category: ["students", "dorms"],
+    coords: [58.567204, 49.688199],
+    address: {ru: "Киров, ул. Ленина, д. 198/5",
+              en: "Kirov, Lenina St., 198/5",
+              zh: "基洛夫市，列宁街198/5号"},
+    rating: null,
+    image: "images/obsh7.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
+{
+    id: 97,
+    name: {ru: "Общежитие ВятГУ №8",
+           en: "VyatSU Dormitory No. 8",
+           zh: "维亚特国立大学宿舍8号"},
+    category: ["students", "dorms"],
+    coords: [58.590601, 49.677141],
+    address: {ru: "Киров, ул. Свободы, д. 133",
+              en: "Kirov, Svobody St., 133",
+              zh: "基洛夫市，自由街133号"},
+    rating: null,
+    image: "images/obsh8.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
+{
+    id: 98,
+    name: {ru: "Пятёрочка",
+           en: "Pyatorochka",
+           zh: "维亚特国立大学宿舍8号"},
+    category: ["students", "dorms"],
+    coords: [58.5912, 49.6782],
+    address: {ru: "Киров, ул. Свободы, д. 133",
+              en: "Kirov, Svobody St., 133",
+              zh: "基洛夫市，自由街133号"},
+    rating: null,
+    image: "images/obsh8.jpg",
+    description: {ru: "Студенческое общежитие ВятГУ.",
+                  en: "VyatSU student dormitory.",
+                  zh: "维亚特国立大学学生宿舍。"}
+},
+
 
 
 
@@ -1712,7 +1865,8 @@ for (var i = 0; i < places.length; i++) {
 
         places[i].description_full = {
             ru: fullDescriptions[name],
-            en: places[i].description.en || ""
+            en: places[i].description.en || "",
+            zh: places[i].description.en || ""
         };
 
     }

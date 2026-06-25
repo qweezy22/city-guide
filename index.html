@@ -1,248 +1,807 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
+    
+
     <meta charset="UTF-8">
-    <title>Мини-гид по городу Киров</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title data-i18n="pageTitle">Мини-гид по Кирову</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="images/logo-round.png"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="style.css">
+
+    <script
+        id="ymapsApiConfig"
+        data-apikey="65ec81d2-94f4-4f40-adc4-f205e32ee9bb"
+        type="text/javascript"
+    ></script>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css"
+    >
+
 </head>
 
 <body>
-    <div id="menuPanel">
 
-    <div id="menu">
+<div class="app-layout">
 
-        <button id="backButton" onclick="goBack()" style="display:none;">
-            <span class="back-icon"></span>
+    <!-- MAP -->
+
+    <section class="map-section">
+
+        <div id="map"></div>
+
+    </section>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <button
+                class="nav-btn"
+                id="nav-home"
+                data-nav-key="nav-home"
+                onclick="openMainMenu()"
+            >
+            <span><i class="ph-light ph-house" aria-hidden="true"></i></span>
+            <p data-i18n="navHome">Главная</p>
         </button>
 
-        <div id="searchWrapper" style="display:none; margin-bottom:12px;">
-            <input id="searchInput" type="text" placeholder="Поиск мест..." oninput="searchPlaces(this.value)" />
+        <button
+            class="nav-btn"
+            id="nav-interesting"
+            data-nav-key="nav-interesting"
+            onclick="openInterestingPlaces()"
+        >
+            <span><i class="ph-light ph-fire" aria-hidden="true"></i></span>
+            <p data-i18n="navInteresting">Интересно</p>
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nav-routes"
+            data-nav-key="nav-routes"
+            onclick="openRoutePlanner()"
+        >
+            <span><i class="ph-light ph-map-trifold" aria-hidden="true"></i></span>
+            <p data-i18n="navRoutes">Маршруты</p>
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nav-categories"
+            data-nav-key="nav-categories"
+            onclick="openCategories()"
+        >
+            <span><i class="ph-light ph-squares-four" aria-hidden="true"></i></span>
+            <p data-i18n="navCategories">Категории</p>
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nav-students"
+            data-nav-key="nav-students"
+            onclick="openStudents()"
+        >
+            <span><i class="ph-light ph-student" aria-hidden="true"></i></span>
+            <p data-i18n="navStudents">Студентам</p>
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nav-about"
+            data-nav-key="nav-about"
+            onclick="openAboutProject()"
+        >
+            <span><i class="ph-light ph-info" aria-hidden="true"></i></span>
+            <p data-i18n="navAbout">О проекте</p>
+        </button>
+
         </div>
 
-        <div id="interesting" class="screen">
-            <h2 id="interestingTitle">Интересные места</h2>
-        </div>
+        <div class="sidebar-bottom">
 
-        <div id="menuContent">
-
-        </div>
-        
-        <div id="welcome" class="screen active">
-
-                <button id="langToggle" onclick="toggleLanguage()">
-                    EN
-                </button>
-
-               <h2>Мини-гид по Кирову</h2>
-
-               <p>
-                   Выберите категорию
-                   и откройте интересные места города.
-               </p>
-
-               <button id="welcomeButton" onclick="openMainMenu()">
-                    В путешествие →
-               </button>
-
-       </div>
-
-        <div id="mainMenu" class="screen">
-
-            <button class="menu-btn" onclick="openInterestingPlaces()">
-
-                <div class="menu-bg interesting-btn"></div>
-
-                <span>Интересные места</span>
-
-            </button>
-
-            <button class="menu-btn" onclick="openRoutePlanner()">
-
-                <div class="menu-bg route-btn"></div>
-
-                <span>Планы маршрутов</span>
-
-            </button>
-
-            <button class="menu-btn" onclick="openCategories()">
-
-                <div class="menu-bg">
-
-                    <div class="menu-carousel-track" id="categoriesCarousel">
-
-                        <img src="images/Cat-nature.jpg">
-                        <img src="images/Cat-cult.jpg">
-                        <img src="images/Cat-fun.jpg">
-
-                    </div>
-
-                </div>
-
-                <span>Категории</span>
-
-            </button>
-
-            <button class="menu-btn" onclick="openStudents()">
-
-                <div class="menu-bg students-btn"></div>
-
-                <span>Студентам</span>
-
+            <button
+                id="langToggle"
+                onclick="toggleLanguage()"
+                aria-label="Switch language"
+            >
+                EN
             </button>
 
         </div>
 
-        <div id="categories" class="screen">
+    </aside>
 
-            <h2>Категории</h2>
+    <!-- PANEL -->
 
-            <button onclick="showAll(this)">
-                Показать все
-            </button>
+    <main class="content-panel">
 
-            <button onclick="showCategory('tradecenters', this)">
-                Торговый центр
-            </button>
+        <button
+            id="backButton"
+            class="back-button"
+            onclick="goBack()"
+            aria-label="Назад"
+            data-i18n-aria="back"
+        >
+            <i class="ph-light ph-arrow-left" aria-hidden="true"></i>
+        </button>
 
-            <button onclick="showCategory('food', this)">
-                Еда
-            </button>
+        <!-- MAIN SCREEN -->
 
-            <button onclick="showCategory('nature', this)">
-                Природа
-            </button>
+        <section
+            id="mainMenu"
+            class="screen"
+            style="display:block;"
+        >
 
-            <button onclick="showCategory('water', this)">
-                Реки и озёра
-            </button>
+            <h1
+                class="main-title"
+                id="mainTitle"
+                data-i18n="mainTitle"
+            >
+                Мини-гид по Кирову
+            </h1>
 
-            <button onclick="showCategory('cave', this)">
-                Пещеры и скалы
-            </button>
+            <!-- SEARCH -->
 
-            <button onclick="showCategory('spring', this)">
-                Родники
-            </button>
+            <div id="searchWrapper">
 
-            <button onclick="showCategory('history', this)">
-                История
-            </button>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Поиск мест..."
+                    data-i18n-placeholder="search"
+                    oninput="searchPlaces(this.value)"
+                >
 
-            <button onclick="showCategory('museums', this)">
-                Музеи и театры
-            </button>
-
-            <button onclick="showCategory('park', this)">
-                Природные комплексы
-            </button>
-
-            <button onclick="showCategory('kids', this)">
-                Для детей
-            </button>
-
-        </div>
-
-        <div id="students" class="screen">
-
-            <h2 id="studentsTitle">
-                Студентам
-            </h2>
-
-            <button onclick="showCategory('print', this, 'students')">
-                Печать
-            </button>
-
-            <div class="education-wrapper">
-
-                <button class="education-main"
-                    onclick="toggleEducation(this)">
-
-                    Образование ▶
-
+                <button
+                    type="button"
+                    id="searchClearButton"
+                    class="search-clear-button"
+                    onclick="clearSearchInput()"
+                    aria-label="Очистить поиск"
+                    data-i18n-aria="clearSearch"
+                >
+                    <i class="ph-light ph-x" aria-hidden="true"></i>
                 </button>
 
             </div>
 
-            <button onclick="showCategory('food', this, 'students')">
-                Где поесть
-            </button>
+            <div
+                id="searchResultsList"
+                class="search-results-list"
+                aria-live="polite"
+            ></div>
 
-        </div>
+            <div id="mainMenuDefaultContent">
 
-        <div id="placesList"></div>
-        <div id="placeDetails" class="screen">
+            <!-- HERO -->
+
+            <div class="hero-card">
+
+                <div class="hero-left">
+
+                    <div class="hero-badge" data-i18n="heroBadge">
+                        Интересно
+                    </div>
+
+                    <h2
+                        class="hero-title"
+                        id="welcomeTitle"
+                        data-i18n="welcomeTitle"
+                    >
+                        Интересные места
+                    </h2>
+
+                    <p
+                        class="hero-description"
+                        id="welcomeText"
+                        data-i18n="welcomeText"
+                    >
+                        Куда обязательно стоит
+                        сходить в Кирове
+                    </p>
+
+                    <button
+                        class="hero-button"
+                        onclick="openInterestingPlaces()"
+                        id="welcomeButton"
+                        data-i18n="welcomeButton"
+                    >
+                        Смотреть места
+                    </button>
+
+                </div>
+
+                <div
+                    class="hero-right hero-photo-stack"
+                    id="heroPhotoStack"
+                >
+
+                    <img
+                        src="images/aleks_sad.jpg"
+                        class="hero-image active"
+                        alt=""
+                    >
+
+                    <img
+                        src="images/kriollo.jpg"
+                        class="hero-image"
+                        alt=""
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- SMALL CARDS -->
+
+            <div class="small-cards-grid">
+
+                <div
+                    class="small-card light routes-card"
+                    onclick="openRoutePlanner()"
+                >
+
+                    <h3 data-i18n="cardRoutesTitle">
+                        Планы
+                        маршрутов
+                    </h3>
+
+                    <p data-i18n="cardRoutesText">
+                        Готовые маршруты
+                        для прогулок
+                        по городу
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-map-pin-line" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+
+                <div
+                    class="small-card green categories-card"
+                    onclick="openCategories()"
+                >
+                    <h3 data-i18n="cardCategoriesTitle">
+                        Категории
+                    </h3>
+
+                    <p data-i18n="cardCategoriesText">
+                        Места по интересам:
+                        музеи, парки,
+                        кафе и другое
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-grid-four" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- POPULAR -->
+
+            <div class="section-header">
+
+                <h2 class="section-title" data-i18n="popularPlaces">
+                    Популярные места
+                </h2>
+
+                <button
+                    class="section-link"
+                    onclick="openInterestingPlaces()"
+                    data-i18n="showAll"
+                >
+                    Смотреть все
+                </button>
+
+            </div>
+
+            <!-- LIST -->
+
+            <div id="placesList"></div>
+
+            </div>
+
+        </section>
+
+        <!-- INTERESTING -->
+
+        <section
+            id="interesting"
+            class="screen"
+            style="display:none;"
+        >
+
+            <div class="section-header">
+
+                <h2 class="section-title" data-i18n="interesting">
+                    Интересные места
+                </h2>
+
+            </div>
+
+            <div id="interestingList"></div>
+
+        </section>
+
+        <!-- CATEGORIES -->
+
+        <section
+            id="categories"
+            class="screen"
+            style="display:none;"
+        >
+
+            <div class="section-header">
+
+                <h2 class="section-title" data-i18n="categories">
+                    Категории
+                </h2>
+
+            </div>
+
+            <div class="small-cards-grid">
+
+                <div
+                    class="small-card light food-card"
+                    onclick="showCategory('food', this)"
+                >
+                    <h3 data-i18n="food">Еда</h3>
+
+                    <p data-i18n="foodCardText">
+                        Кафе, рестораны
+                        и кофейни
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-fork-knife" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="small-card green nature-card"
+                    onclick="showCategory('nature', this)"
+                >
+                    <h3 data-i18n="nature">Природа</h3>
+
+                    <p data-i18n="natureCardText">
+                        Парки,
+                        леса и места
+                        отдыха
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-tree-evergreen" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="small-card light history-card"
+                    onclick="showCategory('history', this)"
+                >
+                    <h3 data-i18n="history">История</h3>
+
+                    <p data-i18n="historyCardText">
+                        Исторические
+                        здания и места
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-bank" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="small-card green kids-card"
+                    onclick="showCategory('kids', this)"
+                >
+                    <h3 data-i18n="kids">Для детей</h3>
+
+                    <p data-i18n="kidsCardText">
+                        Развлечения
+                        для всей семьи
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-baby" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CATEGORY RESULTS -->
+
+        <section
+            id="categoryResults"
+            class="screen"
+            style="display:none;"
+        >
+
+            <div class="section-header">
+
+                <h2
+                    class="section-title"
+                    id="categoryResultsTitle"
+                    data-i18n="categories"
+                >
+                    Категории
+                </h2>
+
+            </div>
+
+            <div id="categoryResultsList"></div>
+
+        </section>
+
+        <!-- ROUTES -->
+
+        <section
+            id="routePlanner"
+            class="screen"
+            style="display:none;"
+        >
+
+            <div class="section-header">
+
+                <h2 class="section-title" data-i18n="routesTitle">
+                    Маршруты
+                </h2>
+
+            </div>
+
+            <div class="small-cards-grid">
+
+                <div
+                    class="small-card light routes-card"
+                    onclick="openRoutePlan('hour')"
+                >
+                    <h3 data-i18n="routeHour">Маршрут на час</h3>
+
+                    <p data-i18n="routeHourText">
+                        Быстрая прогулка
+                        по центру
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-timer" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="small-card green walk-card"
+                    onclick="openRoutePlan('walking')"
+                >
+                    <h3 data-i18n="routeWalking">Пешеходный</h3>
+
+                    <p data-i18n="routeWalkingText">
+                        Красивые улицы
+                        и набережные
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-person-simple-walk" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="small-card light kids-card"
+                    onclick="openRoutePlan('kids')"
+                >
+                    <h3 data-i18n="routeKids">С детьми</h3>
+
+                    <p data-i18n="routeKidsText">
+                        Интересно
+                        для всей семьи
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-users-three" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="small-card green photo-card"
+                    onclick="openRoutePlan('photo')"
+                >
+                    <h3 data-i18n="routePhoto">Фото-маршрут</h3>
+
+                    <p data-i18n="routePhotoText">
+                        Самые красивые
+                        места города
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-camera" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ROUTE PLAN -->
+
+        <section
+            id="routePlanScreen"
+            class="screen"
+            style="display:none;"
+        >
+
+            <div class="section-header">
+
+                <h2
+                    class="section-title"
+                    id="routePlanScreenTitle"
+                >
+                    Маршрут
+                </h2>
+
+                <button
+                    class="section-link"
+                    onclick="openRoutePlanner()"
+                    data-i18n="allRoutes"
+                >
+                    Все маршруты
+                </button>
+
+            </div>
+
+            <div id="routePlanDetails"></div>
+
+        </section>
+
+        <!-- STUDENTS -->
+
+        <section
+            id="students"
+            class="screen"
+            style="display:none;"
+        >
+
+            <div class="section-header">
+
+                <h2 class="section-title" data-i18n="students">
+                    Студентам
+                </h2>
+
+            </div>
+
+            <div class="small-cards-grid">
+
+                <div
+                    class="small-card light students-card"
+                    onclick="showCategory('vyatsu', this, 'students')"
+                >
+                    <h3 data-i18n="campus">Корпуса</h3>
+
+                    <p data-i18n="campusText">
+                        Учебные здания
+                        и адреса
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-student" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="small-card green dorms-card"
+                    onclick="showCategory('dorms', this, 'students')"
+                >
+                    <h3 data-i18n="dorms">Общаги</h3>
+
+                    <p data-i18n="dormsText">
+                        Студенческие
+                        общежития
+                    </p>
+
+                    <div class="small-card-icon">
+                        <i class="ph-light ph-buildings" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ABOUT -->
+
+        <section
+            id="aboutProject"
+            class="screen"
+            style="display:none;"
+        >
+
+            <div class="section-header">
+
+                <h2
+                    class="section-title"
+                    id="aboutProjectTitle"
+                    data-i18n="about"
+                >
+                    О проекте
+                </h2>
+
+            </div>
+
+            <div class="about-project">
+                <p data-i18n="aboutText1">
+                    Мини-гид помогает быстро найти интересные места Кирова,
+                    посмотреть подборки, готовые маршруты и полезные точки
+                    для студентов.
+                </p>
+
+                <p data-i18n="aboutText2">
+                    Все разделы сделаны как короткие карточки: выберите тему,
+                    откройте место и постройте маршрут на карте.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- DETAILS -->
+
+        <section
+            id="placeDetails"
+            class="screen"
+            style="display:none;"
+        >
 
             <div class="place-details-container">
 
-                <div id="photoCarousel" class="carousel"></div>
+                <div
+                    id="photoCarousel"
+                    class="photo-carousel"
+                ></div>
 
                 <h2 id="placeTitle"></h2>
 
                 <p id="placeDescription"></p>
 
-                <button id="routeButton">
-                    Построить маршрут
-                </button>
+                <div id="placeRating"></div>
 
-                <h3 id="reviewsTitle">Отзывы</h3>
-
-                <div id="reviews">
-                    Пока отзывов нет
+                <div class="place-actions">
+                    <button
+                        id="routeButton"
+                        class="hero-button"
+                        data-i18n="buildRoute"
+                    >
+                        Построить маршрут
+                    </button>
                 </div>
-                <div id="placeRating" style="margin-top:10px;"></div>
+
+                <div id="vyatsuExtraBlocks"></div>
 
             </div>
 
+        </section>
+
+    </main>
+
+    <button
+        id="menuHandle"
+        class="menu-handle"
+        type="button"
+        aria-label="Toggle menu"
+    >
+        <i class="ph-light ph-caret-up" aria-hidden="true"></i>
+    </button>
+
+    <nav
+        class="bottom-nav"
+        aria-label="Mobile navigation"
+    >
+        <div class="bottom-nav-scroll">
+            <button
+                class="nav-btn bottom-nav-btn"
+                data-nav-key="nav-home"
+                onclick="openMainMenu()"
+            >
+                <span><i class="ph-light ph-house" aria-hidden="true"></i></span>
+                <p data-i18n="navHome">Р“Р»Р°РІРЅР°СЏ</p>
+            </button>
+
+            <button
+                class="nav-btn bottom-nav-btn"
+                data-nav-key="nav-interesting"
+                onclick="openInterestingPlaces()"
+            >
+                <span><i class="ph-light ph-fire" aria-hidden="true"></i></span>
+                <p data-i18n="navInteresting">РРЅС‚РµСЂРµСЃРЅРѕ</p>
+            </button>
+
+            <button
+                class="nav-btn bottom-nav-btn"
+                data-nav-key="nav-routes"
+                onclick="openRoutePlanner()"
+            >
+                <span><i class="ph-light ph-map-trifold" aria-hidden="true"></i></span>
+                <p data-i18n="navRoutes">РњР°СЂС€СЂСѓС‚С‹</p>
+            </button>
+
+            <button
+                class="nav-btn bottom-nav-btn"
+                data-nav-key="nav-categories"
+                onclick="openCategories()"
+            >
+                <span><i class="ph-light ph-squares-four" aria-hidden="true"></i></span>
+                <p data-i18n="navCategories">РљР°С‚РµРіРѕСЂРёРё</p>
+            </button>
+
+            <button
+                class="nav-btn bottom-nav-btn"
+                data-nav-key="nav-students"
+                onclick="openStudents()"
+            >
+                <span><i class="ph-light ph-student" aria-hidden="true"></i></span>
+                <p data-i18n="navStudents">РЎС‚СѓРґРµРЅС‚Р°Рј</p>
+            </button>
+
+            <button
+                class="nav-btn bottom-nav-btn"
+                data-nav-key="nav-about"
+                onclick="openAboutProject()"
+            >
+                <span><i class="ph-light ph-info" aria-hidden="true"></i></span>
+                <p data-i18n="navAbout">Рћ РїСЂРѕРµРєС‚Рµ</p>
+            </button>
+
+            <button
+                class="nav-btn bottom-nav-btn bottom-nav-lang"
+                onclick="toggleLanguage()"
+                aria-label="Switch language"
+            >
+                <span><i class="ph-light ph-translate" aria-hidden="true"></i></span>
+                <p id="mobileLangToggle">EN</p>
+            </button>
         </div>
+    </nav>
 
-    <div id="routePlanner" class="screen" style="display:none;">
+</div>
 
-        <h2 id="routePlannerTitle">
-            Планы маршрутов
-        </h2>
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
-        <p id="routePlannerText">
-            Выберите готовый план маршрута для туристов:
-        </p>
+<script src="places.js"></script>
 
-        <button id="routeHour" onclick="openRoutePlan('hour')">
-            Маршрут на час
-        </button>
-
-        <button id="routeKids" onclick="openRoutePlan('kids')">
-            Маршрут с детьми
-        </button>
-
-        <button id="routeWalking" onclick="openRoutePlan('walking')">
-            Пешеходный маршрут
-        </button>
-
-        <button id="routeCulture" onclick="openRoutePlan('culture')">
-            Культурный маршрут
-        </button>
-
-        <button id="routePhoto" onclick="openRoutePlan('photo')">
-            Фото-маршрут
-        </button>
-
-        <div id="routePlanDetails"
-            style="margin-top:12px; display:none;">
-        </div>
-
-    </div>
-
-    </div>
-
-        <div id="map"></div>
-        <button id="menuToggleBtn">
-            <span>▲</span>
-        </button>
-
-        <script src="https://api-maps.yandex.ru/2.1/?apikey=65ec81d2-94f4-4f40-adc4-f205e32ee9bb&lang=ru_RU"></script>
-        <script src="places.js"></script>
-        <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
+
 </html>
